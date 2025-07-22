@@ -5,7 +5,7 @@ public class User {
     private String userName;
     private String userEmail;
     private String userPassword;
-    private Sttring role;
+    private String role;
 
     public int getUserId() {
         return userId;
@@ -39,6 +39,7 @@ public class User {
         this.userPassword = userPassword;
     }
 
-    public void setRole(String role){ this.role = role;}
+    public void setRole(String role){
+        this.role = role;}
     public String getUserRole() { return role;}
 }

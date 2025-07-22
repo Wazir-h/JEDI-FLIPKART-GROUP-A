@@ -2,15 +2,15 @@ package com.flipfit.beans;
 
 public class Customer extends User {
 
-    private String adress;
+    private String address;
     private String phoneNo;
 
-    public String getAdress() {
-        return adress;
+    public String getAddress() {
+        return address;
     }
 
-    public void setAdress(String adress) {
-        this.adress = adress;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getPhoneNo() {

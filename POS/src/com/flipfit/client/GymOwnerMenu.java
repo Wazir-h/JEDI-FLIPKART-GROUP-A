@@ -37,6 +37,8 @@ public class GymOwnerMenu {
     public static GymOwner AddGymOwnerClient(){
         Scanner scanner = new Scanner(System.in);
 
+//        Complete This ---------------------------------
+
         System.out.print("Add Gym Owner Address");
         String GymOwnerAddress = scanner.nextLine();
 
@@ -49,7 +51,7 @@ public class GymOwnerMenu {
         System.out.print("Add gym owner Location ");
         String location = scanner.nextLine();
 
-        GymOwner gymOwner=GymOwnerBusinessService.AddGymOwnerDetails(GymOwnerAddress , GymOwnerPhone,GSTNumber,location);
+        GymOwner gymOwner = GymOwnerBusinessService.AddGymOwnerDetails(GymOwnerAddress , GymOwnerPhone,GSTNumber,location);
          return gymOwner;
     }
     public static GymCentre AddGymCenterClient(){

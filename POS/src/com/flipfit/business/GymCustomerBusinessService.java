@@ -1,13 +1,17 @@
 package com.flipfit.business;
+import com.flipfit.beans.GymCustomer;
 
 import com.flipfit.beans.GymCustomer;
 
 import java.util.Scanner;
 
 public class GymCustomerBusinessService {
-    public void createProfile(){
 
+    public static GymCustomer createProfile(){
+        //Complete This -----------------------------------------
         System.out.println("Profile Created");
+        GymCustomer gymCustomer = new GymCustomer();
+        return gymCustomer;
     }
     public void updateProfile(GymCustomer gymCustomer){
         Scanner sc=new Scanner(System.in);

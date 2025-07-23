@@ -24,14 +24,14 @@ public class GymFlipfitApplicationClient {
 
     public static void GymCustomerRegistration() {
         System.out.println("Gym Customer Registration Successful");
-        GymCustomer newCustomer = new GymCustomer();       // -----------------------------------------
+        GymCustomer newCustomer = GymCustomerMenu.AddGymCustomer();       // -----------------------------------------
 
         GymCustomerCredentials.addCustomer(newCustomer.getUserEmail(), newCustomer);
     }
 
     public static void GymOwnerRegistration() {
         System.out.println("Gym Owner registration Successful1");
-        GymOwner newOwner = new GymOwner(); //-----------------------------------------------------
+        GymOwner newOwner = GymOwnerMenu.AddGymOwnerClient(); //-----------------------------------------------------
         GymOwnerCredentials.addGymOwner(newOwner.getUserEmail(),newOwner);
     }
 

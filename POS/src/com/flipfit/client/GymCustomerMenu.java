@@ -1,6 +1,9 @@
 package com.flipfit.client;
+import com.flipfit.beans.GymCentre;
 import  com.flipfit.beans.GymCustomer;
+import com.flipfit.beans.GymOwner;
 import com.flipfit.business.GymCustomerBusinessService;
+
 import java.util.Scanner;
 
 public class GymCustomerMenu {
@@ -27,6 +30,25 @@ public class GymCustomerMenu {
         } catch(Exception e){
             System.out.println("Enter Correct Value");
         }
+    }
+    public static GymCustomer AddGymCustomer(){
+
+        // Complete this -------------------------------------------
+        Scanner scanner = new Scanner(System.in);
+
+
+        System.out.print("Add Gym Customer Address");
+        String GymOwnerAddress = scanner.nextLine();
+
+        System.out.print("Add Gym Customer Phone Number: ");
+        String GymOwnerPhone = scanner.nextLine();
+
+
+        System.out.print("Add gym owner Location ");
+        String location = scanner.nextLine();
+
+        GymCustomer gymCustomer = GymCustomerBusinessService.createProfile();
+        return gymCustomer;
     }
 
 }

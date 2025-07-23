@@ -4,9 +4,10 @@ import com.flipfit.beans.GymCentre;
 import com.flipfit.beans.GymOwner;
 
 public class GymOwnerBusinessService{
-    public static GymOwner AddGymOwnerDetails(String gymOwnerAddress, String gymOwnerPhone, String GSTNumber, String location){
+    public static GymOwner AddGymOwnerDetails(String gymOwnerName, String gymOwnerAddress, String gymOwnerPhone, String GSTNumber, String location){
           GymOwner gymOwner=new GymOwner();
 
+          gymOwner.setName(gymOwnerName);
           gymOwner.setGymOwnerAddress(gymOwnerAddress);
           gymOwner.setGymOwnerPhone(gymOwnerPhone);
           gymOwner.setGSTNumber(GSTNumber);

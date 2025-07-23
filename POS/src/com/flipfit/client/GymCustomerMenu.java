@@ -11,11 +11,14 @@ public class GymCustomerMenu {
         GymCustomer gymCustomer=new GymCustomer();
         gymCustomer.setUserName(userName);
         gymCustomer.setUserPassword(userPassword);
-        System.out.println("Welcome"+ userName + "to Flipfit");
+        System.out.println("Welcome "+ userName + " to Flipfit");
         Scanner sc=new Scanner(System.in);
         System.out.println("Enter option to Move Next");
         System.out.println("1. To UpdateProfile");
 		System.out.println("2. To View All Gyms");
+        System.out.println("3. Book Slot");
+        System.out.println("4. Cancel Slot");
+
         try {
             int choice = sc.nextInt();
             GymCustomerBusinessService gymCustomerBusinessService=new GymCustomerBusinessService();
@@ -33,22 +36,21 @@ public class GymCustomerMenu {
     }
     public static GymCustomer AddGymCustomer(){
 
-        // Complete this -------------------------------------------
         Scanner scanner = new Scanner(System.in);
 
-        System.out.print("Add Gym Customer Name");
+        System.out.print("Add Gym Customer Name \t");
         String GymOwnerName = scanner.nextLine();
 
-        System.out.print("Add Gym Customer EmailId");
+        System.out.print("Add Gym Customer EmailId \t");
         String GymOwnerEmailId = scanner.nextLine();
 
-        System.out.print("Add Gym Customer Phone Number");
+        System.out.print("Add Gym Customer Phone Number \t");
         String GymOwnerPhoneNo = scanner.nextLine();
 
-        System.out.print("Add Gym Customer Address");
+        System.out.print("Add Gym Customer Address \t");
         String GymOwnerAddress = scanner.nextLine();
 
-        System.out.print("Add Your Password");
+        System.out.print("Add Your Password \t");
         String GymOwnerPassword = scanner.nextLine();
         GymCustomer gymCustomer = GymCustomerBusinessService.createProfile(GymOwnerName,GymOwnerEmailId,GymOwnerPhoneNo,GymOwnerAddress,GymOwnerPassword);
         return gymCustomer;

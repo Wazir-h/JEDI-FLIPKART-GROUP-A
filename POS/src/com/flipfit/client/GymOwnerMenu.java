@@ -38,6 +38,8 @@ public class GymOwnerMenu {
         Scanner scanner = new Scanner(System.in);
 
 //        Complete This ---------------------------------
+        System.out.println("Enter Your Name: ");
+        String gymOwnerName = scanner.nextLine();
 
         System.out.print("Add Gym Owner Address");
         String GymOwnerAddress = scanner.nextLine();
@@ -51,7 +53,7 @@ public class GymOwnerMenu {
         System.out.print("Add gym owner Location ");
         String location = scanner.nextLine();
 
-        GymOwner gymOwner = GymOwnerBusinessService.AddGymOwnerDetails(GymOwnerAddress , GymOwnerPhone,GSTNumber,location);
+        GymOwner gymOwner = GymOwnerBusinessService.AddGymOwnerDetails(gymOwnerName, GymOwnerAddress , GymOwnerPhone,GSTNumber,location);
          return gymOwner;
     }
     public static GymCentre AddGymCenterClient(){
@@ -60,13 +62,13 @@ public class GymOwnerMenu {
         System.out.print("Enter Gym Name: ");
         String GymName =  scanner.nextLine();
 
-        System.out.print("Add Gym Center Address");
+        System.out.print("Add Gym Center Address: ");
         String GymCenterAddress = scanner.nextLine();
 
         System.out.print("Add Gym Center Phone Number: ");
         String GymCenterPhone = scanner.nextLine();
 
-        System.out.print("Enter Total Slot Count");
+        System.out.print("Enter Total Slot Count: ");
         int SlotCount = scanner.nextInt();
 
         GymCentre gym = GymOwnerBusinessService.AddGymCenter(GymName, GymCenterAddress, GymCenterPhone, SlotCount);

@@ -18,7 +18,10 @@ public class GymFlipfitApplicationClient {
         System.out.print("Enter Password: ");
         String password = scanner.nextLine();
 
-        System.out.print("Enter Role id :");
+        System.out.println("Enter Your Role Number:");
+        System.out.println("1. Gym Admin");
+        System.out.println("2. Gym Customer");
+        System.out.println("3. Gym Owner");
         int roleId = scanner.nextInt();
 
 
@@ -28,34 +31,37 @@ public class GymFlipfitApplicationClient {
             }else{
                 System.out.println("Login Failed");
             }
-        } else if (roleId == 2) {
-            if(GymOwnerCredentials.authenticateUser(userName,password)){
-                GymOwnerMenu.ownerPage();
-            }else{
-                System.out.println("\n Login Failed");
-            }
-        } else if (roleId == 3) {
+        }
+        else if (roleId == 2) {
             if(GymCustomerCredentials.authenticateUser(userName,password)){
                 GymCustomerMenu.customerPage(userName,password,3);
             }else{
                 System.out.println("\n Login Failed");
             }
-        } else {
+        }
+        else if (roleId == 3) {
+            if(GymOwnerCredentials.authenticateUser(userName,password)){
+                GymOwnerMenu.ownerPage();
+            }else{
+                System.out.println("\n Login Failed");
+            }
+        }
+        else {
             System.out.println("Please Enter correct RoleId");
         }
     }
 
     public static void GymCustomerRegistration() {
-        System.out.println("Gym Customer Registration Successful");
         GymCustomer newCustomer = GymCustomerMenu.AddGymCustomer();       // -----------------------------------------
 
         GymCustomerCredentials.addCustomer(newCustomer.getUserEmail(), newCustomer);
+        System.out.println("Gym Customer Registration Successful");
     }
 
     public static void GymOwnerRegistration() {
-        System.out.println("Gym Owner registration Successful1");
         GymOwner newOwner = GymOwnerMenu.AddGymOwnerClient(); //-----------------------------------------------------
         GymOwnerCredentials.addGymOwner(newOwner.getUserEmail(),newOwner);
+        System.out.println("Gym Owner registration Successful1");
     }
 
     public static void changePassword() {
@@ -64,6 +70,7 @@ public class GymFlipfitApplicationClient {
 
     public static void main(String[] args) {
         // Welcome Message to User
+        GymAdminCredentials.setAdminCred();
         System.out.println("Welcome to Flipfit Application");
 
         // Scanner Object for User Inputs

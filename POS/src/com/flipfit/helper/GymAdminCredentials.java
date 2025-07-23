@@ -7,7 +7,7 @@ public class GymAdminCredentials {
     // A method to add data to the shared HashMap
     public static void addData(String key, String value) {
         AdminCred.put(key, value);
-        System.out.println("Added: " + key + " -> " + value);
+//        System.out.println("Added: " + key + " -> " + value);
     }
 
     // A method to retrieve data from the shared HashMap
@@ -21,7 +21,7 @@ public class GymAdminCredentials {
     }
 
     public static void setAdminCred() {
-        System.out.println("\n--- Setting Up Admin Credentials ---");
+//        System.out.println("\n--- Setting Up Admin Credentials ---");
         GymAdminCredentials.addData("admin1@flipkart.com", "passwordAdmin1");
         GymAdminCredentials.addData("admin2@flipkart.com", "passwordAdmin2");
         GymAdminCredentials.printAllData();

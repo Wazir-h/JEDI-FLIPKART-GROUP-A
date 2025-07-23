@@ -4,9 +4,7 @@ public class GymOwner extends User {
     private String gymOwnerAddress;
     private String gymOwnerPhone;
     private String GSTNumber;
-    private boolean isApproved;
-    private String location;
-
+    private boolean isApproved = false;
 
     public String getGymOwnerPhone() {
         return gymOwnerPhone;
@@ -37,15 +35,7 @@ public class GymOwner extends User {
     }
 
     public void setApproved(boolean approved) {
-        isApproved = approved;
-    }
-
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
+        isApproved = true;
     }
 
 }

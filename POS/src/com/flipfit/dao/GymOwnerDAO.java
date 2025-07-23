@@ -19,13 +19,36 @@ public class GymOwnerDAO {
     public static void AddGymCenter(String ownerEmail, GymCentre gymCenter) {
 
         if (!GymCenterDetails.containsKey(ownerEmail)) {
-            // If not, create a new list, add the gym, and put it in the map
             List<GymCentre> gymsInCity = new ArrayList<>();
             gymsInCity.add(gymCenter);
             GymCenterDetails.put(ownerEmail, gymsInCity);
         } else {
-            // If the city already exists, get the list and add the new gym to it
             GymCenterDetails.get(ownerEmail).add(gymCenter);
+        }
+    }
+    public static void DeleteGymCenter(String ownerEmail, String gymName) {
+        List<GymCentre> gymsInCity = GymCenterDetails.get(ownerEmail);
+        for (GymCentre gymCentre : gymsInCity) {
+            if (gymCentre.getGymName().equals(gymName)) {
+                gymsInCity.remove(gymCentre);
+                break;
+            }
+        }
+
+    }
+    public static GymCentre GetGymCenter(String ownerEmail, String gymName) {
+        List<GymCentre> gymsInCity = GymCenterDetails.get(ownerEmail);
+        for (GymCentre gymCentre : gymsInCity) {
+            if (gymCentre.getGymName().equals(gymName)) {
+                return gymCentre;
+            }
+        }
+        return null;
+    }
+    public static void getAllGymCenters(String userName){
+        System.out.println("Gym Centres: ");
+        for (GymCentre gymCentre : GymCenterDetails.get(userName)){
+            System.out.println(gymCentre);
         }
     }
     public static void getAllOwners() {

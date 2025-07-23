@@ -3,11 +3,12 @@ package com.flipfit.beans;
 public class GymCentre extends GymOwner {
 
     private String GymCenterAddress;
-    private boolean isApproved;
+    private boolean isApproved = false;
     private int SlotCount;
     private String GymName;
     private String GymID;
     private String GymCenterPhone;
+
     public String getGymCenterAddress() {
         return GymCenterAddress;
     }
@@ -18,7 +19,7 @@ public class GymCentre extends GymOwner {
         return isApproved;
     }
     public void setApproved(boolean approved) {
-        isApproved = approved;
+        isApproved = true;
     }
     public void setGymName(String gymName){GymName=gymName;}
     public String getGymName() {return  GymName;}
@@ -45,5 +46,8 @@ public class GymCentre extends GymOwner {
         GymCenterPhone = gymCenterPhone;
     }
 
-
+    @Override
+    public String toString() {
+        return "Gym: " + getGymName() + "\nGym Address: " + getGymCenterAddress() + "\nGym Slots: " + getSlotCount();
+    }
 }

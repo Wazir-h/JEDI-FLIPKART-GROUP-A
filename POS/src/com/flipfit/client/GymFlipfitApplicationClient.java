@@ -1,8 +1,7 @@
 package com.flipfit.client;
 import java.util.Scanner;
 
-import com.flipfit.beans.GymOwner;
-import com.flipfit.business.GymOwnerBusinessService;
+import com.flipfit.beans.GymCentre;
 import com.flipfit.dao.GymAdminCredentialsDAO;
 import com.flipfit.dao.GymCustomerCredentialsDAO;
 import com.flipfit.beans.GymCustomer;
@@ -44,7 +43,7 @@ public class GymFlipfitApplicationClient {
         }
         else if (roleId == 3) {
             if(GymOwnerDAO.authenticateUser(userName,password)){
-                gymOwnerMenu.ownerPage();
+                gymOwnerMenu.ownerPage(userName);
             }else{
                 System.out.println("\n Login Failed");
             }
@@ -69,7 +68,7 @@ public class GymFlipfitApplicationClient {
         System.out.println("Password Changed Successful");
     }
 
-    public void main(String[] args) {
+     void Main() {
         // Welcome Message to User
         GymAdminCredentialsDAO.setAdminCred();
         System.out.println("Welcome to Flipfit Application");
@@ -117,4 +116,9 @@ public class GymFlipfitApplicationClient {
             }
         }
     }
+    public static void main(String[] args) {
+        GymFlipfitApplicationClient app = new GymFlipfitApplicationClient();
+        app.Main();
+    }
+
 }

@@ -1,6 +1,6 @@
 package com.flipfit.beans;
 
-public interface GymOwner extends User {
+public class GymOwner extends User {
     private String gymOwnerAddress;
     private String gymOwnerPhone;
     private String GSTNumber;

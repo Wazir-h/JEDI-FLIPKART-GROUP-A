@@ -1,6 +1,7 @@
 package com.flipfit.business;
 
-public class UserBuisness {
+public class GymUserBusiness {
+
     public void createProfile(){
         System.out.println("Profile Created");
     }

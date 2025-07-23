@@ -1,11 +1,11 @@
 package com.flipfit.beans;
 
-public class User {
+public class User extends Role{
     private int userId;
     private String userName;
     private String userEmail;
     private String userPassword;
-    private String role;
+    private Role role;
 
     public int getUserId() {
         return userId;
@@ -39,6 +39,4 @@ public class User {
         this.userPassword = userPassword;
     }
 
-    public void setRole(String role){ this.role = role;}
-    public String getUserRole() { return role;}
 }

@@ -5,7 +5,7 @@ import com.flipfit.beans.GymCustomer;
 
 import java.util.Scanner;
 
-public class GymCustomerBusinessService {
+public class GymCustomerBusinessService implements GymCustomerBusinessServiceInterface{
 
     public static GymCustomer createProfile(String userName,String EmailId,String userPhoneNo,String userAddress,String userPassword){
         //Complete This -----------------------------------------

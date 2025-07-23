@@ -1,6 +1,6 @@
 package com.flipfit.business;
 
-public class GymAdminBusinessService {
+public class GymAdminBusinessService implements GymAdminBusinessServiceInterface {
 
     public void ViewPendingGymRequests(){
 

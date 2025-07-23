@@ -3,6 +3,7 @@ import com.flipfit.beans.GymCentre;
 import  com.flipfit.beans.GymCustomer;
 import com.flipfit.beans.GymOwner;
 import com.flipfit.business.GymCustomerBusinessService;
+import com.flipfit.business.GymCustomerBusinessServiceInterface;
 
 import java.util.Scanner;
 
@@ -21,7 +22,7 @@ public class GymCustomerMenu {
 
         try {
             int choice = sc.nextInt();
-            GymCustomerBusinessService gymCustomerBusinessService=new GymCustomerBusinessService();
+            GymCustomerBusinessServiceInterface gymCustomerBusinessService = new GymCustomerBusinessService();
             switch (choice) {
                 case 1:
                     gymCustomerBusinessService.updateProfile(gymCustomer);

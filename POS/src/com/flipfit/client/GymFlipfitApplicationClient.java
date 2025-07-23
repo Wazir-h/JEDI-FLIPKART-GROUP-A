@@ -9,7 +9,7 @@ public class GymFlipfitApplicationClient {
         if (roleId == 1) {
             GymAdminMenu.adminPage();
         } else if (roleId == 2) {
-            GymCustomerMenu.customerPage();
+            GymCustomerMenu.customerPage(userName,userPassword,roleId);
         } else if (roleId == 3) {
             GymOwnerMenu.ownerPage();
         } else {

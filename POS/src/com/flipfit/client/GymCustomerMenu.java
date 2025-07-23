@@ -4,7 +4,7 @@ import com.flipfit.business.GymCustomerBusinessService;
 import java.util.Scanner;
 
 public class GymCustomerMenu {
-    public static void CustomerPage(String userName,String userPassword,int roleId){
+    public static void customerPage(String userName,String userPassword,int roleId){
         GymCustomer gymUser = new GymCustomer();
         gymUser.setUserName(userName);
         gymUser.setUserPassword(userPassword);

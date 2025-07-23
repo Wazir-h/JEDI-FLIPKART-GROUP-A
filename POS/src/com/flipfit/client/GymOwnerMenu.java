@@ -8,6 +8,31 @@ import java.util.Scanner;
 public class GymOwnerMenu {
     public static void ownerPage() {
 
+        System.out.println("Welcome Gym Owner");
+        System.out.println("Enter your choice: ");
+        System.out.println("1. Add Gym Center");
+        System.out.println("2. View Gym Centers");
+        System.out.println("3. Exit");
+
+        Scanner scanner = new Scanner(System.in);
+        int choice = -1;
+        try {
+            choice = Integer.parseInt(scanner.nextLine());
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid input! Please enter a number.");
+        }
+
+        switch (choice) {
+            case 1:
+                AddGymCenterClient();
+                break;
+
+            case 2:
+                ViewGymCentresClient();
+                break;
+            default:
+                return;
+        }
     }
     public static GymOwner AddGymOwnerClient(){
         Scanner scanner = new Scanner(System.in);
@@ -46,7 +71,7 @@ public class GymOwnerMenu {
         return gym;
 
     }
-    public void ViewGymCentresClient(){
+    public static void ViewGymCentresClient(){
 
     }
 

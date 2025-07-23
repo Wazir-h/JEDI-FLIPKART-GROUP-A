@@ -21,11 +21,12 @@ public class GymCustomerCredentials {
         }
         return null;
     }
-    public static boolean authenticateUser(String username, GymCustomer customer) {
+    public static boolean authenticateUser(String username, String password) {
         if (CustomerCred.containsKey(username)) {
             String storedPassword = CustomerCred.get(username).getUserPassword();
-            return storedPassword.equals(customer.getUserPassword());
+            return storedPassword.equals(password);
         }
+        System.out.println("User Not exist");
         return false;
     }
 

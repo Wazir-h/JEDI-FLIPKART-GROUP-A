@@ -2,21 +2,44 @@ package com.flipfit.client;
 import java.util.Scanner;
 
 import com.flipfit.beans.GymOwner;
+import com.flipfit.helper.GymAdminCredentials;
 import com.flipfit.helper.GymCustomerCredentials;
 import com.flipfit.beans.GymCustomer;
 import com.flipfit.helper.GymOwnerCredentials;
 
 public class GymFlipfitApplicationClient {
-    public static void userLogin(String userName, String userPassword, int roleId) {
+    public static void userLogin() {
         // RoleId - 1: Gym Admin, RoleId - 2: Gym Customer, RoleId - 3: Gym Owner
-        System.out.println("Login Successful");
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter Username: ");
+        String userName = scanner.nextLine();
+
+        System.out.print("Enter Password: ");
+        String password = scanner.nextLine();
+
+        System.out.print("Enter Role id :");
+        int roleId = scanner.nextInt();
+
 
         if (roleId == 1) {
-            GymAdminMenu.adminPage();
+            if(GymAdminCredentials.authenticateUser(userName,password)){
+                GymAdminMenu.adminPage();
+            }else{
+                System.out.println("Login Failed");
+            }
         } else if (roleId == 2) {
-            GymCustomerMenu.customerPage(userName,userPassword,roleId);
+            if(GymOwnerCredentials.authenticateUser(userName,password)){
+                GymOwnerMenu.ownerPage();
+            }else{
+                System.out.println("\n Login Failed");
+            }
         } else if (roleId == 3) {
-            GymOwnerMenu.ownerPage();
+            if(GymCustomerCredentials.authenticateUser(userName,password)){
+                GymCustomerMenu.customerPage(userName,password,3);
+            }else{
+                System.out.println("\n Login Failed");
+            }
         } else {
             System.out.println("Please Enter correct RoleId");
         }
@@ -66,7 +89,7 @@ public class GymFlipfitApplicationClient {
 
             switch (choice) {
                 case 1:
-                    userLogin("userName", "userPassword", 1);
+                    userLogin();
                     break;
 
                 case 2:

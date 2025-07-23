@@ -23,10 +23,10 @@ public class GymOwnerCredentials {
         }
         return null;
     }
-    public static boolean authenticateUser(String username, GymOwner owner) {
+    public static boolean authenticateUser(String username, String password) {
         if (OwnerCredentials.containsKey(username)) {
             String storedPassword = OwnerCredentials.get(username).getUserPassword();
-            return storedPassword.equals(owner.getUserPassword());
+            return storedPassword.equals(password);
         }
         return false;
     }

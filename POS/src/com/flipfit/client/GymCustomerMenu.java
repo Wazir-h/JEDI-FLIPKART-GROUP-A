@@ -8,6 +8,7 @@ import java.util.Scanner;
 
 public class GymCustomerMenu {
     public static void customerPage(String userName,String userPassword,int roleId){
+        System.out.println("LoggedIn Succesfully");
         GymCustomer gymUser = new GymCustomer();
         gymUser.setUserName(userName);
         gymUser.setUserPassword(userPassword);

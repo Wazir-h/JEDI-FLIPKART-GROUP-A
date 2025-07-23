@@ -1,9 +1,9 @@
 package com.flipfit.business;
 
-public class PaymentBusinessService {
+public class GymPaymentBusinessService {
     public void makePayment(String customerId){}
 
-    public void retrievePaymentinfor(){}
+    public void retrievePaymentinfo(){}
 
     public void retrievePayment(){}
 

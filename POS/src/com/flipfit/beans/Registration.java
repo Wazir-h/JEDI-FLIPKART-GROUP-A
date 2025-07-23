@@ -1,4 +1,4 @@
-package com.flipkart.bean;
+package com.flipfit.beans;
 
 public class Registration extends User{
     private int registrationId;

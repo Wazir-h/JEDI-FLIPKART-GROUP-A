@@ -9,4 +9,6 @@ public interface GymCustomerBusinessServiceInterface {
     public String getRole();
 
     public void viewAllGyms();
+    public  void bookSlot();
+    public  void cancelSlot();
 }

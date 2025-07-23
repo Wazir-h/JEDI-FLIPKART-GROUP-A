@@ -5,4 +5,5 @@ public interface SlotBusinessServiceInterfcae {
     public int getCustomerId();
     public void setSlotDate();
     public int getSlotDate();
+
 }

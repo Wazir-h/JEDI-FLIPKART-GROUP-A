@@ -1,6 +1,7 @@
 package com.flipfit.client;
 
 import com.flipfit.business.GymAdminBusinessService;
+import com.flipfit.business.SlotBusinessServiceInterfcae;
 
 import java.util.Scanner;
 
@@ -16,7 +17,6 @@ public class GymAdminMenu {
         System.out.println("5. Add Gym Owner");
         System.out.println("6. Delete Gym Owner");
         System.out.println("7. View Pending Gym Request");
-
         try {
             int choice = sc.nextInt();
             GymAdminBusinessService gymAdminBusinessService=new GymAdminBusinessService();
@@ -39,6 +39,6 @@ public class GymAdminMenu {
         } catch(Exception e){
             System.out.println("Enter Correct Value");
         }
-        String a = scanner.nextLine();
+        String a = sc.nextLine();
     }
 }

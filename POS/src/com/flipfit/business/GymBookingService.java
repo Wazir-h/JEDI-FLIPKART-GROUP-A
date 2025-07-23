@@ -1,9 +1,11 @@
 package com.flipkart.business;
 
+import com.flipfit.business.GymBookingServiceInterface;
+
 import java.sql.Timestamp;
 import java.util.Date;
 
-public class GymBookingService {
+public class GymBookingService implements GymBookingServiceInterface {
     public Timestamp getDate() {
         return new Timestamp(System.currentTimeMillis());
     }

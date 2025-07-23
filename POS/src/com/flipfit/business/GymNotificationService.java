@@ -1,6 +1,8 @@
 package com.flipkart.business;
 
-public class GymNotificationService {
+import com.flipfit.business.GymNotificationServiceInterface;
+
+public class GymNotificationService implements GymNotificationServiceInterface {
     public void sendNotification() {
         System.out.println("Notification Sent");
     }

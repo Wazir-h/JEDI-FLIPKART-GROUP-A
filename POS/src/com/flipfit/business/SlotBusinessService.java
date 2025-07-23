@@ -1,6 +1,6 @@
 package com.flipfit.business;
 
-public class SlotBusinessService {
+public class SlotBusinessService implements SlotBusinessServiceInterfcae{
     public void setGymCenterId(){
         System.out.println("setting the gym center id");
     }

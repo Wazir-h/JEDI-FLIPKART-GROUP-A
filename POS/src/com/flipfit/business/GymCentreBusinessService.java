@@ -1,6 +1,8 @@
 package com.flipfit.buisness;
 
-public class GymCentreBusinessService {
+import com.flipfit.business.GymCentreBusinessServiceInterface;
+
+public class GymCentreBusinessService implements GymCentreBusinessServiceInterface {
     public void markApproved(){
 
     }

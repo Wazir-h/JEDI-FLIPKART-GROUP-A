@@ -19,7 +19,6 @@ public class GymCustomerMenu {
 		System.out.println("2. To View All Gyms");
         System.out.println("3. Book Slot");
         System.out.println("4. Cancel Slot");
-
         try {
             int choice = sc.nextInt();
             GymCustomerBusinessServiceInterface gymCustomerBusinessService = new GymCustomerBusinessService();

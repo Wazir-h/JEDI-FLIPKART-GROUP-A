@@ -1,6 +1,8 @@
 package com.flipkart.business;
 
-public class RegistrationBusinessService {
+import com.flipfit.business.RegistrationBusinessServiceInterface;
+
+public class RegistrationBusinessService implements RegistrationBusinessServiceInterface {
     public void getRegistrationID(){
         System.out.println("This is Registration ID: ");
     }

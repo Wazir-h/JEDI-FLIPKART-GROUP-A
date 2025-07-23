@@ -1,6 +1,6 @@
 package com.flipkart.bean;
 
-public class Registration extends user{
+public class Registration extends User{
     private int registrationId;
     private int dateOfRegistration;
     private boolean isRegistered;

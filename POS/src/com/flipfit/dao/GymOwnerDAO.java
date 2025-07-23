@@ -51,6 +51,18 @@ public class GymOwnerDAO {
             System.out.println(gymCentre);
         }
     }
+    public static void getAllGyms(){
+        if(GymCenterDetails.isEmpty()){
+            System.out.println("No Gym is registered");
+        }
+        else{
+            for (List<GymCentre> gymlist: GymCenterDetails.values()){
+                for(GymCentre gym: gymlist){
+                    System.out.println(gym);
+                }
+            }
+        }
+    }
     public static void getAllOwners() {
         System.out.println("All owners: ");
     }

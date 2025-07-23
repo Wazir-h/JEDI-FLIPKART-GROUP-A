@@ -7,7 +7,7 @@ public class GymOwnerMenu {
     GymOwnerBusinessService gymOwnerBusinessService = new GymOwnerBusinessService();
      void ownerPage(String userName) {
 
-        System.out.println("Welcome Gym Owner");
+        System.out.println("Welcome "+ userName);
         System.out.println("Enter your choice: ");
         System.out.println("1. Add Gym Center");
         System.out.println("2. Delete Gym Center");

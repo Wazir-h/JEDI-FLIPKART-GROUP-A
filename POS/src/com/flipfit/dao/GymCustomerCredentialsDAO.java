@@ -29,7 +29,31 @@ public class GymCustomerCredentialsDAO {
         System.out.println("User Not exist");
         return false;
     }
+    public static boolean updateCustomerProfile(String oldUsername, GymCustomer updatedCustomer) {
+        if (!CustomerCred.containsKey(oldUsername)) {
+            System.out.println("Error: Customer with username '" + oldUsername + "' not found. Profile update failed.");
+            return false;
+        }
 
+        String newUsername = updatedCustomer.getUserName();
+
+        if (!oldUsername.equals(newUsername)) {
+
+            if (CustomerCred.containsKey(newUsername)) {
+                System.out.println("Error: New username '" + newUsername + "' is already taken by another user. Profile update failed.");
+                return false;
+            }
+
+            CustomerCred.remove(oldUsername);
+            System.out.println("Username for customer changed from '" + oldUsername + "' to '" + newUsername + "'.");
+        }
+
+        CustomerCred.put(newUsername, updatedCustomer);
+
+        System.out.println("Profile for customer '" + newUsername + "' updated successfully.");
+        System.out.println("New details: " + updatedCustomer);
+        return true;
+    }
     public static boolean userExists(String username) {
         return CustomerCred.containsKey(username);
     }

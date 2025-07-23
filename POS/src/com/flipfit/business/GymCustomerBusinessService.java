@@ -2,6 +2,8 @@ package com.flipfit.business;
 import com.flipfit.beans.GymCustomer;
 
 import com.flipfit.beans.GymCustomer;
+import com.flipfit.dao.GymCustomerCredentialsDAO;
+import com.flipfit.dao.GymOwnerDAO;
 
 import java.util.Scanner;
 
@@ -18,8 +20,9 @@ public class GymCustomerBusinessService implements GymCustomerBusinessServiceInt
         gymCustomer.setUserPassword(userPassword);
         return gymCustomer;
     }
-    public void updateProfile(GymCustomer gymCustomer){
-        Scanner sc=new Scanner(System.in);
+    public void updateProfile(GymCustomer gymCustomer) {
+        Scanner sc = new Scanner(System.in);
+        String userNameOld = gymCustomer.getUserName();
         System.out.println("Enter What to Update");
         System.out.println("1. To Update Your Name");
         System.out.println("2. To Update Your EmailId");
@@ -28,34 +31,40 @@ public class GymCustomerBusinessService implements GymCustomerBusinessServiceInt
         System.out.println("5. To Update Your Address");
         try {
             int choice = sc.nextInt();
-            switch (choice) {
-                case 1:
-                    System.out.println("Enter Your New Name");
-                    String newUserName=sc.nextLine();
-                    gymCustomer.setUserName(newUserName);
-                case 2:
-                    System.out.println("Enter Your New EmailId");
-                    String newUserEmailId=sc.nextLine();
-                    gymCustomer.setUserEmail(newUserEmailId);
-                case 3:
-                    System.out.println("Enter Your New PassWord");
-                    String newUserPassWord=sc.nextLine();
-                    gymCustomer.setUserPassword(newUserPassWord);
-                case 4:
-                    System.out.println("Enter Your New Phone Number");
-                    String newUserPhoneNumber=sc.nextLine();
-                    gymCustomer.setPhoneNo(newUserPhoneNumber);
-                case 5:
-                    System.out.println("Enter Your New Address");
-                    String newUserAddress=sc.nextLine();
-                    gymCustomer.setAddress(newUserAddress);
+            sc.nextLine();
 
-                default:
+            if (choice == 1) {
+                System.out.println("Enter Your New Name");
+                String newUserName = sc.nextLine();
+                gymCustomer.setUserName(newUserName);
+            } else if (choice == 2) {
+                System.out.println("Enter Your New EmailId");
+                String newUserEmailId = sc.nextLine();
+                gymCustomer.setUserEmail(newUserEmailId);
+            } else if (choice == 3) {
+                System.out.println("Enter Your New PassWord");
+                String newUserPassWord = sc.nextLine();
+                gymCustomer.setUserPassword(newUserPassWord);
+            } else if (choice == 4) {
+                System.out.println("Enter Your New Phone Number");
+                String newUserPhoneNumber = sc.nextLine();
+                gymCustomer.setPhoneNo(newUserPhoneNumber);
 
+            } else if (choice == 5) {
+                System.out.println("Enter Your New Address");
+                String newUserAddress = sc.nextLine();
+                gymCustomer.setAddress(newUserAddress);
+            } else {
+                // Handle invalid number choices
+                System.out.println("Invalid choice. No changes were made.");
             }
-        } catch(Exception e){
-            System.out.println("Enter Correct Value");
+        } catch (Exception e) {
+            // Catches non-integer input for 'choice'
+            System.out.println("Invalid input. Please enter a number between 1 and 5.");
         }
+
+            GymCustomerCredentialsDAO.updateCustomerProfile(userNameOld, gymCustomer);
+            System.out.println("Profile updated successfully!");
 
     }
     public String getRole(){
@@ -63,10 +72,7 @@ public class GymCustomerBusinessService implements GymCustomerBusinessServiceInt
         return "";
     }
     public void viewAllGyms(){
-
-        System.out.println("Gyms Near Your Area:");
-        System.out.println("Gym-1");
-        System.out.println("Gym-2");
+        GymOwnerDAO.getAllGyms();
     }
     public  void bookSlot(){
         System.out.println("Booking Confirmed");

@@ -3,7 +3,13 @@ package com.flipfit.business;
 public class GymAdminBusinessService implements GymAdminBusinessServiceInterface {
 
     public void ViewPendingGymRequests(){
-        System.out.println("Following are the list of pending requests");
+        System.out.println("Searching for pending Gym Requests");
+        if (true) {
+            System.out.println("No pending gym registration requests found.");
+        } else {
+            System.out.println("--- Pending Gym Requests ---");
+            System.out.println("----------------------------");
+        }
     }
     public void ApproveGymRegistration(){
         System.out.println("Gym request approved");

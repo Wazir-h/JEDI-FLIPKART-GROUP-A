@@ -1,10 +1,18 @@
 package com.flipfit.business;
 
 import com.flipfit.beans.GymCentre;
+import com.flipfit.beans.GymOwner;
 
 public class GymOwnerBusinessService{
-    public void GetOwnerDetails(){
+    public void AddGymOwnerDetails(string gymOwnerAddress , String gymOwnerPhone,String GSTNumber,String location){
+          GymOwner gymOwner=new GymOwner();
 
+          gymOwner.setGymOwnerAddress(gymOwnerAddress);
+          gymOwner.setGymOwnerPhone(gymOwnerPhone);
+          gymOwner.setGSTNumber(GSTNumber);
+          gymOwner.setlocation(location);
+
+          return gymOwner;
     }
 
     public static GymCentre AddGymCenter(String gymCenterName, String gymCenterAddress, String gymCenterPhone, int SlotCount){

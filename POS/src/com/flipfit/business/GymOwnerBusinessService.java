@@ -3,8 +3,10 @@ package com.flipfit.business;
 import com.flipfit.beans.GymCentre;
 import com.flipfit.beans.GymOwner;
 
-public class GymOwnerBusinessService{
-    public static GymOwner AddGymOwnerDetails(String gymOwnerName, String gymOwnerAddress, String gymOwnerPhone, String GSTNumber, String location){
+public class GymOwnerBusinessService implements GymOwnerBusinessServiceInterface {
+    public GymOwner AddGymOwnerDetails(String gymOwnerName, String gymOwnerAddress,
+                                              String gymOwnerPhone, String GSTNumber, String location){
+
           GymOwner gymOwner=new GymOwner();
 
           gymOwner.setName(gymOwnerName);
@@ -16,7 +18,7 @@ public class GymOwnerBusinessService{
           return gymOwner;
     }
 
-    public static GymCentre AddGymCenter(String gymCenterName, String gymCenterAddress, String gymCenterPhone, int SlotCount){
+    public GymCentre AddGymCenter(String gymCenterName, String gymCenterAddress, String gymCenterPhone, int SlotCount){
         GymCentre gymCenter = new GymCentre();
 
         gymCenter.setName(gymCenterName);
@@ -32,13 +34,10 @@ public class GymOwnerBusinessService{
     public void DeleteGymCenter(){
     }
 
-    public void AddGymSlot(){
+    public void EditGymSlot(){
 
     }
 
-    public void DeleteGymSlot(){
-
-    }
 
     public void ViewAllGymCenters(){
     }

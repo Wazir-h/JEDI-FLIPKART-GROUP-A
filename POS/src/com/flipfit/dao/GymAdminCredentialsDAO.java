@@ -1,7 +1,7 @@
-package com.flipfit.helper;
+package com.flipfit.dao;
 import java.util.HashMap;
 import java.util.Map;
-public class GymAdminCredentials {
+public class GymAdminCredentialsDAO {
     public static Map<String, String> AdminCred = new HashMap<>();
 
     // A method to add data to the shared HashMap
@@ -22,9 +22,9 @@ public class GymAdminCredentials {
 
     public static void setAdminCred() {
 //        System.out.println("\n--- Setting Up Admin Credentials ---");
-        GymAdminCredentials.addData("admin1@flipkart.com", "passwordAdmin1");
-        GymAdminCredentials.addData("admin2@flipkart.com", "passwordAdmin2");
-        GymAdminCredentials.printAllData();
+        GymAdminCredentialsDAO.addData("admin1@flipkart.com", "passwordAdmin1");
+        GymAdminCredentialsDAO.addData("admin2@flipkart.com", "passwordAdmin2");
+        GymAdminCredentialsDAO.printAllData();
     }
 
     public static boolean authenticateUser(String username, String password) {

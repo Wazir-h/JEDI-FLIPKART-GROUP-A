@@ -1,9 +1,9 @@
-package com.flipfit.helper;
+package com.flipfit.dao;
 import java.util.HashMap;
 import java.util.Map;
 import com.flipfit.beans.GymOwner;
 
-public class GymOwnerCredentials {
+public class GymOwnerDAO {
 
 
     public static Map<String, GymOwner> OwnerCredentials = new HashMap<>();

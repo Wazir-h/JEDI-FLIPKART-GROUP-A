@@ -2,10 +2,10 @@ package com.flipfit.client;
 import java.util.Scanner;
 
 import com.flipfit.beans.GymOwner;
-import com.flipfit.helper.GymAdminCredentials;
-import com.flipfit.helper.GymCustomerCredentials;
+import com.flipfit.dao.GymAdminCredentialsDAO;
+import com.flipfit.dao.GymCustomerCredentialsDAO;
 import com.flipfit.beans.GymCustomer;
-import com.flipfit.helper.GymOwnerCredentials;
+import com.flipfit.dao.GymOwnerDAO;
 
 public class GymFlipfitApplicationClient {
     public static void userLogin() {
@@ -26,21 +26,21 @@ public class GymFlipfitApplicationClient {
 
 
         if (roleId == 1) {
-            if(GymAdminCredentials.authenticateUser(userName,password)){
+            if(GymAdminCredentialsDAO.authenticateUser(userName,password)){
                 GymAdminMenu.adminPage();
             }else{
                 System.out.println("Login Failed");
             }
         }
         else if (roleId == 2) {
-            if(GymCustomerCredentials.authenticateUser(userName,password)){
-                GymCustomerMenu.customerPage(userName,password,2);
+            if(GymCustomerCredentialsDAO.authenticateUser(userName,password)){
+                GymCustomerMenu.customerPage(userName,password,3);
             }else{
                 System.out.println("\n Login Failed");
             }
         }
         else if (roleId == 3) {
-            if(GymOwnerCredentials.authenticateUser(userName,password)){
+            if(GymOwnerDAO.authenticateUser(userName,password)){
                 GymOwnerMenu.ownerPage();
             }else{
                 System.out.println("\n Login Failed");
@@ -54,13 +54,13 @@ public class GymFlipfitApplicationClient {
     public static void GymCustomerRegistration() {
         GymCustomer newCustomer = GymCustomerMenu.AddGymCustomer();       // -----------------------------------------
 
-        GymCustomerCredentials.addCustomer(newCustomer.getUserEmail(), newCustomer);
+        GymCustomerCredentialsDAO.addCustomer(newCustomer.getUserEmail(), newCustomer);
         System.out.println("Gym Customer Registration Successful");
     }
 
     public static void GymOwnerRegistration() {
         GymOwner newOwner = GymOwnerMenu.AddGymOwnerClient(); //-----------------------------------------------------
-        GymOwnerCredentials.addGymOwner(newOwner.getUserEmail(),newOwner);
+        GymOwnerDAO.addGymOwner(newOwner.getUserEmail(),newOwner);
         System.out.println("Gym Owner registration Successful1");
     }
 
@@ -70,7 +70,7 @@ public class GymFlipfitApplicationClient {
 
     public static void main(String[] args) {
         // Welcome Message to User
-        GymAdminCredentials.setAdminCred();
+        GymAdminCredentialsDAO.setAdminCred();
         System.out.println("Welcome to Flipfit Application");
 
         // Scanner Object for User Inputs

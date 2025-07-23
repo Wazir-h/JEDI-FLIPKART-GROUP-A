@@ -1,5 +1,5 @@
-package com.flipfit.buisness;
-import  com.flipfit.buisness.UserBuisness;
+package com.flipfit.business;
+
 public class UserBuisness {
     public void createProfile(){
         System.out.println("Profile Created");

@@ -8,11 +8,10 @@ import java.util.Scanner;
 
 public class GymCustomerMenu {
     public static void customerPage(String userName,String userPassword,int roleId){
-        System.out.println("LoggedIn Succesfully");
-        GymCustomer gymUser = new GymCustomer();
-        gymUser.setUserName(userName);
-        gymUser.setUserPassword(userPassword);
-        System.out.println("Welcome"+ gymUser.getUserName()+ "to Flipfit");
+        GymCustomer gymCustomer=new GymCustomer();
+        gymCustomer.setUserName(userName);
+        gymCustomer.setUserPassword(userPassword);
+        System.out.println("Welcome"+ userName + "to Flipfit");
         Scanner sc=new Scanner(System.in);
         System.out.println("Enter option to Move Next");
         System.out.println("1. To UpdateProfile");
@@ -22,7 +21,7 @@ public class GymCustomerMenu {
             GymCustomerBusinessService gymCustomerBusinessService=new GymCustomerBusinessService();
             switch (choice) {
                 case 1:
-                    gymCustomerBusinessService.updateProfile(gymUser);
+                    gymCustomerBusinessService.updateProfile(gymCustomer);
                 case 2:
                     gymCustomerBusinessService.viewAllGyms();
                 default:
@@ -37,18 +36,21 @@ public class GymCustomerMenu {
         // Complete this -------------------------------------------
         Scanner scanner = new Scanner(System.in);
 
+        System.out.print("Add Gym Customer Name");
+        String GymOwnerName = scanner.nextLine();
+
+        System.out.print("Add Gym Customer EmailId");
+        String GymOwnerEmailId = scanner.nextLine();
+
+        System.out.print("Add Gym Customer Phone Number");
+        String GymOwnerPhoneNo = scanner.nextLine();
 
         System.out.print("Add Gym Customer Address");
         String GymOwnerAddress = scanner.nextLine();
 
-        System.out.print("Add Gym Customer Phone Number: ");
-        String GymOwnerPhone = scanner.nextLine();
-
-
-        System.out.print("Add gym owner Location ");
-        String location = scanner.nextLine();
-
-        GymCustomer gymCustomer = GymCustomerBusinessService.createProfile();
+        System.out.print("Add Your Password");
+        String GymOwnerPassword = scanner.nextLine();
+        GymCustomer gymCustomer = GymCustomerBusinessService.createProfile(GymOwnerName,GymOwnerEmailId,GymOwnerPhoneNo,GymOwnerAddress,GymOwnerPassword);
         return gymCustomer;
     }
 

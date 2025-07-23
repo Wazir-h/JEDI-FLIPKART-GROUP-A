@@ -7,10 +7,15 @@ import java.util.Scanner;
 
 public class GymCustomerBusinessService {
 
-    public static GymCustomer createProfile(){
+    public static GymCustomer createProfile(String userName,String EmailId,String userPhoneNo,String userAddress,String userPassword){
         //Complete This -----------------------------------------
         System.out.println("Profile Created");
         GymCustomer gymCustomer = new GymCustomer();
+        gymCustomer.setUserName(userName);
+        gymCustomer.setUserEmail(EmailId);
+        gymCustomer.setPhoneNo(userPhoneNo);
+        gymCustomer.setAddress(userAddress);
+        gymCustomer.setUserPassword(userPassword);
         return gymCustomer;
     }
     public void updateProfile(GymCustomer gymCustomer){

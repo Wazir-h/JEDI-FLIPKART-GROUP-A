@@ -4,13 +4,13 @@ import com.flipfit.beans.GymCentre;
 import com.flipfit.beans.GymOwner;
 
 public class GymOwnerBusinessService{
-    public void AddGymOwnerDetails(string gymOwnerAddress , String gymOwnerPhone,String GSTNumber,String location){
+    public static GymOwner AddGymOwnerDetails(String gymOwnerAddress, String gymOwnerPhone, String GSTNumber, String location){
           GymOwner gymOwner=new GymOwner();
 
           gymOwner.setGymOwnerAddress(gymOwnerAddress);
           gymOwner.setGymOwnerPhone(gymOwnerPhone);
           gymOwner.setGSTNumber(GSTNumber);
-          gymOwner.setlocation(location);
+          gymOwner.setLocation(location);
 
           return gymOwner;
     }

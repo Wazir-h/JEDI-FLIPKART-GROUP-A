@@ -49,7 +49,7 @@ public class GymOwnerMenu {
         System.out.print("Add gym owner Location ");
         String location = scanner.nextLine();
 
-        GymOwner gymOwner=GymOwnerBusinessService.AddGymOwnerDetails(string gymOwnerAddress , String gymOwnerPhone,String GSTNumber,String location);
+        GymOwner gymOwner=GymOwnerBusinessService.AddGymOwnerDetails(GymOwnerAddress , GymOwnerPhone,GSTNumber,location);
          return gymOwner;
     }
     public static GymCentre AddGymCenterClient(){

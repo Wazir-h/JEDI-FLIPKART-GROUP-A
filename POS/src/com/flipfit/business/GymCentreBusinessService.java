@@ -1,4 +1,4 @@
-package com.flipfit.buisness;
+package com.flipfit.business;
 
 import com.flipfit.business.GymCentreBusinessServiceInterface;
 

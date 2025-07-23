@@ -1,6 +1,11 @@
 package com.flipfit.client;
 import java.util.Scanner;
 
+import com.flipfit.beans.GymOwner;
+import com.flipfit.helper.GymCustomerCredentials;
+import com.flipfit.beans.GymCustomer;
+import com.flipfit.helper.GymOwnerCredentials;
+
 public class GymFlipfitApplicationClient {
     public static void userLogin(String userName, String userPassword, int roleId) {
         // RoleId - 1: Gym Admin, RoleId - 2: Gym Customer, RoleId - 3: Gym Owner
@@ -19,10 +24,15 @@ public class GymFlipfitApplicationClient {
 
     public static void GymCustomerRegistration() {
         System.out.println("Gym Customer Registration Successful");
+        GymCustomer newCustomer = new GymCustomer();       // -----------------------------------------
+
+        GymCustomerCredentials.addCustomer(newCustomer.getUserEmail(), newCustomer);
     }
 
     public static void GymOwnerRegistration() {
         System.out.println("Gym Owner registration Successful1");
+        GymOwner newOwner = new GymOwner(); //-----------------------------------------------------
+        GymOwnerCredentials.addGymOwner(newOwner.getUserEmail(),newOwner);
     }
 
     public static void changePassword() {

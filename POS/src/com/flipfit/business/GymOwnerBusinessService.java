@@ -2,10 +2,11 @@ package com.flipfit.business;
 
 import com.flipfit.beans.GymCentre;
 import com.flipfit.beans.GymOwner;
+import com.flipfit.dao.GymOwnerDAO;
 
 public class GymOwnerBusinessService implements GymOwnerBusinessServiceInterface {
-    public GymOwner AddGymOwnerDetails(String gymOwnerName, String gymOwnerAddress,
-                                              String gymOwnerPhone, String GSTNumber, String location){
+    public void AddGymOwnerDetails(String gymEmail, String gymOwnerName, String gymOwnerAddress,
+                                   String gymOwnerPhone, String GSTNumber, String location){
 
           GymOwner gymOwner=new GymOwner();
 
@@ -14,22 +15,28 @@ public class GymOwnerBusinessService implements GymOwnerBusinessServiceInterface
           gymOwner.setGymOwnerPhone(gymOwnerPhone);
           gymOwner.setGSTNumber(GSTNumber);
           gymOwner.setLocation(location);
+          String gymId = gymOwnerName+gymOwnerName;
+          gymOwner.setId(gymId);
+          gymOwner.setUserEmail(gymEmail);
 
-          return gymOwner;
+          GymOwnerDAO.AddGymOwner(gymOwner.getUserEmail(),gymOwner);
+          System.out.println("Gym Owner registration Successful");
     }
 
-    public GymCentre AddGymCenter(String gymCenterName, String gymCenterAddress, String gymCenterPhone, int SlotCount){
+    public void AddGymCenter(String gymOwnerEmail, String gymCenterName, String gymCenterAddress,
+                      String gymCenterPhone, int SlotCount){
         GymCentre gymCenter = new GymCentre();
 
         gymCenter.setName(gymCenterName);
         gymCenter.setGymCenterAddress(gymCenterAddress);
         gymCenter.setSlotCount(SlotCount);
         gymCenter.setGymCenterPhone(gymCenterPhone);
-
+        gymCenter.setUserEmail(gymOwnerEmail);
         String gymID = gymCenterName + gymCenterAddress;
-        gymCenter.setId(gymID);
+        gymCenter.setGymID(gymID);
 
-        return gymCenter;
+        GymOwnerDAO.AddGymCenter(gymCenter.getUserEmail(), gymCenter);
+        System.out.println("Gym Center registration Successful");
     }
     public void DeleteGymCenter(){
     }

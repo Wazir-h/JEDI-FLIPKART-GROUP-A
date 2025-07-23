@@ -1,12 +1,11 @@
 package com.flipfit.client;
-import com.flipfit.beans.GymCentre;
-import com.flipfit.beans.GymOwner;
 import com.flipfit.business.GymOwnerBusinessService;
 
 import java.util.Scanner;
 
 public class GymOwnerMenu {
-    public static void ownerPage() {
+    GymOwnerBusinessService gymOwnerBusinessService = new GymOwnerBusinessService();
+     void ownerPage() {
 
         System.out.println("Welcome Gym Owner");
         System.out.println("Enter your choice: ");
@@ -33,22 +32,27 @@ public class GymOwnerMenu {
 
             case 2:
                 ViewGymCentresClient();
+            case 3:
+
                 break;
             default:
                 return;
         }
     }
-    public static GymOwner AddGymOwnerClient(){
-        GymOwnerBusinessService gymOwnerBusinessService = new GymOwnerBusinessService();
+    void AddGymOwnerClient(){
         Scanner scanner = new Scanner(System.in);
 
         String  gymOwnerName,
+                gymEmail,
                 gymOwnerAddress,
                 gymOwnerPhone,
                 GSTNumber,
                 location;
         System.out.println("Enter Your Name: ");
         gymOwnerName = scanner.nextLine();
+
+        System.out.println("Enter Your Email: ");
+        gymEmail = scanner.nextLine();
 
         System.out.print("Add Gym Owner Address");
         gymOwnerAddress = scanner.nextLine();
@@ -62,11 +66,10 @@ public class GymOwnerMenu {
         System.out.print("Add gym owner Location ");
         location = scanner.nextLine();
 
-        GymOwner gymOwner = gymOwnerBusinessService.AddGymOwnerDetails(gymOwnerName, gymOwnerAddress,
-                gymOwnerPhone, GSTNumber, location);
-        return gymOwner;
+        gymOwnerBusinessService.AddGymOwnerDetails(gymEmail,gymOwnerName, gymOwnerAddress,
+                                                    gymOwnerPhone, GSTNumber, location);
     }
-    public static GymCentre AddGymCenterClient(){
+    void AddGymCenterClient(){
         GymOwnerBusinessService gymOwnerBusinessService = new GymOwnerBusinessService();
         Scanner scanner = new Scanner(System.in);
 
@@ -82,9 +85,7 @@ public class GymOwnerMenu {
         System.out.print("Enter Total Slot Count: ");
         int SlotCount = scanner.nextInt();
 
-        GymCentre gym = gymOwnerBusinessService.AddGymCenter(GymName, GymCenterAddress, GymCenterPhone, SlotCount);
-        return gym;
-
+        gymOwnerBusinessService.AddGymCenter(, GymName, GymCenterAddress, GymCenterPhone, SlotCount);
     }
     public static void ViewGymCentresClient(){
 

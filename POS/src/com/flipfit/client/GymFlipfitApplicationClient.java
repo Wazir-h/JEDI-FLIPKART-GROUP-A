@@ -2,13 +2,16 @@ package com.flipfit.client;
 import java.util.Scanner;
 
 import com.flipfit.beans.GymOwner;
+import com.flipfit.business.GymOwnerBusinessService;
 import com.flipfit.dao.GymAdminCredentialsDAO;
 import com.flipfit.dao.GymCustomerCredentialsDAO;
 import com.flipfit.beans.GymCustomer;
 import com.flipfit.dao.GymOwnerDAO;
 
 public class GymFlipfitApplicationClient {
-    public static void userLogin() {
+    public GymOwnerMenu gymOwnerMenu = new GymOwnerMenu();
+
+    void userLogin() {
         // RoleId - 1: Gym Admin, RoleId - 2: Gym Customer, RoleId - 3: Gym Owner
         Scanner scanner = new Scanner(System.in);
 
@@ -41,7 +44,7 @@ public class GymFlipfitApplicationClient {
         }
         else if (roleId == 3) {
             if(GymOwnerDAO.authenticateUser(userName,password)){
-                GymOwnerMenu.ownerPage();
+                gymOwnerMenu.ownerPage();
             }else{
                 System.out.println("\n Login Failed");
             }
@@ -51,24 +54,22 @@ public class GymFlipfitApplicationClient {
         }
     }
 
-    public static void GymCustomerRegistration() {
+    public void GymCustomerRegistration() {
         GymCustomer newCustomer = GymCustomerMenu.AddGymCustomer();       // -----------------------------------------
 
         GymCustomerCredentialsDAO.addCustomer(newCustomer.getUserEmail(), newCustomer);
         System.out.println("Gym Customer Registration Successful");
     }
 
-    public static void GymOwnerRegistration() {
-        GymOwner newOwner = GymOwnerMenu.AddGymOwnerClient(); //-----------------------------------------------------
-        GymOwnerDAO.addGymOwner(newOwner.getUserEmail(),newOwner);
-        System.out.println("Gym Owner registration Successful1");
+    public void GymOwnerRegistration() {
+        gymOwnerMenu.AddGymOwnerClient();
     }
 
-    public static void changePassword() {
+    public void changePassword() {
         System.out.println("Password Changed Successful");
     }
 
-    public static void main(String[] args) {
+    public void main(String[] args) {
         // Welcome Message to User
         GymAdminCredentialsDAO.setAdminCred();
         System.out.println("Welcome to Flipfit Application");

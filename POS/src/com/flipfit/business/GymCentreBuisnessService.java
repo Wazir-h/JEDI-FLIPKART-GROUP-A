@@ -1,6 +1,6 @@
 package com.flipfit.buisness;
 import  com.flipfit.beans.GymCentre;
-public class GymCentreBuisness {
+public class GymCentreBuisnessService{
     public void markApproved(){
 
     }

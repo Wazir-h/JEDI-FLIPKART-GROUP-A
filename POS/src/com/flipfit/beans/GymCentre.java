@@ -1,6 +1,6 @@
 package com.flipfit.beans;
 
-public interface GymCentre extends GymOwner {
+public class GymCentre extends GymOwner {
 
     private String GymCenterAddress;
     private boolean isApproved;
@@ -21,7 +21,7 @@ public interface GymCentre extends GymOwner {
         isApproved = approved;
     }
     public void setGymName(String gymName){GymName=gymName;}
-    public void getGymName(){return  GymName;}
+    public String getGymName() {return  GymName;}
     public int getSlotCount() {
         return SlotCount;
     }

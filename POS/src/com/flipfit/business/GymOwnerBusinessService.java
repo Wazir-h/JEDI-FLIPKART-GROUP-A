@@ -1,6 +1,6 @@
 package com.flipfit.business;
 
-public class GymOwnerBusiness {
+public class GymOwnerBusinessService{
     public void GetOwnerDetails(){
 
     }

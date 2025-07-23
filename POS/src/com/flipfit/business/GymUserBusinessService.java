@@ -1,6 +1,6 @@
 package com.flipfit.buisness;
 import  com.flipfit.beans.User;
-public class UserBuisness {
+public class GymUserBusinessService {
     public void createProfile(){
         System.out.println("Profile Created");
     }

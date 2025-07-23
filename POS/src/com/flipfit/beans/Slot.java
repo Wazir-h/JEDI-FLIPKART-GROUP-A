@@ -1,6 +1,7 @@
 package com.flipfit.beans;
-
-public class Slot extends GymCenter, GymPayment {
+import java.sql.Timestamp;
+import java.util.Date;
+public class Slot extends GymCentre {
     private Timestamp slotbookingTime;
     private Timestamp SlotTimeStart;
     private Timestamp SlotTimeEnd;

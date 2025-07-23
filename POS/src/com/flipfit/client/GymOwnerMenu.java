@@ -1,4 +1,4 @@
 package com.flipfit.client;
 
-public class GymAdminClient {
+public class GymOwnerMenu {
 }

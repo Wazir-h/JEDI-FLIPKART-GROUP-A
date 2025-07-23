@@ -67,7 +67,11 @@ public class GymCustomerBusinessService implements GymCustomerBusinessServiceInt
         System.out.println("Gyms Near Your Area:");
         System.out.println("Gym-1");
         System.out.println("Gym-2");
-
-
+    }
+    public  void bookSlot(){
+        System.out.println("Booking Confirmed");
+    }
+    public  void cancelSlot(){
+        System.out.println("Slot Canceled");
     }
 }

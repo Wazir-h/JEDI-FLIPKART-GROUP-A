@@ -34,7 +34,7 @@ public class GymFlipfitApplicationClient {
         }
         else if (roleId == 2) {
             if(GymCustomerCredentials.authenticateUser(userName,password)){
-                GymCustomerMenu.customerPage(userName,password,3);
+                GymCustomerMenu.customerPage(userName,password,2);
             }else{
                 System.out.println("\n Login Failed");
             }

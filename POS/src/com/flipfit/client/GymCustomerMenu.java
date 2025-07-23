@@ -28,6 +28,10 @@ public class GymCustomerMenu {
                     gymCustomerBusinessService.updateProfile(gymCustomer);
                 case 2:
                     gymCustomerBusinessService.viewAllGyms();
+                case 3:
+                    gymCustomerBusinessService.bookSlot();
+                case 4:
+                    gymCustomerBusinessService.cancelSlot();
                 default:
 
             }

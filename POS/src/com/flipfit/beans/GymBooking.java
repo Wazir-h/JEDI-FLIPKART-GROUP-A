@@ -1,6 +1,6 @@
 package com.flipfit.beans;
 
-public class Booking extends Slot{
+public class GymBooking extends Slot{
    private int bookingId;
 
     public int getBookingId() {

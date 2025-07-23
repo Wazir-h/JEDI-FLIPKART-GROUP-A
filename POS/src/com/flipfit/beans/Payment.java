@@ -1,6 +1,6 @@
 package com.flipfit.beans;
 
-public class Payment extends Customer {
+public class Payment extends GymCustomer {
    private String paymentID;
    private Timestamp paymentTime;
 

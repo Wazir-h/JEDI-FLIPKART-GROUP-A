@@ -6,18 +6,17 @@ public interface GymCentre extends GymOwner {
     private boolean isApproved;
     private int SlotCount;
     private String GymName;
+    private String GymID;
+    private String GymCenterPhone;
     public String getGymCenterAddress() {
         return GymCenterAddress;
     }
-
     public void setGymCenterAddress(String gymCenterAddress) {
         GymCenterAddress = gymCenterAddress;
     }
-
     public boolean isApproved() {
         return isApproved;
     }
-
     public void setApproved(boolean approved) {
         isApproved = approved;
     }
@@ -26,7 +25,6 @@ public interface GymCentre extends GymOwner {
     public int getSlotCount() {
         return SlotCount;
     }
-
     public void setSlotCount(int slotCount) {
         SlotCount = slotCount;
     }
@@ -47,7 +45,5 @@ public interface GymCentre extends GymOwner {
         GymCenterPhone = gymCenterPhone;
     }
 
-    private String GymID;
-    private String GymCenterPhone;
 
 }

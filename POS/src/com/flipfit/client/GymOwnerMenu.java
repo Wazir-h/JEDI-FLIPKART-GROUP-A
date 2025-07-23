@@ -5,6 +5,9 @@ import com.flipfit.business.GymOwnerBusinessService;
 import java.util.Scanner;
 
 public class GymOwnerMenu {
+    public static void ownerPage() {
+
+    }
     public void AddGymOwnerClient(){
         Scanner scanner = new Scanner(System.in);
 

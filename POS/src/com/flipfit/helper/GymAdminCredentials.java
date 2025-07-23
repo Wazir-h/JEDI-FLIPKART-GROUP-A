@@ -36,11 +36,7 @@ public class GymAdminCredentials {
         }
         return false; // User does not exist
     }
-
     public static boolean userExists(String username) {
         return AdminCred.containsKey(username);
     }
-
-
-
 }

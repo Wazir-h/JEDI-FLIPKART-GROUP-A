@@ -19,6 +19,7 @@ public class GymOwnerBusinessService implements GymOwnerBusinessServiceInterface
           gymOwner.setUserEmail(gymEmail);
           gymOwner.setUserPassword(password);
           GymOwnerDAO.AddGymOwner(gymOwner.getUserEmail(),gymOwner);
+
 //          System.out.println("Gym Owner registration Successful");
     }
 
@@ -32,6 +33,9 @@ public class GymOwnerBusinessService implements GymOwnerBusinessServiceInterface
         gymCenter.setSlotCount(SlotCount);
         gymCenter.setGymCenterPhone(gymCenterPhone);
         gymCenter.setUserEmail(gymOwnerEmail);
+
+        // Call CustomerDAO -> fill slots
+
         String gymID = gymCenterName + gymCenterAddress;
         gymCenter.setGymID(gymID);
 //        System.out.println(gymCenter);

@@ -1,6 +1,7 @@
 package com.flipfit.client;
 import java.util.Scanner;
 
+import com.flipfit.business.GymCustomerBusinessService;
 import com.flipfit.business.GymOwnerBusinessService;
 import com.flipfit.dao.GymAdminDAO;
 import com.flipfit.dao.GymCustomerDAO;
@@ -72,6 +73,11 @@ public class GymFlipfitApplicationClient {
         // Welcome Message to User
         GymAdminDAO.setAdminCred();
         System.out.println("Welcome to Flipfit Application");
+
+        //Add Dummy Data for customers
+         GymCustomerBusinessService.createProfile("User1", "user1@gmail.com", "123", "abc", "abc");
+         GymCustomerBusinessService.createProfile("User2", "user2@gmail.com", "123", "abc", "abc");
+
 
         // Add Dummy Data for GymOwners and Gym Centers
          GymOwnerBusinessService gymOwnerService = new GymOwnerBusinessService();

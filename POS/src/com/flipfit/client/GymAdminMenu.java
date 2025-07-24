@@ -46,7 +46,9 @@ public class GymAdminMenu {
                     System.out.println("Invalid choice");
 
             }
+            adminPage();
         } catch(Exception e){
+            System.out.println(e);
             System.out.println("Enter Correct Value");
         }
         String a = sc.nextLine();
@@ -55,7 +57,7 @@ public class GymAdminMenu {
     void ApproveGymRegistration(){
         Scanner sc = new Scanner(System.in);
 
-        System.out.println("Enter Gym Owner Name:");
+        System.out.println("Enter Gym Owner Email:");
         String gymOwnerName = sc.nextLine();
 
         System.out.println("Enter Gym Name:");
@@ -70,7 +72,7 @@ public class GymAdminMenu {
     void DeleteGym(){
         Scanner sc = new Scanner(System.in);
 
-        System.out.println("Enter Gym Owner Name:");
+        System.out.println("Enter Gym Owner Email:");
         String gymOwnerName = sc.nextLine();
 
         System.out.println("Enter Gym Name:");

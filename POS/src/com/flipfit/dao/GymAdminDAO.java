@@ -18,8 +18,8 @@ public class GymAdminDAO{
     }
     public static void setAdminCred() {
 //        System.out.println("\n--- Setting Up Admin Credentials ---");
-        GymAdminDAO.addData("admin1@flipkart.com", "passwordAdmin1");
-        GymAdminDAO.addData("admin2@flipkart.com", "passwordAdmin2");
+        GymAdminDAO.addData("admin1", "admin1");
+        GymAdminDAO.addData("admin2", "admin2");
 //        GymAdminDAO.printAllData();
     }
 

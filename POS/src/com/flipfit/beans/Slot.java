@@ -50,4 +50,19 @@ public class Slot extends GymCentre {
 
     private Date SlotDate;
 
+    @Override
+    public String toString() {
+        return String.format(
+        """
+        Slot Id: %s,
+        Slot Starting Time: %s,
+        Slot Ending Time: %s,
+        Gym Name: %s,
+        """,
+                getSlotID(),
+                getSlotTimeStart(),
+                getSlotTimeEnd(),
+                getGymName());
+    }
+
 }

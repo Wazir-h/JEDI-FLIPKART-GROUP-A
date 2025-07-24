@@ -16,7 +16,7 @@ public class GymCustomerDAO  {
 
     public static void addCustomer(String username, GymCustomer customer) {
         CustomerCred.put(username, customer);
-        System.out.println("Added customer: " + username );
+//        System.out.println("Added customer: " + username );
     }
 
     public static void getAllCustomers() {
@@ -70,14 +70,14 @@ public class GymCustomerDAO  {
         Scanner sc = new Scanner(System.in);
 
         System.out.println("\n--- Book a Slot ---");
-        System.out.print("Enter Gym ID: ");
+        System.out.print("Enter Gym Name: ");
         String gymId = sc.nextLine();
 
-        System.out.print("Enter Start Time (1-12): ");
+        System.out.print("Enter Start Time (6-8): ");
         int startTime = sc.nextInt();
         sc.nextLine();
 
-        System.out.print("Enter End Time (1-12): ");
+        System.out.print("Enter End Time (7-9): ");
         int endTime = sc.nextInt();
         sc.nextLine();
         System.out.print("For Shift enter E (Evening) or M (Morning): ");
@@ -116,10 +116,11 @@ public class GymCustomerDAO  {
         newSlot.setSlotID(gymId + "_" + userName + "_" + slotTimeStart.getTime()); // Using timestamp long value for uniqueness
         newSlot.setSlotTimeStart(slotTimeStart);
         newSlot.setSlotTimeEnd(slotTimeEnd);
-
-        if(shift=="M" && GymBookings.get(gymId).get(startTime-6) >0){
+        newSlot.setGymName(gymId);
+        System.out.println(GymBookings);
+        if(shift.equals("M") && GymBookings.get(gymId).get(startTime-6) >0){
             GymBookings.get(gymId).set(startTime-6,GymBookings.get(gymId).get(startTime-6)-1);
-        }else if(shift=="E" && GymBookings.get(gymId).get(startTime-3) > 0){
+        }else if(shift.equals("E") && GymBookings.get(gymId).get(startTime-3) > 0){
             GymBookings.get(gymId).set(startTime-3,GymBookings.get(gymId).get(startTime-3)-1);
         }else{
             System.out.println("Slots not available in this time");
@@ -133,6 +134,8 @@ public class GymCustomerDAO  {
             slots.add(newSlot);
             userBookings.put(userName, slots);
         }
+//        System.out.println("Log User Bookings");
+//        System.out.println(userBookings);
         GymPaymentBusinessService.makePayment(userName, 100, startTime, endTime);
         System.out.println("\nSlot booking details:");
         System.out.println("Gym ID: " + gymId);
@@ -147,6 +150,8 @@ public class GymCustomerDAO  {
         List<Integer> numberOfSlots = new ArrayList<>();
         for(int i=0;i<6;i++) numberOfSlots.add(mxSlot);
         GymBookings.put(gymId,numberOfSlots);
+//        System.out.println("Fill success");
+//        System.out.println(GymBookings);
     }
 
     public static void cancelBooking(String userName) {
@@ -155,10 +160,10 @@ public class GymCustomerDAO  {
         System.out.print("Enter Gym ID of the slot to cancel: ");
         String gymId = sc.nextLine();
 
-        System.out.print("Enter Start Time (1-12) of your slot: ");
+        System.out.print("Enter Start Time (6-8) of your slot: ");
         int startTime = sc.nextInt();
         sc.nextLine();
-        System.out.print("Enter End Time (1-12) of your slot: ");
+        System.out.print("Enter End Time (7-9) of your slot: ");
         int endTime = sc.nextInt();
         sc.nextLine();
 

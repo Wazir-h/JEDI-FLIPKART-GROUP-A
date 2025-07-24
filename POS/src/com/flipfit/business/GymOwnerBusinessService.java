@@ -2,6 +2,8 @@ package com.flipfit.business;
 
 import com.flipfit.beans.GymCentre;
 import com.flipfit.beans.GymOwner;
+import com.flipfit.beans.Slot;
+import com.flipfit.dao.GymCustomerDAO;
 import com.flipfit.dao.GymOwnerDAO;
 
 public class GymOwnerBusinessService implements GymOwnerBusinessServiceInterface {
@@ -34,10 +36,9 @@ public class GymOwnerBusinessService implements GymOwnerBusinessServiceInterface
         gymCenter.setGymCenterPhone(gymCenterPhone);
         gymCenter.setUserEmail(gymOwnerEmail);
 
-        // Call CustomerDAO -> fill slots
-
         String gymID = gymCenterName + gymCenterAddress;
         gymCenter.setGymID(gymID);
+        GymCustomerDAO.fillNumberofSlotInGym(gymCenterName, SlotCount);
 //        System.out.println(gymCenter);
         GymOwnerDAO.AddGymCenter(gymCenter.getUserEmail(), gymCenter);
 //        System.out.println("Gym Center registration Successful");

@@ -48,6 +48,16 @@ public class GymCentre extends GymOwner {
 
     @Override
     public String toString() {
-        return "Gym: " + getGymName() + "\nGym Address: " + getGymCenterAddress() + "\nGym Slots: " + getSlotCount();
+        return String.format(
+                """
+                Gym: %s
+                Gym Address: %s
+                Gym Slots: %s
+                Gym Id: %s
+                """,
+                    getGymName(),
+                    getGymCenterAddress(),
+                    getSlotCount(),
+                    getGymID());
     }
 }

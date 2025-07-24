@@ -10,13 +10,14 @@ public class GymCustomerBusinessService implements GymCustomerBusinessServiceInt
 
     public static GymCustomer createProfile(String userName,String EmailId,String userPhoneNo,String userAddress,String userPassword){
         //Complete This -----------------------------------------
-        System.out.println("Profile Created");
+//        System.out.println("Profile Created");
         GymCustomer gymCustomer = new GymCustomer();
         gymCustomer.setUserName(userName);
         gymCustomer.setUserEmail(EmailId);
         gymCustomer.setPhoneNo(userPhoneNo);
         gymCustomer.setAddress(userAddress);
         gymCustomer.setUserPassword(userPassword);
+        GymCustomerDAO.addCustomer(userName,gymCustomer);
         return gymCustomer;
     }
     public void updateProfile(GymCustomer gymCustomer) {
@@ -70,7 +71,9 @@ public class GymCustomerBusinessService implements GymCustomerBusinessServiceInt
         System.out.println("Role:");
         return "";
     }
-    public void viewAllBookings(){}
+    public void viewAllBookings(String userName){
+        GymCustomerDAO.viewBookings(userName);
+    }
     public void viewAllGyms(){
         GymOwnerDAO.getAllGyms();
     }

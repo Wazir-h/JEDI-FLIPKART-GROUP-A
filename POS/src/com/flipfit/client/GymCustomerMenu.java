@@ -20,6 +20,7 @@ public class GymCustomerMenu {
         System.out.println("3. View All Bookings");
         System.out.println("4. Book Slot");
         System.out.println("5. Cancel Slot");
+        System.out.println("6. Log Out");
         try {
             int choice = sc.nextInt();
             GymCustomerBusinessServiceInterface gymCustomerBusinessService = new GymCustomerBusinessService();
@@ -31,7 +32,7 @@ public class GymCustomerMenu {
                     gymCustomerBusinessService.viewAllGyms();
                     break;
                 case 3:
-                    gymCustomerBusinessService.viewAllBookings();
+                    gymCustomerBusinessService.viewAllBookings(userName);
                     break;
                 case 4:
                     gymCustomerBusinessService.bookSlot(userName);
@@ -40,8 +41,10 @@ public class GymCustomerMenu {
                     gymCustomerBusinessService.cancelSlot(userName);
                     break;
                 default:
-
+                    System.out.println("Logout Successful");
+                    return;
             }
+            customerPage(userName, userPassword,roleId);
         } catch(Exception e){
             System.out.println("Enter Correct Value");
         }

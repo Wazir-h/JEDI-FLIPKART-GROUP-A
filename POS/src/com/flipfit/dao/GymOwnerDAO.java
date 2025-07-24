@@ -14,7 +14,7 @@ public class GymOwnerDAO {
 
     public static void AddGymOwner(String username, GymOwner owner) {
         OwnerCredentials.put(username, owner);
-        System.out.println("Added Gym owner: " + username );
+//        System.out.println("Added Gym owner: " + username );
     }
     public static void AddGymCenter(String ownerEmail, GymCentre gymCenter) {
 

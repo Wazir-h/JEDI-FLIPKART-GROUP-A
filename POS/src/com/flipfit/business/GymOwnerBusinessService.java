@@ -19,7 +19,7 @@ public class GymOwnerBusinessService implements GymOwnerBusinessServiceInterface
           gymOwner.setUserEmail(gymEmail);
           gymOwner.setUserPassword(password);
           GymOwnerDAO.AddGymOwner(gymOwner.getUserEmail(),gymOwner);
-          System.out.println("Gym Owner registration Successful");
+//          System.out.println("Gym Owner registration Successful");
     }
 
     public void AddGymCenter(String gymOwnerEmail, String gymCenterName, String gymCenterAddress,
@@ -34,9 +34,9 @@ public class GymOwnerBusinessService implements GymOwnerBusinessServiceInterface
         gymCenter.setUserEmail(gymOwnerEmail);
         String gymID = gymCenterName + gymCenterAddress;
         gymCenter.setGymID(gymID);
-        System.out.println(gymCenter);
+//        System.out.println(gymCenter);
         GymOwnerDAO.AddGymCenter(gymCenter.getUserEmail(), gymCenter);
-        System.out.println("Gym Center registration Successful");
+//        System.out.println("Gym Center registration Successful");
     }
     public void DeleteGymCenter(String userName,  String gymName){
         GymOwnerDAO.DeleteGymCenter(userName,gymName);

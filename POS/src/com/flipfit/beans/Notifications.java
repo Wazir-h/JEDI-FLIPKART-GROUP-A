@@ -2,7 +2,7 @@ package com.flipfit.beans;
 
 import java.sql.Timestamp;
 
-public class Notifications extends User{
+public class Notifications extends User {
     private String NotificationsID;
     private String receiversEmail;
     private String message;

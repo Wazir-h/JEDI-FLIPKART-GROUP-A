@@ -98,6 +98,24 @@ public class GymOwnerDAO {
         }
         return false;
     }
+    public static void viewApprovedGyms(){
+        for(String ownerEmail : GymCenterDetails.keySet()){
+            List<GymCentre> gymsInCity = GymCenterDetails.get(ownerEmail);
+            for(GymCentre gyms : gymsInCity){
+            if(gyms.isApproved()){
+                System.out.println(gyms);
+            }
+        }}
+    }
+    public static void viewPendingGymApprovals(){
+        for(String ownerEmail : GymCenterDetails.keySet()){
+            List<GymCentre> gymsInCity = GymCenterDetails.get(ownerEmail);
+            for(GymCentre gyms : gymsInCity){
+                if(!gyms.isApproved()){
+                    System.out.println(gyms);
+                }
+            }}
+    }
 
     public static boolean userExists(String username) {
         return OwnerCredentials.containsKey(username);

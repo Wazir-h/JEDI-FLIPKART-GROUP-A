@@ -17,22 +17,30 @@ public class GymCustomerMenu {
         System.out.println("Enter option to Move Next");
         System.out.println("1. To UpdateProfile");
 		System.out.println("2. To View All Gyms");
-        System.out.println("3. Book Slot");
-        System.out.println("4. Cancel Slot");
+        System.out.println("3. View All Bookings");
+        System.out.println("4. Book Slot");
+        System.out.println("5. Cancel Slot");
         try {
             int choice = sc.nextInt();
             GymCustomerBusinessServiceInterface gymCustomerBusinessService = new GymCustomerBusinessService();
             switch (choice) {
                 case 1:
                     gymCustomerBusinessService.updateProfile(gymCustomer);
+                    break;
                 case 2:
                     gymCustomerBusinessService.viewAllGyms();
+                    break;
                 case 3:
-                    gymCustomerBusinessService.bookSlot();
+                    gymCustomerBusinessService.viewAllBookings();
+                    break;
                 case 4:
+                    gymCustomerBusinessService.bookSlot();
+                    break;
+                case 5:
                     gymCustomerBusinessService.cancelSlot();
+                    break;
                 default:
-
+                    return;
             }
         } catch(Exception e){
             System.out.println("Enter Correct Value");

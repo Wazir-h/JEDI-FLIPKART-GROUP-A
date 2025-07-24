@@ -2,21 +2,20 @@ package com.flipfit.dao;
 
 import java.util.HashMap;
 import java.util.Map;
-public class GymAdminDAO implements GymAdminDAOInterface{
+public class GymAdminDAO{
     public static Map<String, String> AdminCred = new HashMap<>();
 
     public static void addData(String key, String value) {
         AdminCred.put(key, value);
     }
 
-    public String getAdminData(String key) {
+    public static String getAdminData(String key) {
         return AdminCred.get(key);
     }
 
     public void printAllData() {
         System.out.println("Current Admin data: " + AdminCred);
     }
-
     public static void setAdminCred() {
 //        System.out.println("\n--- Setting Up Admin Credentials ---");
         GymAdminDAO.addData("admin1@flipkart.com", "passwordAdmin1");
@@ -31,11 +30,7 @@ public class GymAdminDAO implements GymAdminDAOInterface{
         }
         return false; // User does not exist
     }
-    public boolean userExists(String username) {
-        return AdminCred.containsKey(username);
-    }
 
-//    Functions needed to be implemented --------------------------------------\\
 
     public void getAllOwners(){
         System.out.println("All Gym Owners");
@@ -50,6 +45,6 @@ public class GymAdminDAO implements GymAdminDAOInterface{
     public void approveGymCenter(String ownerUserName, String gymCenterID){
         GymOwnerDAO.approveGym(ownerUserName, gymCenterID);
     };
-    public boolean approveGymOwner(String userName){return true;};
+
 
 }

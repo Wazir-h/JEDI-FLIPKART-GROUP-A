@@ -11,4 +11,6 @@ public interface GymCustomerBusinessServiceInterface {
     public void viewAllGyms();
     public  void bookSlot();
     public  void cancelSlot();
+
+    void viewAllBookings();
 }

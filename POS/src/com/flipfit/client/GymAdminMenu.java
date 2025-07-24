@@ -2,11 +2,11 @@ package com.flipfit.client;
 
 import com.flipfit.business.GymAdminBusinessService;
 import com.flipfit.business.SlotBusinessServiceInterfcae;
-
+import com.flipfit.dao.GymOwnerDAO;
 import java.util.Scanner;
 
 public class GymAdminMenu {
-    public static void adminPage() {
+    public void adminPage() {
         Scanner sc = new Scanner(System.in);
         System.out.println("Admin Page loaded Successfully");
         System.out.println("Please enter your choice:");
@@ -22,23 +22,80 @@ public class GymAdminMenu {
             GymAdminBusinessService gymAdminBusinessService=new GymAdminBusinessService();
             switch (choice) {
                 case 1:
-                    gymAdminBusinessService.ApproveGymRegistration();
+                    ApproveGymRegistration();
+                    break;
                 case 2:
-                    gymAdminBusinessService.AddGym();
+                    AddGym();
+                    break;
                 case 3:
-                    gymAdminBusinessService.DeleteGym();
+                    DeleteGym();
+                    break;
                 case 4:
-                    gymAdminBusinessService.ViewApprovedGyms();
+                    ViewApprovedGyms();
+                    break;
                 case 5:
-                    gymAdminBusinessService.AddGymOwner();
+                    AddGymOwner();
+                    break;
                 case 6:
-                    gymAdminBusinessService.DeleteGymOwner();
+                    DeleteGymOwner();
+                    break;
                 case 7:
-                    gymAdminBusinessService.ViewPendingGymRequests();
+                    ViewPendingGymRequests();
+                    break;
+                default:
+                    System.out.println("Invalid choice");
+
             }
         } catch(Exception e){
             System.out.println("Enter Correct Value");
         }
         String a = sc.nextLine();
     }
+
+    void ApproveGymRegistration(){
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Enter Gym Owner Name:");
+        String gymOwnerName = sc.nextLine();
+
+        System.out.println("Enter Gym Name:");
+        String gymName = sc.nextLine();
+
+        GymOwnerDAO.approveGym(gymOwnerName, gymName);
+    }
+    void AddGym(){
+        GymOwnerMenu gymOwnerMenu = new GymOwnerMenu();
+        gymOwnerMenu.AddGymCenterClient("admin");
+    }
+    void DeleteGym(){
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Enter Gym Owner Name:");
+        String gymOwnerName = sc.nextLine();
+
+        System.out.println("Enter Gym Name:");
+        String gymName = sc.nextLine();
+
+        GymOwnerDAO.DeleteGymCenter(gymOwnerName, gymName);
+
+    }
+    void ViewApprovedGyms(){
+        GymOwnerDAO.viewApprovedGyms();
+    }
+    void AddGymOwner(){
+        GymOwnerMenu gymOwnerMenu = new GymOwnerMenu();
+        gymOwnerMenu.AddGymOwnerClient();
+    }
+    void DeleteGymOwner(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter Gym Owner Name:");
+        String gymOwnerName = sc.nextLine();
+
+        GymOwnerDAO.DeleteGymOwner(gymOwnerName);
+    }
+    void ViewPendingGymRequests(){
+        GymOwnerDAO.viewPendingGymApprovals();
+    }
+
+
 }

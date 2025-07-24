@@ -1,5 +1,7 @@
 package com.flipfit.business;
 
+import com.flipfit.client.GymOwnerMenu;
+
 public class GymAdminBusinessService implements GymAdminBusinessServiceInterface {
 
     public void ViewPendingGymRequests(){
@@ -21,8 +23,10 @@ public class GymAdminBusinessService implements GymAdminBusinessServiceInterface
         System.out.println("Gym owner added successfully");
     }
     public void DeleteGymOwner(){System.out.println("Gym owner deleted successfully");}
+
+
     public void AddGym(){
-        System.out.println("Gym added successfully");
+
     }
 
     public void DeleteGym(){

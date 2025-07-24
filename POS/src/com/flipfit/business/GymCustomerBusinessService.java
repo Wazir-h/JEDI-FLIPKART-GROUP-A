@@ -70,6 +70,7 @@ public class GymCustomerBusinessService implements GymCustomerBusinessServiceInt
         System.out.println("Role:");
         return "";
     }
+    public void viewAllBookings(){}
     public void viewAllGyms(){
         GymOwnerDAO.getAllGyms();
     }

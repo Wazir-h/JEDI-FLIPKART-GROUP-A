@@ -75,7 +75,7 @@ public class GymOwnerMenu {
         gymOwnerBusinessService.AddGymOwnerDetails(gymEmail,gymOwnerName, gymOwnerAddress,
                                                     gymOwnerPhone, GSTNumber, password);
     }
-    void AddGymCenterClient(String userName) {
+    public void AddGymCenterClient(String userName) {
         GymOwnerBusinessService gymOwnerBusinessService = new GymOwnerBusinessService();
         Scanner scanner = new Scanner(System.in);
 
@@ -125,4 +125,6 @@ public class GymOwnerMenu {
 
          gymOwnerBusinessService.ViewGymApprovedStatus(userName, gymName);
     }
+
+
 }

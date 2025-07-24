@@ -130,6 +130,7 @@ public class GymFlipfitApplicationClient {
         }
     }
     public static void main(String[] args) {
+
         GymFlipfitApplicationClient app = new GymFlipfitApplicationClient();
         app.Main();
     }

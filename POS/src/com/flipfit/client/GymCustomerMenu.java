@@ -31,8 +31,7 @@ public class GymCustomerMenu {
                     gymCustomerBusinessService.viewAllGyms();
                     break;
                 case 3:
-                    gymCustomerBusinessService.viewAllBookings();
-                    break;
+                    gymCustomerBusinessService.bookSlot(userName);
                 case 4:
                     gymCustomerBusinessService.bookSlot();
                     break;
@@ -40,7 +39,7 @@ public class GymCustomerMenu {
                     gymCustomerBusinessService.cancelSlot();
                     break;
                 default:
-                    return;
+
             }
         } catch(Exception e){
             System.out.println("Enter Correct Value");

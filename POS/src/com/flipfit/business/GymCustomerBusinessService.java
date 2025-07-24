@@ -74,8 +74,9 @@ public class GymCustomerBusinessService implements GymCustomerBusinessServiceInt
     public void viewAllGyms(){
         GymOwnerDAO.getAllGyms();
     }
-    public  void bookSlot(){
-        System.out.println("Booking Confirmed");
+    public  void bookSlot(String userName){
+        viewAllGyms();
+        GymCustomerDAO.bookSlot(userName);
     }
     public  void cancelSlot(){
         System.out.println("Slot Canceled");

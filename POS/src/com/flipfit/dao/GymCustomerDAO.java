@@ -5,9 +5,9 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.*;
-
 import com.flipfit.beans.GymCustomer;
 import com.flipfit.beans.Slot;
+import com.flipfit.business.GymPaymentBusinessService;
 
 public class GymCustomerDAO  {
     public static Map<String, GymCustomer> CustomerCred = new HashMap<>();
@@ -117,7 +117,14 @@ public class GymCustomerDAO  {
         newSlot.setSlotTimeStart(slotTimeStart);
         newSlot.setSlotTimeEnd(slotTimeEnd);
 
-
+        if(shift=="M" && GymBookings.get(gymId).get(startTime-6) >0){
+            GymBookings.get(gymId).set(startTime-6,GymBookings.get(gymId).get(startTime-6)-1);
+        }else if(shift=="E" && GymBookings.get(gymId).get(startTime-3) > 0){
+            GymBookings.get(gymId).set(startTime-3,GymBookings.get(gymId).get(startTime-3)-1);
+        }else{
+            System.out.println("Slots not available in this time");
+            return;
+        }
 
         if(userBookings.containsKey(userName)){
             userBookings.get(userName).add(newSlot);
@@ -126,14 +133,120 @@ public class GymCustomerDAO  {
             slots.add(newSlot);
             userBookings.put(userName, slots);
         }
-
+        GymPaymentBusinessService.makePayment(userName, 100, startTime, endTime);
         System.out.println("\nSlot booking details:");
         System.out.println("Gym ID: " + gymId);
         System.out.println("Customer: " + userName);
         System.out.println("Booked Slot: " + newSlot.getSlotID());
-        System.out.println("Start Time: " + newSlot.getSlotTimeStart());
-        System.out.println("End Time: " + newSlot.getSlotTimeEnd());
+        System.out.println("Start Time: " + startTime + newSlot.getSlotTimeStart());
+        System.out.println("End Time: " + endTime + newSlot.getSlotTimeEnd());
         System.out.println("Slot booking process completed (details printed above).");
     }
+
+    public static void fillNumberofSlotInGym(String gymId, int mxSlot){
+        List<Integer> numberOfSlots = new ArrayList<>();
+        for(int i=0;i<6;i++) numberOfSlots.add(mxSlot);
+        GymBookings.put(gymId,numberOfSlots);
+    }
+
+    public static void cancelBooking(String userName) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("\n--- Cancel a Slot ---");
+        System.out.print("Enter Gym ID of the slot to cancel: ");
+        String gymId = sc.nextLine();
+
+        System.out.print("Enter Start Time (1-12) of your slot: ");
+        int startTime = sc.nextInt();
+        sc.nextLine();
+        System.out.print("Enter End Time (1-12) of your slot: ");
+        int endTime = sc.nextInt();
+        sc.nextLine();
+
+        System.out.print("For Shift enter E (Evening) or M (Morning) of your slot: ");
+        String shift = sc.nextLine().trim().toUpperCase();
+
+        if (startTime < 1 || startTime > 12 || endTime < 1 || endTime > 12) {
+            System.out.println("Invalid time input. Start and End times must be between 1 and 12.");
+            return;
+        }
+        if (!shift.equals("E") && !shift.equals("M")) {
+            System.out.println("Invalid shift input. Please enter 'E' for Evening or 'M' for Morning.");
+            return;
+        }
+        // --- Calculate Timestamp for the slot to be cancelled ---
+        LocalDate today = LocalDate.now();
+        int startHour24 = startTime;
+        if (shift.equals("E") && startTime != 12) {
+            startHour24 = startTime + 12;
+        } else if (shift.equals("M") && startTime == 12) {
+            startHour24 = 0;
+        }
+        LocalTime localStartTime = LocalTime.of(startHour24, 0);
+        LocalDateTime startDateTime = LocalDateTime.of(today, localStartTime);
+        Timestamp slotTimeStart = Timestamp.valueOf(startDateTime);
+
+        int endHour24 = endTime;
+        if (shift.equals("E") && endTime != 12) {
+            endHour24 = endTime + 12;
+        } else if (shift.equals("M") && endTime == 12) {
+            endHour24 = 0;
+        }
+        LocalTime localEndTime = LocalTime.of(endHour24, 0);
+        LocalDateTime endDateTime = LocalDateTime.of(today, localEndTime);
+        Timestamp slotTimeEnd = Timestamp.valueOf(endDateTime);
+        // --- Find and Remove Slot from userBookings ---
+        if (!userBookings.containsKey(userName)) {
+            System.out.println("You have no bookings to cancel.");
+            return;
+        }
+        List<Slot> userSlots = userBookings.get(userName);
+        Slot slotToCancel = null;
+        int foundIndex = -1;
+
+        // Iterate to find the exact slot to cancel
+        for (int i = 0; i < userSlots.size(); i++) {
+            Slot s = userSlots.get(i);
+            if (s.getSlotTimeStart().equals(slotTimeStart) &&
+                    s.getSlotTimeEnd().equals(slotTimeEnd) &&
+                    s.getSlotID().startsWith(gymId + "_" + userName)) {
+                slotToCancel = s;
+                foundIndex = i;
+                break;
+            }
+        }
+        if (slotToCancel != null) {
+            userSlots.remove(foundIndex);
+            System.out.println("DAO: Slot " + slotToCancel.getSlotID() + " cancelled for user " + userName + ".");
+            // --- Update GymBookings (Increment Slot Count) ---
+            int slotIndex = -1;
+            if (shift.equals("M")) {
+                if (startTime >= 6 && startTime <= 11) {
+                    slotIndex = startTime - 6;
+                }
+            } else if (shift.equals("E")) {
+                if (startTime >= 3 && startTime >= 3 && startTime <= 8) { // Corrected range for evening
+                    slotIndex = startTime - 3;
+                }
+            }
+            if (slotIndex != -1 && GymBookings.containsKey(gymId) && GymBookings.get(gymId) != null && slotIndex < GymBookings.get(gymId).size()) {
+                List<Integer> gymSlots = GymBookings.get(gymId);
+                gymSlots.set(slotIndex, gymSlots.get(slotIndex) + 1); // Increment available slot
+                System.out.println("DAO: Slot count for Gym " + gymId + " at " + startTime + shift + " increased to " + gymSlots.get(slotIndex));
+            } else {
+                System.out.println("DAO Warning: Could not update gym slot availability (gym ID or slot index invalid).");
+            }
+
+            System.out.println("Slot cancellation process completed successfully.");
+        } else {
+            System.out.println("No matching slot found for cancellation with the provided details.");
+        }
+    }
+
+    public static void viewBookings(String userName){
+        for(Slot slot: userBookings.get(userName)){
+            System.out.println(slot);
+        }
+    }
+
 
 }

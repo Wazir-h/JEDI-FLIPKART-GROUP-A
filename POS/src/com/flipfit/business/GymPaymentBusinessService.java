@@ -1,7 +1,7 @@
 package com.flipfit.business;
 
 public class GymPaymentBusinessService {
-    public void makePayment(String customerId, double amount, String slotStartTime, String slotEndTime) {
+    public static void makePayment(String customerId, double amount, int slotStartTime, int slotEndTime) {
         System.out.println("\n--- Initiating Payment Process ---");
         System.out.println("Customer: " + customerId + ", Amount: Rs." + amount);
 

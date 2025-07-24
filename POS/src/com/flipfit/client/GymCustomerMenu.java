@@ -31,12 +31,13 @@ public class GymCustomerMenu {
                     gymCustomerBusinessService.viewAllGyms();
                     break;
                 case 3:
-                    gymCustomerBusinessService.bookSlot(userName);
+                    gymCustomerBusinessService.viewAllBookings();
+                    break;
                 case 4:
-                    gymCustomerBusinessService.bookSlot();
+                    gymCustomerBusinessService.bookSlot(userName);
                     break;
                 case 5:
-                    gymCustomerBusinessService.cancelSlot();
+                    gymCustomerBusinessService.cancelSlot(userName);
                     break;
                 default:
 

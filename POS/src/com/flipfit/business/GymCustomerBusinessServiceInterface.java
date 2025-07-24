@@ -10,7 +10,7 @@ public interface GymCustomerBusinessServiceInterface {
 
     public void viewAllGyms();
     public  void bookSlot(String userName);
-    public  void cancelSlot();
+    public  void cancelSlot(String userName);
 
     void viewAllBookings();
 }

@@ -21,5 +21,4 @@ public class GymCustomer extends User {
         this.phoneNo = phoneNo;
     }
 
-
 }

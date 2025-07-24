@@ -1,4 +1,5 @@
 package com.flipfit.dao;
 
-public interface GymCustomerInterface {
+public interface GymCustomerDAOInterface {
+
 }

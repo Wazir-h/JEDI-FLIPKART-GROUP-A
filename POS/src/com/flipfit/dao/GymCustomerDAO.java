@@ -3,7 +3,7 @@ import java.util.HashMap;
 import java.util.Map;
 import com.flipfit.beans.GymCustomer;
 
-public class GymCustomerDAO {
+public class GymCustomerDAO implements  {
     public static Map<String, GymCustomer> CustomerCred = new HashMap<>();
 
     public static void addCustomer(String username, GymCustomer customer) {

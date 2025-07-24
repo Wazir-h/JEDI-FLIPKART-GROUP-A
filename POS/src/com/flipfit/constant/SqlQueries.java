@@ -2,6 +2,12 @@ package com.flipfit.constant;
 
 public class SqlQueries {
 
+    public static final String DB_URL = "jdbc:mysql://localhost:3306/flipfit";
+
+    public static final String DB_USER = "root"; // Your MySQL username
+
+    public static final String DB_PASSWORD = "password"; // Your MySQL password
+
     public static final String AUTHENTICATE_USER = "SELECT user_id, user_name, user_email, role_id FROM User WHERE user_email = ? AND user_password = ? AND role_id = ?";
 
     public static final String FETCH_ALL_USERS_BY_ROLE = "SELECT user_id, user_name, user_email FROM User WHERE role_id = ?";

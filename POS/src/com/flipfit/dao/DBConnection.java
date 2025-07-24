@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-import static com.flipfit.Constants.DBconstants.*;
+import static com.flipfit.constant.SqlQueries.*;
 
 
 public class DBConnection {

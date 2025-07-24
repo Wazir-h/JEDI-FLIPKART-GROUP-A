@@ -1,6 +1,5 @@
 package com.flipfit.dao;
-import java.sql.Time;
-import java.sql.Timestamp;
+import java.sql.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -8,6 +7,8 @@ import java.util.*;
 import com.flipfit.beans.GymCustomer;
 import com.flipfit.beans.Slot;
 import com.flipfit.business.GymPaymentBusinessService;
+import com.flipfit.constant.SqlQueries;
+import com.flipfit.constant.SqlQueries.*;
 
 public class GymCustomerDAO  {
     public static Map<String, GymCustomer> CustomerCred = new HashMap<>();
@@ -16,7 +17,23 @@ public class GymCustomerDAO  {
 
     public static void addCustomer(String username, GymCustomer customer) {
         CustomerCred.put(username, customer);
-//        System.out.println("Added customer: " + username );
+        try{
+            Connection db = DBConnection.getConnection();
+            PreparedStatement ps1 = db.prepareStatement(SqlQueries.REGISTER_NEW_USER);
+            int rowsAffected = ps1.executeUpdate();
+            ps1.setString(1,customer.getId());
+            ps1.setString(2,customer.getUserName());
+            ps1.setString(3,customer.getUserEmail());
+            ps1.setString(4,customer.getUserPassword());
+            ps1.setString(5,"1");
+            PreparedStatement ps2 = db.prepareStatement(SqlQueries.REGISTER_NEW_CUSTOMER_DETAILS);
+            ps2.setString(1,customer.getId());
+            ps2.setString(2,customer.getAddress());
+            ps2.setString(3,customer.getPhoneNo());
+            System.out.println("Rows Affected" + rowsAffected);
+        }catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
     }
 
     public static void getAllCustomers() {

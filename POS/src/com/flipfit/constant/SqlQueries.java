@@ -8,7 +8,7 @@ public class SqlQueries {
 
     public static final String DB_PASSWORD = "password"; // Your MySQL password
 
-    public static final String AUTHENTICATE_USER = "SELECT user_id, user_name, user_email, role_id FROM User WHERE user_email = ? AND user_password = ? AND role_id = ?";
+    public static final String AUTHENTICATE_USER = "SELECT user_id, user_name, user_email, role_id FROM User WHERE user_name = ? AND user_password = ? AND role_id = ?";
 
     public static final String FETCH_ALL_USERS_BY_ROLE = "SELECT user_id, user_name, user_email FROM User WHERE role_id = ?";
 
@@ -59,5 +59,13 @@ public class SqlQueries {
     public static final String REGISTER_NEW_GYMOWNER_DETAILS = "INSERT INTO GymOwner (user_id, gym_owner_address, gym_owner_phone, gst_number, is_approved) VALUES (?, ?, ?, ?, ?)";
 
     public static final String MAKE_PAYMENT = "INSERT INTO GymPayment (payment_id, user_id, payment_time) VALUES (?, ?, CURRENT_TIMESTAMP())";
+
+    public static final String UPDATE_USER_DETAILS = "UPDATE User SET user_name = ?, user_email = ?, user_password = ? WHERE user_id = ?";
+
+    public static final String UPDATE_GYM_CUSTOMER_DETAILS = "UPDATE GymCustomer SET address = ?, phone_no = ? WHERE user_id = ?";
+
+    public static final String FETCH_ALL_GYM_CUSTOMERS_WITH_USER_DETAILS = "SELECT gc.user_id, u.user_name, u.user_email, gc.address, gc.phone_no " + "FROM GymCustomer gc " + "JOIN User u ON gc.user_id = u.user_id";
+
+    public static final String SELECT_USER_BY_USERNAME = "SELECT user_id FROM User WHERE user_name = ?";
 
 }

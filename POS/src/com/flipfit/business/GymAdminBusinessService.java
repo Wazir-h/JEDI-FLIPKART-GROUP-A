@@ -26,9 +26,7 @@ public class GymAdminBusinessService implements GymAdminBusinessServiceInterface
 
 
     public void AddGym(){
-
     }
-
     public void DeleteGym(){
         System.out.println("Gym delete added successfully");
     }

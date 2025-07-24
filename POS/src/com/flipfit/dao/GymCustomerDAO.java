@@ -47,21 +47,84 @@ public class GymCustomerDAO  {
         return null;
     }
     public static boolean authenticateUser(String username, String password) {
-        if (CustomerCred.containsKey(username)) {
-            String storedPassword = CustomerCred.get(username).getUserPassword();
-            return storedPassword.equals(password);
+        try{
+            Connection db = DBConnection.getConnection();
+            PreparedStatement ps1 = db.prepareStatement(SqlQueries.AUTHENTICATE_USER);
+            ps1.setString(1,username);
+            ps1.setString(2,password);
+            try (ResultSet rs = ps1.executeQuery()) {
+                if (rs.next()) {
+
+                    System.out.println("User " + username + " authenticated successfully.");
+                    return true;
+                } else {
+
+                    System.out.println("User Not exist or invalid credentials for " + username);
+                    return false;
+                }
+            }
+
+        }catch (SQLException e){
+            System.out.println(e.getMessage());
         }
-        System.out.println("User Not exist");
-        return false;
+        return true;
     }
     public static boolean updateCustomerProfile(String oldUsername, GymCustomer updatedCustomer) {
+        String userId=updatedCustomer.getUserId();
+        String newUsername=updatedCustomer.getUserName();
+        String newUserEmail=updatedCustomer.getUserEmail();
+        String newUserPassword=updatedCustomer.getUserPassword();
+        String newUserAddress=updatedCustomer.getAddress();
+        String newUserPhoneNo=updatedCustomer.getPhoneNo();
+        Connection db = null;
+        PreparedStatement ps1 = null;
+        PreparedStatement ps2 = null;
+
+        try{
+            db = DBConnection.getConnection();
+            db.setAutoCommit(false);
+            ps1 = db.prepareStatement(SqlQueries.UPDATE_USER_DETAILS);
+            ps1.setString(1,newUsername);
+            ps1.setString(2,newUserEmail);
+            ps1.setString(3,newUserPassword);
+            ps1.setString(4,userId);
+            ps1.executeUpdate();
+            ps2 = db.prepareStatement(SqlQueries.UPDATE_GYM_CUSTOMER_DETAILS);
+            ps2.setString(1,newUserAddress);
+            ps2.setString(2,newUserPhoneNo);
+            ps2.setString(3,userId);
+            ps2.executeUpdate();
+            db.commit();
+        }catch (SQLException e){
+            System.out.println(e.getMessage());
+        }finally { // Add a finally block for resource closing
+            if (ps1 != null) {
+                try {
+                    ps1.close(); // Close ps1
+                } catch (SQLException closeEx) {
+                    System.err.println("Error closing PreparedStatement ps1: " + closeEx.getMessage());
+                }
+            }
+            if (ps2 != null) {
+                try {
+                    ps2.close(); // Close ps2
+                } catch (SQLException closeEx) {
+                    System.err.println("Error closing PreparedStatement ps2: " + closeEx.getMessage());
+                }
+            }
+            if (db != null) {
+                try {
+                    db.close(); // Close the Connection
+                } catch (SQLException closeEx) {
+                    System.err.println("Error closing Connection: " + closeEx.getMessage());
+                }
+            }
+        }
+
         if (!CustomerCred.containsKey(oldUsername)) {
             System.out.println("Error: Customer with username '" + oldUsername + "' not found. Profile update failed.");
             return false;
         }
-
-        String newUsername = updatedCustomer.getUserName();
-
         if (!oldUsername.equals(newUsername)) {
 
             if (CustomerCred.containsKey(newUsername)) {
@@ -79,8 +142,23 @@ public class GymCustomerDAO  {
         System.out.println("New details: " + updatedCustomer);
         return true;
     }
-    public static boolean userExists(String username) {
-        return CustomerCred.containsKey(username);
+    public static boolean userExists(String userName) {
+        try (Connection db = DBConnection.getConnection();
+             PreparedStatement stmt = db.prepareStatement(SqlQueries.SELECT_USER_BY_USERNAME)) {
+
+            stmt.setString(1, userName);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+
+                return rs.next();
+            }
+        } catch (SQLException e) {
+
+            System.err.println("Error checking if user '" + userName + "' exists: " + e.getMessage());
+
+            return false;
+        }
+
     }
 
     public static void bookSlot(String userName) {

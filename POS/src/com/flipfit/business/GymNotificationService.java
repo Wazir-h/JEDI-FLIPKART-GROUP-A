@@ -1,15 +1,23 @@
 package com.flipkart.business;
 
-import com.flipfit.business.GymNotificationServiceInterface;
+public class GymNotificationService {
+    // To keep the track of last Notification
+    private String lastNotificationSent = "";
 
-public class GymNotificationService implements GymNotificationServiceInterface {
-    public void sendNotification() {
-        System.out.println("Notification Sent");
+    public void sendNotification(String notificationType, String slotStartTime, String slotEndTime) {
+        String notificationMessage = "Notification Sent: ";
+
+        if ("Payment".equals(notificationType)) {
+            notificationMessage = "Congratulations! Your payment is done. Your gym slot for " + slotStartTime + " to " + slotEndTime + " is booked.";
+        } else if ("Admin".equals(notificationType)) {
+            notificationMessage = "Admin Approval";
+        }
+
+        this.lastNotificationSent = notificationMessage;
     }
 
     public String getNotification() {
-        String currentNotification = "";
-        return currentNotification;
+        return this.lastNotificationSent;
     }
 
     public void createNotification() {

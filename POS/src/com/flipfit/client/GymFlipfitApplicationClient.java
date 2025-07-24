@@ -1,6 +1,7 @@
 package com.flipfit.client;
 import java.util.Scanner;
 
+import com.flipfit.business.GymOwnerBusinessService;
 import com.flipfit.dao.GymAdminDAO;
 import com.flipfit.dao.GymCustomerDAO;
 import com.flipfit.beans.GymCustomer;
@@ -72,7 +73,20 @@ public class GymFlipfitApplicationClient {
         GymAdminDAO.setAdminCred();
         System.out.println("Welcome to Flipfit Application");
 
-        // Scanner Object for User Inputs
+        // Add Dummy Data for GymOwners and Gym Centers
+         GymOwnerBusinessService gymOwnerService = new GymOwnerBusinessService();
+
+         gymOwnerService.AddGymOwnerDetails("owner1@example.com", "Fitness Pro", "123 Gym St, City", "9876543210", "GSTIN12345", "owner1pass");
+         gymOwnerService.AddGymCenter("owner1@example.com", "Fitness Pro Gym", "123 Gym St, City", "9876543210", 10);
+         gymOwnerService.AddGymCenter("owner1@example.com", "Pro Strength Hub", "456 Power Ave, Town", "9876543211", 8);
+
+         gymOwnerService.AddGymOwnerDetails("owner2@example.com", "Health Haven", "789 Wellness Rd, Village", "9988776655", "GSTIN67890", "owner2pass");
+         gymOwnerService.AddGymCenter("owner2@example.com", "Health Haven Center", "789 Wellness Rd, Village", "9988776655", 12);
+
+         gymOwnerService.AddGymOwnerDetails("owner3@example.com", "CultFit", "ETV", "9988776655", "GSTIN67890", "owner3pass");
+         gymOwnerService.AddGymCenter("owner3@example.com", "CultFit Pro", "ETV", "9988776655", 12);
+
+         // Scanner Object for User Inputs
         Scanner scanner = new Scanner(System.in);
 
         while (true) {

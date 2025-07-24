@@ -1,9 +1,8 @@
 package com.flipfit.client;
 import java.util.Scanner;
 
-import com.flipfit.beans.GymCentre;
-import com.flipfit.dao.GymAdminCredentialsDAO;
-import com.flipfit.dao.GymCustomerCredentialsDAO;
+import com.flipfit.dao.GymAdminDAO;
+import com.flipfit.dao.GymCustomerDAO;
 import com.flipfit.beans.GymCustomer;
 import com.flipfit.dao.GymOwnerDAO;
 
@@ -28,14 +27,14 @@ public class GymFlipfitApplicationClient {
 
 
         if (roleId == 1) {
-            if(GymAdminCredentialsDAO.authenticateUser(userName,password)){
+            if(GymAdminDAO.authenticateUser(userName,password)){
                 GymAdminMenu.adminPage();
             }else{
                 System.out.println("Login Failed");
             }
         }
         else if (roleId == 2) {
-            if(GymCustomerCredentialsDAO.authenticateUser(userName,password)){
+            if(GymCustomerDAO.authenticateUser(userName,password)){
                 GymCustomerMenu.customerPage(userName,password,3);
             }else{
                 System.out.println("\n Login Failed");
@@ -56,7 +55,7 @@ public class GymFlipfitApplicationClient {
     public void GymCustomerRegistration() {
         GymCustomer newCustomer = GymCustomerMenu.AddGymCustomer();       // -----------------------------------------
 
-        GymCustomerCredentialsDAO.addCustomer(newCustomer.getUserEmail(), newCustomer);
+        GymCustomerDAO.addCustomer(newCustomer.getUserEmail(), newCustomer);
         System.out.println("Gym Customer Registration Successful");
     }
 
@@ -70,7 +69,7 @@ public class GymFlipfitApplicationClient {
 
      void Main() {
         // Welcome Message to User
-        GymAdminCredentialsDAO.setAdminCred();
+        GymAdminDAO.setAdminCred();
         System.out.println("Welcome to Flipfit Application");
 
         // Scanner Object for User Inputs

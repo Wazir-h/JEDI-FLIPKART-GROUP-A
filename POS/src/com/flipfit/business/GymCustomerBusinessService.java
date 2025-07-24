@@ -1,8 +1,7 @@
 package com.flipfit.business;
 import com.flipfit.beans.GymCustomer;
 
-import com.flipfit.beans.GymCustomer;
-import com.flipfit.dao.GymCustomerCredentialsDAO;
+import com.flipfit.dao.GymCustomerDAO;
 import com.flipfit.dao.GymOwnerDAO;
 
 import java.util.Scanner;
@@ -63,7 +62,7 @@ public class GymCustomerBusinessService implements GymCustomerBusinessServiceInt
             System.out.println("Invalid input. Please enter a number between 1 and 5.");
         }
 
-            GymCustomerCredentialsDAO.updateCustomerProfile(userNameOld, gymCustomer);
+            GymCustomerDAO.updateCustomerProfile(userNameOld, gymCustomer);
             System.out.println("Profile updated successfully!");
 
     }

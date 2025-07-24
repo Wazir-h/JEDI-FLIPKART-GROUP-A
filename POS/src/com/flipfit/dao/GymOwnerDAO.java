@@ -36,6 +36,15 @@ public class GymOwnerDAO {
         }
 
     }
+
+    public static void DeleteGymOwner(String ownerEmail) {
+        if(!OwnerCredentials.containsKey(ownerEmail)){
+            System.out.println("Gym owner not found");
+            return;
+        }
+        OwnerCredentials.remove(ownerEmail);
+
+    }
     public static GymCentre GetGymCenter(String ownerEmail, String gymName) {
         List<GymCentre> gymsInCity = GymCenterDetails.get(ownerEmail);
         for (GymCentre gymCentre : gymsInCity) {

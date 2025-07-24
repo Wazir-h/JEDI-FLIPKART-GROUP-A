@@ -26,10 +26,10 @@ public class GymFlipfitApplicationClient {
         System.out.println("3. Gym Owner");
         int roleId = scanner.nextInt();
 
-
+        GymAdminMenu gymAdminMenu = new GymAdminMenu();
         if (roleId == 1) {
             if(GymAdminDAO.authenticateUser(userName,password)){
-                GymAdminMenu.adminPage();
+                gymAdminMenu.adminPage();
             }else{
                 System.out.println("Login Failed");
             }

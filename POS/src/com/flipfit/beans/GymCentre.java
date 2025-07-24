@@ -58,6 +58,7 @@ public class GymCentre extends GymOwner {
                     getGymName(),
                     getGymCenterAddress(),
                     getSlotCount(),
-                    getGymID());
+                    getGymID(),
+                    isApproved());
     }
 }

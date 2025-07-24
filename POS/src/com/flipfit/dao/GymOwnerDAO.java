@@ -55,9 +55,18 @@ public class GymOwnerDAO {
         return null;
     }
     public static void getAllGymCenters(String userName){
-        System.out.println("Gym Centres: ");
+        System.out.println("----------------------------------------------------------------------------------------------------");
+        System.out.printf("%-30s %-40s %-15s %-15s %-15s%n", "Gym Name", "Gym Address", "Slots", "Gym ID");
+        System.out.println("-------------------------------------------------------------------------------------------------------");
         for (GymCentre gymCentre : GymCenterDetails.get(userName)){
-            System.out.println(gymCentre);
+            System.out.printf("%-30s %-40s %-15d %-15s %-15s%n ",
+                    gymCentre.getGymName(),
+                    gymCentre.getGymCenterAddress(),
+                    gymCentre.getSlotCount(),
+                    gymCentre.getGymID(),
+                    gymCentre.isApproved()?"Approved":"Not Approved"
+            );
+//            System.out.println(gymCentre);
         }
     }
     public static void getAllGyms(){
@@ -65,9 +74,18 @@ public class GymOwnerDAO {
             System.out.println("No Gym is registered");
         }
         else{
+            System.out.println("----------------------------------------------------------------------------------------------------");
+            System.out.printf("%-30s %-40s %-15s %-15s %-15s%n", "Gym Name", "Gym Address", "Slots", "Gym ID", "Gym Status");
+            System.out.println("----------------------------------------------------------------------------------------------------");
             for (List<GymCentre> gymlist: GymCenterDetails.values()){
                 for(GymCentre gym: gymlist){
-                    System.out.println(gym);
+                    System.out.printf("%-30s %-40s %-15d %-15s %-15s%n ",
+                            gym.getGymName(),
+                            gym.getGymCenterAddress(),
+                            gym.getSlotCount(),
+                            gym.getGymID(),
+                            gym.isApproved()?"Approved":"Not Approved"
+                    );
                 }
             }
         }
@@ -99,20 +117,38 @@ public class GymOwnerDAO {
         return false;
     }
     public static void viewApprovedGyms(){
+        System.out.println("----------------------------------------------------------------------------------------------------");
+        System.out.printf("%-30s %-40s %-15s %-40s %-15s%n", "Gym Name", "Gym Address", "Slots", "Gym ID", "Gym Status");
+        System.out.println("----------------------------------------------------------------------------------------------------");
         for(String ownerEmail : GymCenterDetails.keySet()){
             List<GymCentre> gymsInCity = GymCenterDetails.get(ownerEmail);
-            for(GymCentre gyms : gymsInCity){
-            if(gyms.isApproved()){
-                System.out.println(gyms);
+            for(GymCentre gym : gymsInCity){
+            if(gym.isApproved()){
+                System.out.printf("%-30s %-40s %-15d %-15s %-15s%n ",
+                        gym.getGymName(),
+                        gym.getGymCenterAddress(),
+                        gym.getSlotCount(),
+                        gym.getGymID(),
+                        gym.isApproved()?"Approved":"Not Approved"
+                );
             }
         }}
     }
     public static void viewPendingGymApprovals(){
+        System.out.println("----------------------------------------------------------------------------------------------------");
+        System.out.printf("%-40s %-40s %-15s %-40s %-15s%n", "Gym Name", "Gym Address", "Slots", "Gym ID", "Gym Status");
+        System.out.println("----------------------------------------------------------------------------------------------------");
         for(String ownerEmail : GymCenterDetails.keySet()){
             List<GymCentre> gymsInCity = GymCenterDetails.get(ownerEmail);
-            for(GymCentre gyms : gymsInCity){
-                if(!gyms.isApproved()){
-                    System.out.println(gyms);
+            for(GymCentre gym : gymsInCity){
+                if(!gym.isApproved()){
+                    System.out.printf("%-30s %-40s %-15d %-15s %-15s%n ",
+                            gym.getGymName(),
+                            gym.getGymCenterAddress(),
+                            gym.getSlotCount(),
+                            gym.getGymID(),
+                            gym.isApproved()?"Approved":"Not Approved"
+                    );
                 }
             }}
     }

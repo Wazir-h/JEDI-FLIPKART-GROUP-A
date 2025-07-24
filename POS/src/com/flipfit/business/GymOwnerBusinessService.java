@@ -10,11 +10,11 @@ public class GymOwnerBusinessService implements GymOwnerBusinessServiceInterface
 
           GymOwner gymOwner=new GymOwner();
 
-          gymOwner.setName(gymOwnerName);
+          gymOwner.setUserName(gymOwnerName);
           gymOwner.setGymOwnerAddress(gymOwnerAddress);
           gymOwner.setGymOwnerPhone(gymOwnerPhone);
           gymOwner.setGSTNumber(GSTNumber);
-          String gymId = gymOwnerName+gymOwnerName;
+          String gymId = gymOwnerName+gymOwnerAddress;
           gymOwner.setId(gymId);
           gymOwner.setUserEmail(gymEmail);
           gymOwner.setUserPassword(password);

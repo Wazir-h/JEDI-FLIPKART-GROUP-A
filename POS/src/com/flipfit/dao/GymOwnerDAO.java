@@ -63,8 +63,17 @@ public class GymOwnerDAO {
             }
         }
     }
-    public static void getAllOwners() {
-        System.out.println("All owners: ");
+    public static void approveGym(String username, String gymName){
+        GymCentre gymCenter = GetGymCenter(username, gymName);
+        gymCenter.setApproved(true);
+        DeleteGymCenter(username, gymName);
+        AddGymCenter(username, gymCenter);
+    }
+    public static void getAllGymOwners() {
+        for(String ownerEmail : OwnerCredentials.keySet()) {
+            GymOwner gymOwner = OwnerCredentials.get(ownerEmail);
+            System.out.println(gymOwner);
+        }
     }
 
     public static GymOwner getGymOwnerDetail(String username){

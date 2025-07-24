@@ -38,4 +38,9 @@ public class GymOwner extends User {
         isApproved = true;
     }
 
+    @Override
+    public String toString() {
+        return "Gym Owner Name: " + getUserName() + "\nGym Owner ID: " + getUserId();
+    }
+
 }

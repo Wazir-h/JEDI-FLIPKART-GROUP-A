@@ -121,12 +121,24 @@ public class GymCustomerDAO  {
     public static void getAllCustomers() {
         System.out.println("All customers: ");
     }
+    /*
+     * @Author : "Kartik Aggarwal, Shivansh Sinha, Sujal Mishra"
+     * @ClassName: "getGymCustomerDetail"
+     * @Description: "Data Access Object (DAO) for getting GymCustomer related data. This class interacts with a MySQL database using JDBC
+     * for persistence and also maintains in-memory data structures for certain operations."
+     * @Exceptions: "SQLException - Thrown for database access errors."
+     * @Version : "1.0"
+     * @See : "com.flipfit.beans.GymCustomer, com.flipfit.beans.Slot, com.flipfit.business.GymPaymentBusinessService, com.flipfit.dao.DBConnection"
+     *
+     *
+     */
     public static GymCustomer getGymCustomerDetail(String username){
         if(CustomerCred.containsKey(username)){
             return CustomerCred.get(username);
         }
         return null;
     }
+
     public static boolean authenticateUser(String username, String password) {
         try{
             Connection db = DBConnection.getConnection();

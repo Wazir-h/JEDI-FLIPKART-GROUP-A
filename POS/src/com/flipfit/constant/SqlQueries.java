@@ -60,7 +60,7 @@ public class SqlQueries {
 
 
 
-    public static final String INSERT_SLOT = "INSERT INTO Slot (slot_id, slot_date, slot_time_start, slot_time_end, gym_id) VALUES (?, ?, ?, ?, ?)";
+    public static final String INSERT_SLOT = "INSERT INTO Slot (gym_id, slot_date, slot_id, slot_time_end, slot_time_start) VALUES (?, ?, ?, ?, ?)";
 
 
 

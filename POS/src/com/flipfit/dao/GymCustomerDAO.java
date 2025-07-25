@@ -18,16 +18,19 @@ public class GymCustomerDAO  {
 
     public static void addCustomer(String username, GymCustomer customer) {
         CustomerCred.put(username, customer);
+        PreparedStatement ps1=null;
+        PreparedStatement ps2=null;
+
         try{
             Connection db = getConnection();
-            PreparedStatement ps1 = db.prepareStatement(SqlQueries.REGISTER_NEW_USER);
-            int rowsAffected = ps1.executeUpdate();
+            ps1 = db.prepareStatement(SqlQueries.REGISTER_NEW_USER);
             ps1.setString(1,customer.getUserId());
             ps1.setString(2,customer.getUserName());
             ps1.setString(3,customer.getUserEmail());
             ps1.setString(4,customer.getUserPassword());
             ps1.setString(5,"1");
-            PreparedStatement ps2 = db.prepareStatement(SqlQueries.REGISTER_NEW_CUSTOMER_DETAILS);
+            int rowsAffected = ps1.executeUpdate();
+            ps2 = db.prepareStatement(SqlQueries.REGISTER_NEW_CUSTOMER_DETAILS);
             ps2.setString(1,customer.getId());
             ps2.setString(2,customer.getAddress());
             ps2.setString(3,customer.getPhoneNo());
@@ -37,12 +40,28 @@ public class GymCustomerDAO  {
         }catch (SQLException e){
             System.out.println(e.getMessage());
         }
+        finally {
+            if (ps1 != null) {
+                try {
+                    ps1.close();
+                } catch (SQLException closeEx) {
+                    System.err.println("Error closing PreparedStatement ps1: " + closeEx.getMessage());
+                }
+            }
+            if (ps2 != null) {
+                try {
+                    ps2.close();
+                } catch (SQLException closeEx) {
+                    System.err.println("Error closing PreparedStatement ps2: " + closeEx.getMessage());
+                }
+            }
+
+        }
     }
 
     public static void getAllCustomers() {
         System.out.println("All customers: ");
     }
-
     public static GymCustomer getGymCustomerDetail(String username){
         if(CustomerCred.containsKey(username)){
             return CustomerCred.get(username);
@@ -107,28 +126,22 @@ public class GymCustomerDAO  {
             db.commit();
         }catch (SQLException e){
             System.out.println(e.getMessage());
-        }finally { // Add a finally block for resource closing
+        }finally {
             if (ps1 != null) {
                 try {
-                    ps1.close(); // Close ps1
+                    ps1.close();
                 } catch (SQLException closeEx) {
                     System.err.println("Error closing PreparedStatement ps1: " + closeEx.getMessage());
                 }
             }
             if (ps2 != null) {
                 try {
-                    ps2.close(); // Close ps2
+                    ps2.close();
                 } catch (SQLException closeEx) {
                     System.err.println("Error closing PreparedStatement ps2: " + closeEx.getMessage());
                 }
             }
-            if (db != null) {
-                try {
-                    db.close(); // Close the Connection
-                } catch (SQLException closeEx) {
-                    System.err.println("Error closing Connection: " + closeEx.getMessage());
-                }
-            }
+
         }
 
         if (!CustomerCred.containsKey(oldUsername)) {
@@ -152,25 +165,43 @@ public class GymCustomerDAO  {
         System.out.println("New details: " + updatedCustomer);
         return true;
     }
-    public static boolean userExists(String userName) {
-        try (Connection db = getConnection();
-             PreparedStatement stmt = db.prepareStatement(SqlQueries.SELECT_USER_BY_USERNAME)) {
+    public static boolean userExists(String username) throws SQLException {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            conn = DBConnection.getConnection();
 
-            stmt.setString(1, userName);
+            ps = conn.prepareStatement(SqlQueries.SELECT_USER_BY_USERNAME);
+            ps.setString(1, username);
+            rs = ps.executeQuery();
+            if (rs.next()) {
 
-            try (ResultSet rs = stmt.executeQuery()) {
-
-                return rs.next();
+                return rs.getInt(1) > 0;
             }
         } catch (SQLException e) {
-
-            System.err.println("Error checking if user '" + userName + "' exists: " + e.getMessage());
-
+            System.err.println("SQL Error checking user existence: " + e.getMessage());
+            e.printStackTrace();
             return false;
+        } finally {
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException closeEx) {
+                    System.err.println("Error closing PreparedStatement ps1: " + closeEx.getMessage());
+                }
+            }
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException closeEx) {
+                    System.err.println("Error closing ResultSet rs: " + closeEx.getMessage());
+                }
+            }
+
         }
-
+        return false; // Default return if no user found or an error occurred
     }
-
     public static void bookSlot(String userName) {
         Scanner sc = new Scanner(System.in);
 
@@ -231,12 +262,12 @@ public class GymCustomerDAO  {
             System.out.println("Slots not available in this time");
             return;
         }
-
+        PreparedStatement ps1=null;
         try {
             Connection db = getConnection();
             db.setAutoCommit(false); // Start transaction for DB operations
 
-            PreparedStatement ps1 = db.prepareStatement(SqlQueries.INSERT_SLOT);
+            ps1 = db.prepareStatement(SqlQueries.INSERT_SLOT);
             ps1.setString(1, newSlot.getSlotID()); // Use the generated slot ID
             ps1.setDate(2, java.sql.Date.valueOf(newSlot.getSlotTimeStart().toLocalDateTime().toLocalDate())); // Extract date
             ps1.setTimestamp(3, newSlot.getSlotTimeStart());
@@ -252,6 +283,17 @@ public class GymCustomerDAO  {
             db.commit();
         }catch (SQLException e){
             System.out.println(e.getMessage());
+        }
+        finally {
+            if(ps1!=null){
+                try{
+                    ps1.close();
+                }
+                catch (SQLException closeEx) {
+                    System.err.println("Error closing PreparedStatement ps1: " + closeEx.getMessage());
+                }
+
+            }
         }
         if(userBookings.containsKey(userName)){
             userBookings.get(userName).add(newSlot);

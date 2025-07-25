@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"com.flipfit.beans"},{"l":"com.flipfit.business"},{"l":"com.flipfit.client"},{"l":"com.flipfit.constant"},{"l":"com.flipfit.dao"},{"l":"com.flipfit.exceptions"},{"l":"com.flipkart.business"}];updateSearchResults();

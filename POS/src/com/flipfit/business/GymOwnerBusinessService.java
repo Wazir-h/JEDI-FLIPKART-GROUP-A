@@ -5,6 +5,20 @@ import com.flipfit.beans.GymOwner;
 import com.flipfit.dao.GymCustomerDAO;
 import com.flipfit.dao.GymOwnerDAO;
 
+/*
+ * @Author : "Kartik Aggarwal, Shivansh Sinha, Sujal Mishra, Abdul Razique"
+ * @ClassName: "GymOwnerBusinessService"
+ * @Description: "Business Service layer for managing operations related to Gym Owners.
+ * This class implements the GymOwnerBusinessServiceInterface and encapsulates
+ * business logic for gym owner functionalities, such as registering gym centers,
+ * managing their profiles, and interacting with data access objects (DAOs)."
+ * @Exceptions: "Custom business exceptions (e.g., GymOwnerNotFoundException, GymAlreadyExistsException)" // Or specific exceptions it might throw
+ * @Version : "1.0"
+ * @See : "com.flipfit.beans.GymCentre, com.flipfit.beans.GymOwner, com.flipfit.dao.GymOwnerDAO, com.flipfit.business.GymOwnerBusinessServiceInterface"
+ *
+ *
+ */
+
 public class GymOwnerBusinessService implements GymOwnerBusinessServiceInterface {
     public void AddGymOwnerDetails(String gymEmail, String gymOwnerName, String gymOwnerAddress,
                                    String gymOwnerPhone, String GSTNumber, String password) {

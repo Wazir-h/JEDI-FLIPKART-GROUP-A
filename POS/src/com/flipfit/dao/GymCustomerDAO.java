@@ -12,6 +12,19 @@ import com.flipfit.business.GymPaymentBusinessService;
 import com.flipfit.constant.SqlQueries;
 import static com.flipfit.dao.DBConnection.getConnection;
 
+/*
+ * @Author : "Kartik Aggarwal, Shivansh Sinha, Sujal Mishra"
+ * @ClassName: "GymCustomerDAO"
+ * @Description: "Data Access Object (DAO) for managing GymCustomer related data, including customer profiles,
+ * and gym slot bookings. This class interacts with a MySQL database using JDBC
+ * for persistence and also maintains in-memory data structures for certain operations."
+ * @Exceptions: "SQLException - Thrown for database access errors."
+ * @Version : "1.0"
+ * @See : "com.flipfit.beans.GymCustomer, com.flipfit.beans.Slot, com.flipfit.business.GymPaymentBusinessService, com.flipfit.dao.DBConnection"
+ *
+ *
+ */
+
 public class GymCustomerDAO  {
     public static Map<String, GymCustomer> CustomerCred = new HashMap<>();
     public static Map<String, List<Slot>> userBookings = new HashMap<>();

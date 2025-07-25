@@ -12,7 +12,18 @@ import java.util.List;
 import java.util.Calendar;
 import java.sql.Date;
 import static com.flipfit.dao.DBConnection.getConnection;
-
+/*
+ * @Author : "Yahsvardhan Yadav, Shivansh Sinha, Kartik Aggarwal"
+ * @ClassName: "GymPaymentBusinessService"
+ * @Description: "Business Service layer for managing payment operations within the FlipFit application.
+ * This class handles the logic for processing payments for gym slot bookings,
+ * interacting with the database to record transactions and ensuring payment success."
+ * @Exceptions: "SQLException (for database errors), PaymentException (custom business exception if needed)"
+ * @Version : "1.0"
+ * @See : "com.flipfit.beans.GymCustomer, com.flipfit.constant.SqlQueries, com.flipfit.dao.DBConnection"
+ *
+ *
+ */
 public class GymPaymentBusinessService {
     public static void makePayment(String customerId, double amount, int slotStartTime, int slotEndTime) {
         System.out.println("\n--- Initiating Payment Process ---");

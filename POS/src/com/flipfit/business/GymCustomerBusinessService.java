@@ -13,7 +13,19 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Scanner;
 import java.util.List;
-
+/*
+ * @Author : "Shivansh Sinha, Kartik Aggarwal, Sujal Mishra"
+ * @ClassName: "GymCustomerBusinessService"
+ * @Description: "Business Service layer for managing operations related to Gym Customers.
+ * This class implements the GymCustomerBusinessServiceInterface and encapsulates
+ * business logic for gym customer functionalities, such as creating and updating profiles,
+ * viewing gyms and slots, booking, and cancelling slots, interacting with data access objects (DAOs)."
+ * @Exceptions: "Custom business exceptions (e.g., CustomerNotFoundException, BookingConflictException)" // Or specific exceptions it might throw
+ * @Version : "1.0"
+ * @See : "com.flipfit.beans.GymCustomer, com.flipfit.dao.GymCustomerDAO, com.flipfit.business.GymCustomerBusinessServiceInterface"
+ *
+ *
+ */
 public class GymCustomerBusinessService implements GymCustomerBusinessServiceInterface {
 
     public static GymCustomer createProfile(String userName,String EmailId,String userPhoneNo,String userAddress,String userPassword){

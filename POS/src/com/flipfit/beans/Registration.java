@@ -1,5 +1,11 @@
 package com.flipfit.beans;
 
+
+/*
+ * @Author : "Sujal Mishra"
+ * @ClassName: "Registration"
+ * @Version : "1.0"
+ */
 public class Registration extends User{
     private int registrationId;
     private int dateOfRegistration;

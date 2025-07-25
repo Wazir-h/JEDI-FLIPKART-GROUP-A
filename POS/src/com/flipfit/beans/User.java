@@ -1,5 +1,10 @@
 package com.flipfit.beans;
 
+/*
+ * @Author : "Shivansh Sinha"
+ * @ClassName: "User"
+ * @Version : "1.0"
+ */
 public class User extends Role{
     private String userId;
     private String userName;

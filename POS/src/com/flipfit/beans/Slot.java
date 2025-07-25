@@ -1,6 +1,12 @@
 package com.flipfit.beans;
 import java.sql.Timestamp;
 import java.util.Date;
+
+/*
+ * @Author : "Abdul Razique"
+ * @ClassName: "Slot"
+ * @Version : "1.0"
+ */
 public class Slot extends GymCentre {
     private Timestamp slotbookingTime;
     private Timestamp SlotTimeStart;

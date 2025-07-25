@@ -1,5 +1,11 @@
 package com.flipfit.beans;
 
+
+/*
+ * @Author : "Shivansh Sinha"
+ * @ClassName: "GymCentre"
+ * @Version : "1.0"
+ */
 public class GymCentre extends GymOwner {
 
     private String GymCenterAddress;

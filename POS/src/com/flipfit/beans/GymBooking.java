@@ -1,5 +1,10 @@
 package com.flipfit.beans;
 
+/*
+ * @Author : "Kartik Aggarwal"
+ * @ClassName: "GymBooking"
+ * @Version : "1.0"
+ */
 public class GymBooking extends Slot{
    private int bookingId;
 

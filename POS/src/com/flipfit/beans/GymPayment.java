@@ -1,5 +1,11 @@
 package com.flipfit.beans;
 import java.sql.Timestamp;
+
+/*
+ * @Author : "Kallakuri trilekya sri"
+ * @ClassName: "GymPayment"
+ * @Version : "1.0"
+ */
 public class GymPayment extends GymCustomer {
    private String paymentID;
    private Timestamp paymentTime;

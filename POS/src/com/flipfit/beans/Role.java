@@ -1,5 +1,11 @@
 package com.flipfit.beans;
 
+
+/*
+ * @Author : "Sujal Mishra"
+ * @ClassName: "Role"
+ * @Version : "1.0"
+ */
 public class Role {
     public String getRoleid() {
         return roleid;

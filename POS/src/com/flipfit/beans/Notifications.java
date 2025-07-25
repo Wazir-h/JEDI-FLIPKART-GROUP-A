@@ -2,6 +2,11 @@ package com.flipfit.beans;
 
 import java.sql.Timestamp;
 
+/*
+ * @Author : "Kartik Aggarwal"
+ * @ClassName: "Notifications"
+ * @Version : "1.0"
+ */
 public class Notifications extends User {
     private String NotificationsID;
     private String receiversEmail;

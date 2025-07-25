@@ -8,7 +8,8 @@ import com.flipfit.beans.GymCustomer;
 import com.flipfit.beans.Slot;
 import com.flipfit.business.GymPaymentBusinessService;
 import com.flipfit.constant.SqlQueries;
-import com.flipfit.constant.SqlQueries.*;
+
+import static com.flipfit.dao.DBConnection.getConnection;
 
 public class GymCustomerDAO  {
     public static Map<String, GymCustomer> CustomerCred = new HashMap<>();
@@ -18,16 +19,16 @@ public class GymCustomerDAO  {
     public static void addCustomer(String username, GymCustomer customer) {
         CustomerCred.put(username, customer);
         try{
-            Connection db = DBConnection.getConnection();
+            Connection db = getConnection();
             PreparedStatement ps1 = db.prepareStatement(SqlQueries.REGISTER_NEW_USER);
-            ps1.setString(1,"224");
+            int rowsAffected = ps1.executeUpdate();
+            ps1.setString(1,customer.getUserId());
             ps1.setString(2,customer.getUserName());
             ps1.setString(3,customer.getUserEmail());
             ps1.setString(4,customer.getUserPassword());
-            ps1.setString(5,"role_gym_customer");
-            int rowsAffected = ps1.executeUpdate();
+            ps1.setString(5,"1");
             PreparedStatement ps2 = db.prepareStatement(SqlQueries.REGISTER_NEW_CUSTOMER_DETAILS);
-            ps2.setString(1,"224");
+            ps2.setString(1,customer.getId());
             ps2.setString(2,customer.getAddress());
             ps2.setString(3,customer.getPhoneNo());
             System.out.println("Rows Affected" + rowsAffected);
@@ -50,7 +51,7 @@ public class GymCustomerDAO  {
     }
     public static boolean authenticateUser(String username, String password) {
         try{
-            Connection db = DBConnection.getConnection();
+            Connection db = getConnection();
             PreparedStatement ps1 = db.prepareStatement(SqlQueries.AUTHENTICATE_USER);
             ps1.setString(1,username);
             ps1.setString(2,password);
@@ -90,7 +91,7 @@ public class GymCustomerDAO  {
         PreparedStatement ps2 = null;
 
         try{
-            db = DBConnection.getConnection();
+            db = getConnection();
             db.setAutoCommit(false);
             ps1 = db.prepareStatement(SqlQueries.UPDATE_USER_DETAILS);
             ps1.setString(1,newUsername);
@@ -152,7 +153,7 @@ public class GymCustomerDAO  {
         return true;
     }
     public static boolean userExists(String userName) {
-        try (Connection db = DBConnection.getConnection();
+        try (Connection db = getConnection();
              PreparedStatement stmt = db.prepareStatement(SqlQueries.SELECT_USER_BY_USERNAME)) {
 
             stmt.setString(1, userName);
@@ -231,6 +232,27 @@ public class GymCustomerDAO  {
             return;
         }
 
+        try {
+            Connection db = getConnection();
+            db.setAutoCommit(false); // Start transaction for DB operations
+
+            PreparedStatement ps1 = db.prepareStatement(SqlQueries.INSERT_SLOT);
+            ps1.setString(1, newSlot.getSlotID()); // Use the generated slot ID
+            ps1.setDate(2, java.sql.Date.valueOf(newSlot.getSlotTimeStart().toLocalDateTime().toLocalDate())); // Extract date
+            ps1.setTimestamp(3, newSlot.getSlotTimeStart());
+            ps1.setTimestamp(4, newSlot.getSlotTimeEnd());
+            ps1.setString(5, gymId);
+
+            int rowsAffected = ps1.executeUpdate();
+
+            if (rowsAffected == 0) {
+                throw new SQLException("Booking slot failed, no rows affected in Slot table.");
+            }
+            GymPaymentBusinessService.makePayment(userName, 100, startTime, endTime);
+            db.commit();
+        }catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
         if(userBookings.containsKey(userName)){
             userBookings.get(userName).add(newSlot);
         }else {
@@ -238,9 +260,6 @@ public class GymCustomerDAO  {
             slots.add(newSlot);
             userBookings.put(userName, slots);
         }
-//        System.out.println("Log User Bookings");
-//        System.out.println(userBookings);
-        GymPaymentBusinessService.makePayment(userName, 100, startTime, endTime);
         System.out.println("\nSlot booking details:");
         System.out.println("Gym ID: " + gymId);
         System.out.println("Customer: " + userName);

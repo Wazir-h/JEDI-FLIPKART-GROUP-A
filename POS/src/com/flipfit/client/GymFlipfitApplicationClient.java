@@ -96,13 +96,18 @@ public class GymFlipfitApplicationClient {
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
-            System.out.println("-----------------------------------------------------------------------------------");
-            System.out.println("1. Login User");
-            System.out.println("2. Registration for Gym Customer");
-            System.out.println("3. Registration for Gym Owner");
-            System.out.println("4. Change password");
-            System.out.println("5. Exit");
-            System.out.print("Enter your choice: ");
+            System.out.println("╔═════════════════════════════════════════════════════════════════════════════════╗");
+            System.out.println("║                             🙏 Welcome to FlipFit 🙏                            ║");
+            System.out.println("╠═════════════════════════════════════════════════════════════════════════════════╣");
+            System.out.println("║                                                                                 ║");
+            System.out.println("║   1. Login User                                                                 ║");
+            System.out.println("║   2. Registration for Gym Customer                                              ║");
+            System.out.println("║   3. Registration for Gym Owner                                                 ║");
+            System.out.println("║   4. Change Password                                                            ║");
+            System.out.println("║   5. Exit                                                                       ║");
+            System.out.println("║                                                                                 ║");
+            System.out.println("╚═════════════════════════════════════════════════════════════════════════════════╝");
+            System.out.print("👉 Enter your choice (1-5): ");
 
             // Read the User choice
             int choice = -1;

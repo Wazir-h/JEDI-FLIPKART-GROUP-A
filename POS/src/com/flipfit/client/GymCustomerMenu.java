@@ -16,11 +16,12 @@ public class GymCustomerMenu {
         Scanner sc=new Scanner(System.in);
         System.out.println("Enter option to Move Next");
         System.out.println("1. To UpdateProfile");
-		System.out.println("2. To View All Gyms");
+        System.out.println("2. To View All Gyms");
         System.out.println("3. View All Bookings");
         System.out.println("4. Book Slot");
         System.out.println("5. Cancel Slot");
-        System.out.println("6. Log Out");
+        System.out.println("6. View Available Slots");
+        System.out.println("7. Log Out");
         try {
             int choice = sc.nextInt();
             GymCustomerBusinessServiceInterface gymCustomerBusinessService = new GymCustomerBusinessService();
@@ -40,6 +41,9 @@ public class GymCustomerMenu {
                 case 5:
                     gymCustomerBusinessService.cancelSlot(userName);
                     break;
+                case 6:
+                    gymCustomerBusinessService.viewAllAvailableSlots(userName);
+                    break;
                 default:
                     System.out.println("Logout Successful");
                     return;
@@ -47,8 +51,10 @@ public class GymCustomerMenu {
             customerPage(userName, userPassword,roleId);
         } catch(Exception e){
             System.out.println("Enter Correct Value");
+            customerPage(userName, userPassword,roleId);
         }
     }
+
     public static GymCustomer AddGymCustomer(){
 
         Scanner scanner = new Scanner(System.in);

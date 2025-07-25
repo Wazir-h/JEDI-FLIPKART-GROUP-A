@@ -134,6 +134,20 @@ public class GymCustomerBusinessService implements GymCustomerBusinessServiceInt
         viewAllGyms();
         GymCustomerDAO.bookSlot(userName);
     }
+    public void viewAllAvailableSlots(String userName){
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter Gym Name to view slots: ");
+        String gymId = sc.nextLine();
+        List<Integer> slotsForGym = GymCustomerDAO.GymBookings.get(gymId);
+        System.out.println("Available Slots Details:");
+        System.out.println("Morning 6-7: " + slotsForGym.get(0));
+        System.out.println("Morning 7-8: " + slotsForGym.get(1));
+        System.out.println("Morning 8-9: " + slotsForGym.get(2));
+        System.out.println("Evening 6-7: " + slotsForGym.get(3));
+        System.out.println("Evening 7-8: " + slotsForGym.get(4));
+        System.out.println("Evening 8-9: " + slotsForGym.get(5));
+        System.out.println("-----------------------------------------------------------------------------------------------------");
+    }
     public  void cancelSlot(String userName){
         GymCustomerDAO.cancelBooking(userName);
         System.out.println("Slot Canceled");

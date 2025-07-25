@@ -35,9 +35,9 @@ public class GymPaymentBusinessService {
                 ps1.setInt(5,slotStartTime);
                 ps1.setInt(6,slotEndTime);
                 ps1.setDate(7, new java.sql.Date(cal.getTimeInMillis()));
-
-                try (ResultSet rs = ps1.executeQuery()) {
-                    if (rs.next()) {
+                int r = ps1.executeUpdate();
+                try {
+                    if (r>0) {
 
                         System.out.println("Payment Done Successfully.");
 
@@ -46,6 +46,9 @@ public class GymPaymentBusinessService {
                         System.out.println("Payment Failed");
 
                     }
+                }
+                catch (Exception e) {
+
                 }
 
             } catch (SQLException e) {

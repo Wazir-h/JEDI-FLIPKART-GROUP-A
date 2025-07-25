@@ -13,11 +13,11 @@ public class SqlQueries {
 //    public static final String DB_PASSWORD = "password"; // Your MySQL password
 
 
-    public static final String DB_URL = "jdbc:mysql://localhost:3306/Flip_Fit_Schema";
+    public static final String DB_URL = "jdbc:mysql://localhost:3306/flipfit";
 
     public static final String DB_USER = "root"; // Your MySQL username
 
-    public static final String DB_PASSWORD = "Shivanshiit10"; // Your MySQL password
+    public static final String DB_PASSWORD = "kartik@123"; // Your MySQL password
 
     public static final String AUTHENTICATE_USER = "SELECT user_id, user_name, user_email, role_id FROM User WHERE user_name = ? AND user_password = ? AND role_id = ?";
 
@@ -87,7 +87,7 @@ public class SqlQueries {
 
     public static final String REGISTER_NEW_GYMOWNER_DETAILS = "INSERT INTO GymOwner (user_id, gym_owner_address, gym_owner_phone, gst_number, is_approved) VALUES (?, ?, ?, ?, ?)";
 
-    public static final String MAKE_PAYMENT = "INSERT INTO GymPayment (payment_id, user_id, payment_time,amount,status,slot_time_start,slot_time_end,slot_date) VALUES (?, ?, CURRENT_TIMESTAMP(),?,?,?,?)";
+    public static final String MAKE_PAYMENT = "INSERT INTO GymPayment (payment_id, user_id, payment_time,amount,status,slot_time_start,slot_time_end,slot_date) VALUES (?, ?, CURRENT_TIMESTAMP(),?,?,?,?,?)";
 
     public static final String UPDATE_USER_DETAILS = "UPDATE User SET user_name = ?, user_email = ?, user_password = ? WHERE user_id = ?";
 

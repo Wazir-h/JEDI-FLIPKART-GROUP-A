@@ -13,7 +13,7 @@ import com.flipfit.constant.SqlQueries;
 import static com.flipfit.dao.DBConnection.getConnection;
 
 /*
- * @Author : "Kartik Aggarwal, Shivansh Sinha, Sujal Mishra"
+ * @Author : "Kartik Aggarwal, Shivansh Sinha, Sujal Mishra, Trilekya"
  * @ClassName: "GymCustomerDAO"
  * @Description: "Data Access Object (DAO) for managing GymCustomer related data, including customer profiles,
  * and gym slot bookings. This class interacts with a MySQL database using JDBC

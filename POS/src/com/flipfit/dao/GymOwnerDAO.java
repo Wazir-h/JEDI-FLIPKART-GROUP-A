@@ -11,6 +11,18 @@ import com.flipfit.beans.GymCentre;
 import com.flipfit.beans.GymOwner;
 import com.flipfit.constant.SqlQueries;
 
+/*
+ * @Author : "Kartik Aggarwal, Shivansh Sinha, Sujal Mishra"
+ * @ClassName: "GymOwnerDAO"
+ * @Description: "Data Access Object (DAO) for managing Gym Owner related data.
+ * This class handles database operations for GymOwner entities and their associated
+ * gym centers, including creation, retrieval, update, and deletion of owner and gym data."
+ * @Exceptions: "SQLException - Thrown for database access errors during JDBC operations."
+ * @Version : "1.0"
+ * @See : "com.flipfit.beans.GymOwner, com.flipfit.beans.GymCentre, com.flipfit.constant.SqlQueries, com.flipfit.dao.DBConnection"
+ *
+ *
+ */
 
 public class GymOwnerDAO {
 

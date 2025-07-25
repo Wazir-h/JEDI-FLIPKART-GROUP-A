@@ -33,7 +33,6 @@ public class GymPaymentBusinessService {
         Calendar cal = Calendar.getInstance();
         cal.set(2025, Calendar.JULY, 25);
         if (isPaymentSuccessful) {
-<<<<<<< HEAD
             Connection db=null;
             PreparedStatement ps1=null;
 
@@ -76,9 +75,7 @@ public class GymPaymentBusinessService {
                 }
             }
 
-=======
             System.out.println("Payment Successful");
->>>>>>> b367cc0 (Fix Changes)
         }
         else {
             System.out.println("Payment Not Successful");

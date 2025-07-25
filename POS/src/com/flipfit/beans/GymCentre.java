@@ -19,7 +19,7 @@ public class GymCentre extends GymOwner {
         return isApproved;
     }
     public void setApproved(boolean approved) {
-        isApproved = true;
+        isApproved = approved;
     }
     public void setGymName(String gymName){GymName=gymName;}
     public String getGymName() {return  GymName;}
@@ -48,17 +48,12 @@ public class GymCentre extends GymOwner {
 
     @Override
     public String toString() {
-        return String.format(
-                """
-                Gym: %s
-                Gym Address: %s
-                Gym Slots: %s
-                Gym Id: %s
-                """,
-                    getGymName(),
-                    getGymCenterAddress(),
-                    getSlotCount(),
-                    getGymID(),
-                    isApproved());
+        return String.format("%-30s %-40s %-15d %-50s %-15s%n ",
+                getGymName(),
+                getGymCenterAddress(),
+                getSlotCount(),
+                getGymID(),
+                isApproved()?"Approved":"Not Approved"
+        );
     }
 }

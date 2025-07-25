@@ -1,9 +1,9 @@
 package com.flipfit.constant;
 
 public class SqlQueries {
-    public static final String DB_URL = "jdbc:mysql://localhost:3306/flipfit_db?useSSL=false&serverTimezone=UTC";
-    public static final String DB_USER = "root"; // Your MySQL username
-    public static final String DB_PASSWORD = "password"; // Your MySQL password
+//    public static final String DB_URL = "jdbc:mysql://localhost:3306/flipfit_db?useSSL=false&serverTimezone=UTC";
+//    public static final String DB_USER = "root"; // Your MySQL username
+//    public static final String DB_PASSWORD = "password"; // Your MySQL password
 
 
     public static final String DB_URL = "jdbc:mysql://localhost:3306/flipfit";
@@ -13,6 +13,7 @@ public class SqlQueries {
     public static final String DB_PASSWORD = "password"; // Your MySQL password
 
     public static final String AUTHENTICATE_USER = "SELECT user_id, user_name, user_email, role_id FROM User WHERE user_name = ? AND user_password = ? AND role_id = ?";
+
 
     public static final String FETCH_ALL_USERS_BY_ROLE = "SELECT user_id, user_name, user_email FROM User WHERE role_id = ?";
 
@@ -26,13 +27,22 @@ public class SqlQueries {
 
     public static final String FETCH_ALL_SLOTS_OF_GYM = "SELECT slot_id, slot_date, slot_time_start, slot_time_end, gym_id FROM Slot WHERE gym_id = ?";
 
+
+
     public static final String INSERT_GYM = "INSERT INTO GymCentre (gym_id, gym_name, gym_center_address, gym_center_phone, slot_count, is_approved, owner_user_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
     public static final String FETCH_PENDING_GYM_CENTERS = "SELECT gym_id, gym_name, gym_center_address, gym_center_phone, slot_count, is_approved, owner_user_id FROM GymCentre WHERE is_approved = FALSE";
 
+
+    public static final String FETCH_ALL_GYM_CENTERS = "SELECT gym_id, gym_name, gym_center_address, gym_center_phone, slot_count, is_approved, owner_user_id FROM GymCentre";
+
     public static final String APPROVE_GYM_CENTER = "UPDATE GymCentre SET is_approved = TRUE WHERE gym_id = ?";
 
     public static final String CHECK_GYMCENTER_APPROVAL = "SELECT gym_id FROM GymCentre WHERE gym_id = ? AND is_approved = TRUE";
+
+
+
+    public static final String FETCH_ALL_GYMOWNERS = "SELECT go.user_id, u.user_name, u.user_email, go.gym_owner_address, go.gym_owner_phone, go.gst_number, go.is_approved FROM GymOwner go JOIN User u ON go.user_id = u.user_id";
 
     public static final String FETCH_GYMOWNER_DETAILS = "SELECT go.user_id, u.user_name, u.user_email, go.gym_owner_address, go.gym_owner_phone, go.gst_number, go.is_approved FROM GymOwner go JOIN User u ON go.user_id = u.user_id WHERE u.user_email = ?";
 
@@ -46,7 +56,11 @@ public class SqlQueries {
 
     public static final String APPROVE_GYM_OWNER = "UPDATE GymOwner SET is_approved = TRUE WHERE user_id = ?";
 
+
+
     public static final String INSERT_SLOT = "INSERT INTO Slot (slot_id, slot_date, slot_time_start, slot_time_end, gym_id) VALUES (?, ?, ?, ?, ?)";
+
+
 
     public static final String INSERT_BOOKING = "INSERT INTO GymBooking (slot_id, user_id, booking_time, is_active) VALUES (?, ?, ?, TRUE)";
 
@@ -55,6 +69,8 @@ public class SqlQueries {
     public static final String CHECK_SLOT_ALREADY_BOOKED = "SELECT gb.booking_id FROM GymBooking gb JOIN User u ON gb.user_id = u.user_id WHERE gb.slot_id = ? AND u.user_email = ? AND DATE(gb.booking_time) = ?";
 
     public static final String CANCEL_BOOKING = "UPDATE GymBooking SET is_active = FALSE WHERE booking_id = ? AND user_id = (SELECT user_id FROM User WHERE user_email = ?)";
+
+
 
     public static final String REGISTER_NEW_USER = "INSERT INTO User (user_id, user_name, user_email, user_password, role_id) VALUES (?, ?, ?, ?, ?)";
 

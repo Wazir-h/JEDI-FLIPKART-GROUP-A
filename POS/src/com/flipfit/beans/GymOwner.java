@@ -35,7 +35,7 @@ public class GymOwner extends User {
     }
 
     public void setApproved(boolean approved) {
-        isApproved = true;
+        isApproved = approved;
     }
 
     @Override

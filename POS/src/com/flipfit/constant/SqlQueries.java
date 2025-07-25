@@ -62,7 +62,7 @@ public class SqlQueries {
 
 
 
-    public static final String INSERT_BOOKING = "INSERT INTO GymBooking (slot_id, user_id, booking_time, is_active) VALUES (?, ?, ?, TRUE)";
+    public static final String INSERT_BOOKING = "INSERT INTO GymBooking (slot_id, user_id, booking_time) VALUES (?, ?, ?)";
 
     public static final String FETCH_ALL_CUSTOMER_BOOKINGS = "SELECT gb.booking_id, gb.slot_id, gb.user_id, gb.booking_time, gb.is_active FROM GymBooking gb JOIN GymCustomer gc ON gb.user_id = gc.user_id JOIN User u ON gc.user_id = u.user_id WHERE u.user_email = ? AND gb.is_active = ?";
 

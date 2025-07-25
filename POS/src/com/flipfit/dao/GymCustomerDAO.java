@@ -16,6 +16,39 @@ public class GymCustomerDAO  {
     public static Map<String, List<Slot>> userBookings = new HashMap<>();
     public static Map<String, List<Integer>> GymBookings = new HashMap<>();
 
+    public static void loadBookingDetails(String userName){
+        String sql = "SELECT " +
+                "S.slot_id, S.slot_date, S.slot_time_start, S.slot_time_end, S.gym_id " +
+                "FROM Slot S " +
+                "JOIN GymBooking GB ON S.slot_id = GB.slot_id " +
+                "WHERE GB.user_id = ?";
+        try {
+            Connection db = getConnection();
+            PreparedStatement ps1 = db.prepareStatement(sql);
+            ps1.setString(1, userName); // Set the user_id parameter
+            ResultSet rs = ps1.executeQuery();
+            List<Slot> loadedSlots = new ArrayList<>();
+            while (rs.next()) {
+                Slot slot = new Slot();
+                slot.setSlotID(rs.getString("slot_id"));
+                slot.setSlotDate(rs.getDate("slot_date"));
+                slot.setSlotTimeStart(rs.getTimestamp("slot_time_start"));
+                slot.setSlotTimeEnd(rs.getTimestamp("slot_time_end"));
+                loadedSlots.add(slot);
+            }
+
+            userBookings.put(userName, loadedSlots);
+            System.out.println("DAO: Loaded " + loadedSlots.size() + " bookings for user '" + userName + "' from database.");
+
+        } catch (SQLException e) {
+            System.err.println("DAO Error: Failed to load booking details for user '" + userName + "' from MySQL: " + e.getMessage());
+            e.printStackTrace();
+        } finally {
+            System.out.println("Load Booking Slots Called");
+        }
+    }
+
+
     public static void addCustomer(String username, GymCustomer customer) {
         CustomerCred.put(username, customer);
         PreparedStatement ps1=null;
@@ -274,12 +307,18 @@ public class GymCustomerDAO  {
             ps1.setTimestamp(4, newSlot.getSlotTimeEnd());
             ps1.setString(5, gymId);
 
-            int rowsAffected = ps1.executeUpdate();
-
-            if (rowsAffected == 0) {
+            int rowsAffected1 = ps1.executeUpdate();
+            if (rowsAffected1 == 0) {
                 throw new SQLException("Booking slot failed, no rows affected in Slot table.");
             }
-            GymPaymentBusinessService.makePayment(userName, 100, startTime, endTime);
+            PreparedStatement ps2 = db.prepareStatement(SqlQueries.INSERT_BOOKING);
+            ps2.setString(1,newSlot.getSlotID());
+            ps2.setString(2,newSlot.getUserId());
+            ps2.setTimestamp(3,newSlot.getSlotTimeStart());
+            int rowsAffected2 = ps2.executeUpdate();
+            if (rowsAffected2 == 0) {
+                throw new SQLException("Booking slot failed, no rows affected in Booking table.");
+            }
             db.commit();
         }catch (SQLException e){
             System.out.println(e.getMessage());
@@ -309,6 +348,7 @@ public class GymCustomerDAO  {
         System.out.println("Start Time: " + startTime + newSlot.getSlotTimeStart());
         System.out.println("End Time: " + endTime + newSlot.getSlotTimeEnd());
         System.out.println("Slot booking process completed (details printed above).");
+        GymPaymentBusinessService.makePayment(userName, 100, startTime, endTime);
     }
 
     public static void fillNumberofSlotInGym(String gymId, int mxSlot){
@@ -415,5 +455,6 @@ public class GymCustomerDAO  {
             System.out.println(slot);
         }
     }
+
 
 }

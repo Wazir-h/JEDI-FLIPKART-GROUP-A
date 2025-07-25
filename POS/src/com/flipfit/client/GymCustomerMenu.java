@@ -4,12 +4,14 @@ import  com.flipfit.beans.GymCustomer;
 import com.flipfit.beans.GymOwner;
 import com.flipfit.business.GymCustomerBusinessService;
 import com.flipfit.business.GymCustomerBusinessServiceInterface;
+import com.flipfit.dao.GymCustomerDAO;
 
 import java.util.Scanner;
 
 public class GymCustomerMenu {
     public static void customerPage(String userName,String userPassword,int roleId){
         GymCustomer gymCustomer=new GymCustomer();
+        GymCustomerDAO.loadBookingDetails(userName);
         gymCustomer.setUserName(userName);
         gymCustomer.setUserPassword(userPassword);
         System.out.println("Welcome "+ userName + " to Flipfit");

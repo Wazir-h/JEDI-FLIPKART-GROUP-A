@@ -74,9 +74,9 @@ public class GymFlipfitApplicationClient {
         GymAdminDAO.setAdminCred();
         System.out.println("Welcome to Flipfit Application");
 
-        //Add Dummy Data for customers
-         GymCustomerBusinessService.createProfile("user1", "user1", "123", "abc", "abc");
-         GymCustomerBusinessService.createProfile("user2", "user2", "123", "abc", "abc");
+//        //Add Dummy Data for customers
+//         GymCustomerBusinessService.createProfile("user1", "user1", "123", "abc", "abc");
+//         GymCustomerBusinessService.createProfile("user2", "user2", "123", "abc", "abc");
 
 
         // Add Dummy Data for GymOwners and Gym Centers

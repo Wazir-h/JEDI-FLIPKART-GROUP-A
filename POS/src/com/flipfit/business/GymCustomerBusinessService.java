@@ -1,9 +1,15 @@
 package com.flipfit.business;
 import com.flipfit.beans.GymCustomer;
 
+import com.flipfit.constant.SqlQueries;
+import com.flipfit.dao.DBConnection;
 import com.flipfit.dao.GymCustomerDAO;
 import com.flipfit.dao.GymOwnerDAO;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Scanner;
 
 public class GymCustomerBusinessService implements GymCustomerBusinessServiceInterface{
@@ -23,6 +29,53 @@ public class GymCustomerBusinessService implements GymCustomerBusinessServiceInt
     public void updateProfile(GymCustomer gymCustomer) {
         Scanner sc = new Scanner(System.in);
         String userNameOld = gymCustomer.getUserName();
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        try {
+            conn = DBConnection.getConnection();
+            ps = conn.prepareStatement(SqlQueries.GET_USER_BY_USERNAME);
+            ps.setString(1, userNameOld);
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                String userId = rs.getString("user_id");
+                String userName = rs.getString("user_name");
+                String userEmail = rs.getString("user_email");
+                String userPassword = rs.getString("user_password");
+                String userRole = rs.getString("role_id");
+                String userAddress = rs.getString("address");
+                String userPhoneNo = rs.getString("phone_no");
+
+                gymCustomer.setUserId(userId);
+                gymCustomer.setUserName(userName);
+                gymCustomer.setUserEmail(userEmail);
+                gymCustomer.setUserPassword(userPassword);
+                gymCustomer.setId(userRole);
+                gymCustomer.setAddress(userAddress);
+                gymCustomer.setPhoneNo(userPhoneNo);
+
+
+            }
+
+        } catch (SQLException e) {
+            System.err.println("SQL Error during customer registration: " + e.getMessage());
+            e.printStackTrace();
+            try {
+                if (conn != null) conn.rollback(); // Ensure rollback on error
+            } catch (SQLException rbEx) {
+                System.err.println("Error during rollback: " + rbEx.getMessage());
+            }
+
+        } finally {
+            try {
+                if (conn != null) conn.setAutoCommit(true); // Reset auto-commit
+            } catch (SQLException e) {
+                System.err.println("Error resetting auto-commit: " + e.getMessage());
+            }
+
+        }
         System.out.println("Enter What to Update");
         System.out.println("1. To Update Your Name");
         System.out.println("2. To Update Your EmailId");

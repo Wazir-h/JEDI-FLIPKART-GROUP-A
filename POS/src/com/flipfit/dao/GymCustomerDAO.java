@@ -20,17 +20,19 @@ public class GymCustomerDAO  {
         try{
             Connection db = DBConnection.getConnection();
             PreparedStatement ps1 = db.prepareStatement(SqlQueries.REGISTER_NEW_USER);
-            int rowsAffected = ps1.executeUpdate();
-            ps1.setString(1,customer.getId());
+            ps1.setString(1,"224");
             ps1.setString(2,customer.getUserName());
             ps1.setString(3,customer.getUserEmail());
             ps1.setString(4,customer.getUserPassword());
-            ps1.setString(5,"1");
+            ps1.setString(5,"role_gym_customer");
+            int rowsAffected = ps1.executeUpdate();
             PreparedStatement ps2 = db.prepareStatement(SqlQueries.REGISTER_NEW_CUSTOMER_DETAILS);
-            ps2.setString(1,customer.getId());
+            ps2.setString(1,"224");
             ps2.setString(2,customer.getAddress());
             ps2.setString(3,customer.getPhoneNo());
             System.out.println("Rows Affected" + rowsAffected);
+            System.out.println("Rows Affected in GYMCUSTOMER"+ps2.executeUpdate());
+            int rowsAffected2 = ps2.executeUpdate();
         }catch (SQLException e){
             System.out.println(e.getMessage());
         }
@@ -76,6 +78,13 @@ public class GymCustomerDAO  {
         String newUserPassword=updatedCustomer.getUserPassword();
         String newUserAddress=updatedCustomer.getAddress();
         String newUserPhoneNo=updatedCustomer.getPhoneNo();
+        System.out.println(oldUsername);
+        System.out.println(userId);
+        System.out.println(newUsername);
+        System.out.println(newUserEmail);
+        System.out.println(newUserPassword);
+        System.out.println(newUserAddress);
+        System.out.println(newUserPhoneNo);
         Connection db = null;
         PreparedStatement ps1 = null;
         PreparedStatement ps2 = null;

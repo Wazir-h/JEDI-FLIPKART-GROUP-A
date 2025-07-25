@@ -6,11 +6,11 @@ public class SqlQueries {
 //    public static final String DB_PASSWORD = "password"; // Your MySQL password
 
 
-    public static final String DB_URL = "jdbc:mysql://localhost:3306/flipfit";
+    public static final String DB_URL = "jdbc:mysql://localhost:3306/Flip_Fit_Schema";
 
     public static final String DB_USER = "root"; // Your MySQL username
 
-    public static final String DB_PASSWORD = "password"; // Your MySQL password
+    public static final String DB_PASSWORD = "Shivanshiit10"; // Your MySQL password
 
     public static final String AUTHENTICATE_USER = "SELECT user_id, user_name, user_email, role_id FROM User WHERE user_name = ? AND user_password = ? AND role_id = ?";
 
@@ -88,4 +88,7 @@ public class SqlQueries {
 
     public static final String SELECT_USER_BY_USERNAME = "SELECT user_id FROM User WHERE user_name = ?";
 
+    public static final String GET_USER_BY_USERNAME = "SELECT u.user_id, u.user_name, u.user_email, u.user_password, u.role_id, gc.address, gc.phone_no " +
+            "FROM User u LEFT JOIN GymCustomer gc ON u.user_id = gc.user_id " +
+            "WHERE u.user_name = ?";
 }

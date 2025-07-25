@@ -7,15 +7,21 @@ public class GymOwnerMenu {
     GymOwnerBusinessService gymOwnerBusinessService = new GymOwnerBusinessService();
      void ownerPage(String userName) {
 
-        System.out.println("Welcome "+ userName);
-        System.out.println("Enter your choice: ");
-        System.out.println("1. Add Gym Center");
-        System.out.println("2. Delete Gym Center");
-        System.out.println("3. Edit Slot Details");
-        System.out.println("4. View Gym Centers");
-        System.out.println("5. View Gym Approved Status");
-
-        System.out.println("6. Exit");
+         System.out.println("╔═════════════════════════════════════════════════════════════════════════════════╗");
+         System.out.println("                           🏋️‍♂️ Gym Owner Dashboard 🏋️‍♂️                          ");
+         System.out.println("╠═════════════════════════════════════════════════════════════════════════════════╣");
+         System.out.printf ("                          Welcome %-70s ║\n", userName);
+         System.out.println("╠═════════════════════════════════════════════════════════════════════════════════╣");
+         System.out.println("║                                                                                 ║");
+         System.out.println("║   1. Add Gym Center                                                             ║");
+         System.out.println("║   2. Delete Gym Center                                                          ║");
+         System.out.println("║   3. Edit Slot Details                                                          ║");
+         System.out.println("║   4. View Gym Centers                                                           ║");
+         System.out.println("║   5. View Gym Approved Status                                                   ║");
+         System.out.println("║   6. Exit                                                                       ║");
+         System.out.println("║                                                                                 ║");
+         System.out.println("╚═════════════════════════════════════════════════════════════════════════════════╝");
+         System.out.print("👉 Enter your choice (1-6): ");
 
         Scanner scanner = new Scanner(System.in);
         int choice = -1;

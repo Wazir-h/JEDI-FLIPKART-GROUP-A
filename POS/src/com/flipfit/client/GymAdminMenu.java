@@ -8,16 +8,21 @@ import java.util.Scanner;
 public class GymAdminMenu {
     public void adminPage() {
         Scanner sc = new Scanner(System.in);
-        System.out.println("Admin Page loaded Successfully");
-        System.out.println("Please enter your choice:");
-        System.out.println("1. Approve Gyms");
-        System.out.println("2. Add Gyms");
-        System.out.println("3. Delete Gyms");
-        System.out.println("4. View Approved Gyms");
-        System.out.println("5. Add Gym Owner");
-        System.out.println("6. Delete Gym Owner");
-        System.out.println("7. View Pending Gym Request");
-        System.out.println("8. Logout");
+        System.out.println("╔═════════════════════════════════════════════════════════════════════════════════╗");
+        System.out.println("                        🛠️  Admin Dashboard — FlipFit System 🛠️                  ");
+        System.out.println("╠═════════════════════════════════════════════════════════════════════════════════╣");
+        System.out.println("║                                                                                 ║");
+        System.out.println("║   1. Approve Gyms                                                               ║");
+        System.out.println("║   2. Add Gyms                                                                   ║");
+        System.out.println("║   3. Delete Gyms                                                                ║");
+        System.out.println("║   4. View Approved Gyms                                                         ║");
+        System.out.println("║   5. Add Gym Owner                                                              ║");
+        System.out.println("║   6. Delete Gym Owner                                                           ║");
+        System.out.println("║   7. View Pending Gym Requests                                                  ║");
+        System.out.println("║   8. Logout                                                                     ║");
+        System.out.println("║                                                                                 ║");
+        System.out.println("╚═════════════════════════════════════════════════════════════════════════════════╝");
+        System.out.print("👉 Please enter your choice (1–8): ");
         try {
             int choice = sc.nextInt();
             GymAdminBusinessService gymAdminBusinessService=new GymAdminBusinessService();

@@ -6,11 +6,11 @@ public class SqlQueries {
 //    public static final String DB_PASSWORD = "password"; // Your MySQL password
 
 
-    public static final String DB_URL = "jdbc:mysql://localhost:3306/Flip_Fit_Schema";
+    public static final String DB_URL = "jdbc:mysql://localhost:3306/flipfit";
 
     public static final String DB_USER = "root"; // Your MySQL username
 
-    public static final String DB_PASSWORD = "Shivanshiit10"; // Your MySQL password
+    public static final String DB_PASSWORD = "kartik@123"; // Your MySQL password
 
     public static final String AUTHENTICATE_USER = "SELECT user_id, user_name, user_email, role_id FROM User WHERE user_name = ? AND user_password = ? AND role_id = ?";
 
@@ -28,8 +28,9 @@ public class SqlQueries {
     public static final String FETCH_ALL_SLOTS_OF_GYM = "SELECT slot_id, slot_date, slot_time_start, slot_time_end, gym_id FROM Slot WHERE gym_id = ?";
 
 
-
-    public static final String INSERT_GYM = "INSERT INTO GymCentre (gym_id, gym_name, gym_center_address, gym_center_phone, slot_count, is_approved, owner_user_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    public static final String INITIAL = "SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0";
+    public static final String INSERT_GYM =
+            "INSERT INTO GymCentre (gym_id, gym_name, gym_center_address, gym_center_phone, slot_count, is_approved, owner_user_id) VALUES (?, ?, ?, ?, ?, ?, ?)" ;
 
     public static final String FETCH_PENDING_GYM_CENTERS = "SELECT gym_id, gym_name, gym_center_address, gym_center_phone, slot_count, is_approved, owner_user_id FROM GymCentre WHERE is_approved = FALSE";
 

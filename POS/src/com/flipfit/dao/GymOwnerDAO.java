@@ -30,7 +30,7 @@ public class GymOwnerDAO {
                 gymOwner.setUserId(resultSet.getString("user_id"));
                 gymOwner.setUserName(resultSet.getString("user_name"));
                 gymOwner.setUserEmail(resultSet.getString("user_email"));
-                gymOwner.setGymOwnerAddress(resultSet.getString("user_address"));
+                gymOwner.setGymOwnerAddress(resultSet.getString("gym_owner_address"));
                 gymOwner.setGymOwnerPhone(resultSet.getString("user_phone"));
                 gymOwner.setGSTNumber(resultSet.getString("gst_number"));
                 gymOwner.setApproved(resultSet.getBoolean("is_approved"));
@@ -67,14 +67,29 @@ public class GymOwnerDAO {
         OwnerCredentials.put(username, owner);
         try{
             Connection db = DBConnection.getConnection();
+            PreparedStatement ps1 = db.prepareStatement(SqlQueries.REGISTER_NEW_USER);
+            owner.setId(owner.getUserEmail());
+            ps1.setString(1,owner.getId());
+            ps1.setString(2,owner.getUserName());
+            ps1.setString(3,owner.getUserEmail());
+            ps1.setString(4,owner.getUserPassword());
+            ps1.setString(5,"3");
+            int rowsAffected = ps1.executeUpdate();
+            System.out.println(rowsAffected + " row(s) inserted.");
+
+            System.out.println("OKKKKK");
+
             PreparedStatement gymownerRegistration = db.prepareStatement(SqlQueries.REGISTER_NEW_GYMOWNER_DETAILS);
-            gymownerRegistration.setString(1, owner.getUserId());
+            gymownerRegistration.setString(1, owner.getId());
             gymownerRegistration.setString(2, owner.getGymOwnerAddress());
             gymownerRegistration.setString(3, owner.getGymOwnerPhone());
             gymownerRegistration.setString(4, owner.getGSTNumber());
             gymownerRegistration.setBoolean(5, owner.isApproved());
-            int rowsAffected = gymownerRegistration.executeUpdate();
-            System.out.println(rowsAffected + " row(s) inserted.");
+            System.out.println("Problem Here!!!!!!");
+            int b = gymownerRegistration.executeUpdate();
+            System.out.println(b + " row(s) inserted.");
+
+            db.commit();
 
         }catch (SQLException e){
             System.out.println(e.getMessage());
@@ -93,14 +108,18 @@ public class GymOwnerDAO {
 
         try{
             Connection db = DBConnection.getConnection();
+//            PreparedStatement intial = db.prepareStatement(SqlQueries.INITIAL);
+//            intial.executeUpdate();
             PreparedStatement gymCenterRegistration = db.prepareStatement(SqlQueries.INSERT_GYM);
+
             gymCenterRegistration.setString(1, gymCenter.getGymID());
             gymCenterRegistration.setString(2, gymCenter.getGymName());
             gymCenterRegistration.setString(3, gymCenter.getGymCenterAddress());
             gymCenterRegistration.setString(4, gymCenter.getGymCenterPhone());
             gymCenterRegistration.setInt(5, gymCenter.getSlotCount());
-            gymCenterRegistration.setBoolean(5, gymCenter.isApproved());
-            gymCenterRegistration.setString(6, gymCenter.getUserEmail());
+            gymCenterRegistration.setBoolean(6, gymCenter.isApproved());
+            gymCenterRegistration.setString(7, gymCenter.getUserEmail());
+            System.out.println(gymCenter.getUserEmail());
             int rowsAffected = gymCenterRegistration.executeUpdate();
             System.out.println(rowsAffected + " row(s) inserted.");
 

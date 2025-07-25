@@ -55,9 +55,10 @@ public class GymCustomerDAO  {
         PreparedStatement ps2=null;
 
         try{
-            Connection db = getConnection();
-            ps1 = db.prepareStatement(SqlQueries.REGISTER_NEW_USER);
-            ps1.setString(1,customer.getUserId());
+            Connection db = DBConnection.getConnection();
+            PreparedStatement ps1 = db.prepareStatement(SqlQueries.REGISTER_NEW_USER);
+            customer.setId(customer.getUserEmail());
+            ps1.setString(1,customer.getId());
             ps1.setString(2,customer.getUserName());
             ps1.setString(3,customer.getUserEmail());
             ps1.setString(4,customer.getUserPassword());
@@ -67,9 +68,8 @@ public class GymCustomerDAO  {
             ps2.setString(1,customer.getId());
             ps2.setString(2,customer.getAddress());
             ps2.setString(3,customer.getPhoneNo());
-            System.out.println("Rows Affected" + rowsAffected);
-            System.out.println("Rows Affected in GYMCUSTOMER"+ps2.executeUpdate());
-            int rowsAffected2 = ps2.executeUpdate();
+            rowsAffected = ps2.executeUpdate();
+            System.out.println("Rows Affected\t" + rowsAffected);
         }catch (SQLException e){
             System.out.println(e.getMessage());
         }
@@ -89,6 +89,7 @@ public class GymCustomerDAO  {
                 }
             }
 
+//            System.out.println(e.getMessage());
         }
     }
 
@@ -103,7 +104,7 @@ public class GymCustomerDAO  {
     }
     public static boolean authenticateUser(String username, String password) {
         try{
-            Connection db = getConnection();
+            Connection db = DBConnection.getConnection();
             PreparedStatement ps1 = db.prepareStatement(SqlQueries.AUTHENTICATE_USER);
             ps1.setString(1,username);
             ps1.setString(2,password);
@@ -143,7 +144,7 @@ public class GymCustomerDAO  {
         PreparedStatement ps2 = null;
 
         try{
-            db = getConnection();
+            db = DBConnection.getConnection();
             db.setAutoCommit(false);
             ps1 = db.prepareStatement(SqlQueries.UPDATE_USER_DETAILS);
             ps1.setString(1,newUsername);
@@ -174,7 +175,13 @@ public class GymCustomerDAO  {
                     System.err.println("Error closing PreparedStatement ps2: " + closeEx.getMessage());
                 }
             }
-
+            if (db != null) {
+                try {
+                    db.close(); // Close the Connection
+                } catch (SQLException closeEx) {
+                    System.err.println("Error closing Connection: " + closeEx.getMessage());
+                }
+            }
         }
 
         if (!CustomerCred.containsKey(oldUsername)) {

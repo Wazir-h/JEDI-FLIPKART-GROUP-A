@@ -18,6 +18,7 @@ public class GymOwnerBusinessService implements GymOwnerBusinessServiceInterface
           gymOwner.setGSTNumber(GSTNumber);
           String gymId = gymOwnerName+gymOwnerAddress;
           gymOwner.setId(gymId);
+          gymOwner.setUserId(gymEmail);
           gymOwner.setUserEmail(gymEmail);
           gymOwner.setUserPassword(password);
           GymOwnerDAO.AddGymOwner(gymOwner.getUserEmail(),gymOwner);

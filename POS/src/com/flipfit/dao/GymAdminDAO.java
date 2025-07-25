@@ -1,8 +1,11 @@
 package com.flipfit.dao;
 
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
-public class GymAdminDAO{
+
+public class GymAdminDAO {
     public static Map<String, String> AdminCred = new HashMap<>();
 
     public static void addData(String key, String value) {
@@ -16,11 +19,12 @@ public class GymAdminDAO{
     public void printAllData() {
         System.out.println("Current Admin data: " + AdminCred);
     }
+
     public static void setAdminCred() {
-//        System.out.println("\n--- Setting Up Admin Credentials ---");
+        // System.out.println("\n--- Setting Up Admin Credentials ---");
         GymAdminDAO.addData("admin1", "admin1");
         GymAdminDAO.addData("admin2", "admin2");
-//        GymAdminDAO.printAllData();
+        // GymAdminDAO.printAllData();
     }
 
     public static boolean authenticateUser(String username, String password) {
@@ -31,20 +35,20 @@ public class GymAdminDAO{
         return false; // User does not exist
     }
 
-
     public void getAllOwners(){
         System.out.println("All Gym Owners");
         GymOwnerDAO.getAllGymOwners();
     };
+
     public void removeGymOwner(String ownerUsername){
         GymOwnerDAO.DeleteGymOwner(ownerUsername);
     };
+
     public void removeGym(String ownerUserName, String gymCenterID){
         GymOwnerDAO.DeleteGymCenter(ownerUserName,gymCenterID);
     };
+
     public void approveGymCenter(String ownerUserName, String gymCenterID){
         GymOwnerDAO.approveGym(ownerUserName, gymCenterID);
     };
-
-
 }

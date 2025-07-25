@@ -53,7 +53,6 @@ public class GymOwnerMenu {
     }
     void AddGymOwnerClient() {
         Scanner scanner = new Scanner(System.in);
-
         String  gymOwnerName,
                 gymEmail,
                 gymOwnerAddress,

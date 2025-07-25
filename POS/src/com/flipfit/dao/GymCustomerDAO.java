@@ -4,11 +4,12 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.*;
+
+import com.flipfit.beans.GymCentre;
 import com.flipfit.beans.GymCustomer;
 import com.flipfit.beans.Slot;
 import com.flipfit.business.GymPaymentBusinessService;
 import com.flipfit.constant.SqlQueries;
-
 import static com.flipfit.dao.DBConnection.getConnection;
 
 public class GymCustomerDAO  {
@@ -16,6 +17,14 @@ public class GymCustomerDAO  {
     public static Map<String, List<Slot>> userBookings = new HashMap<>();
     public static Map<String, List<Integer>> GymBookings = new HashMap<>();
 
+    static {
+        for(String gymOwner: GymOwnerDAO.GymCenterDetails.keySet()){
+            List<GymCentre> gyms = GymOwnerDAO.GymCenterDetails.get(gymOwner);
+            for(GymCentre gym: gyms){
+                fillNumberofSlotInGym(gym.getGymName(), gym.getSlotCount());
+            }
+        }
+    }
     public static void loadBookingDetails(String userName){
         String sql = "SELECT " +
                 "S.slot_id, S.slot_date, S.slot_time_start, S.slot_time_end, S.gym_id " +
@@ -34,6 +43,7 @@ public class GymCustomerDAO  {
                 slot.setSlotDate(rs.getDate("slot_date"));
                 slot.setSlotTimeStart(rs.getTimestamp("slot_time_start"));
                 slot.setSlotTimeEnd(rs.getTimestamp("slot_time_end"));
+                slot.setGymID(rs.getString("gym_id"));
                 loadedSlots.add(slot);
             }
 
@@ -295,6 +305,7 @@ public class GymCustomerDAO  {
         newSlot.setSlotID(gymName + "_" + userName + "_" + slotTimeStart.getTime()); // Using timestamp long value for uniqueness
         newSlot.setSlotTimeStart(slotTimeStart);
         newSlot.setSlotTimeEnd(slotTimeEnd);
+        newSlot.setUserId(userName);
         newSlot.setGymName(gymName);
 //        System.out.println(GymBookings);
         if(shift.equals("M") && GymBookings.get(gymName).get(startTime-6) >0){
@@ -308,17 +319,16 @@ public class GymCustomerDAO  {
         PreparedStatement ps1=null;
         try {
             Connection db = getConnection();
-            db.setAutoCommit(false); // Start transaction for DB operations
-            System.out.println("fail lvl1");
+//            System.out.println("fail lvl1");
             ps1 = db.prepareStatement(SqlQueries.INSERT_SLOT);
             ps1.setString(1, newSlot.getSlotID()); // Use the generated slot ID
-            System.out.println("fail lvl1");
+//            System.out.println("fail lvl1");
             ps1.setDate(2, java.sql.Date.valueOf(newSlot.getSlotTimeStart().toLocalDateTime().toLocalDate())); // Extract date
-            System.out.println("fail lvl1");
+//            System.out.println("fail lvl1");
             ps1.setTimestamp(3, newSlot.getSlotTimeStart());
-            System.out.println("fail lvl1");
+//            System.out.println("fail lvl1");
             ps1.setTimestamp(4, newSlot.getSlotTimeEnd());
-            System.out.println("fail lvl1");
+//            System.out.println("fail lvl1");
             ps1.setString(5, gymName);
 
             int rowsAffected1 = ps1.executeUpdate();
@@ -333,7 +343,6 @@ public class GymCustomerDAO  {
             if (rowsAffected2 == 0) {
                 throw new SQLException("Booking slot failed, no rows affected in Booking table.");
             }
-            db.commit();
         }catch (SQLException e){
             System.out.println(e.getMessage());
         }

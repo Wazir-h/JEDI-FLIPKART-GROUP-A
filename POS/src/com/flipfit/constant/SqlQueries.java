@@ -44,7 +44,7 @@ public class SqlQueries {
 
 
 
-    public static final String FETCH_ALL_GYMOWNERS = "SELECT go.user_id, u.user_name, u.user_email, go.gym_owner_address, go.gym_owner_phone, go.gst_number, go.is_approved FROM GymOwner go JOIN User u ON go.user_id = u.user_id";
+    public static final String FETCH_ALL_GYMOWNERS = "SELECT go.user_id, u.user_name, u.user_email, u.user_password, go.gym_owner_address, go.gym_owner_phone, go.gst_number, go.is_approved FROM GymOwner go JOIN User u ON go.user_id = u.user_id";
 
     public static final String FETCH_GYMOWNER_DETAILS = "SELECT go.user_id, u.user_name, u.user_email, go.gym_owner_address, go.gym_owner_phone, go.gst_number, go.is_approved FROM GymOwner go JOIN User u ON go.user_id = u.user_id WHERE u.user_email = ?";
 

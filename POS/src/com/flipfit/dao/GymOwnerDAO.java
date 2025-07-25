@@ -30,6 +30,7 @@ public class GymOwnerDAO {
                 gymOwner.setUserId(resultSet.getString("user_id"));
                 gymOwner.setUserName(resultSet.getString("user_name"));
                 gymOwner.setUserEmail(resultSet.getString("user_email"));
+                gymOwner.setUserPassword(resultSet.getString("user_password"));
                 gymOwner.setGymOwnerAddress(resultSet.getString("gym_owner_address"));
                 gymOwner.setGymOwnerPhone(resultSet.getString("gym_owner_phone"));
                 gymOwner.setGSTNumber(resultSet.getString("gst_number"));

@@ -1,4 +1,4 @@
 package com.flipfit.dao;
 
-public class BookingDAO {
+public class GymSlotDAO {
 }

@@ -17,6 +17,7 @@ public class GymAdminMenu {
         System.out.println("5. Add Gym Owner");
         System.out.println("6. Delete Gym Owner");
         System.out.println("7. View Pending Gym Request");
+        System.out.println("8. Logout");
         try {
             int choice = sc.nextInt();
             GymAdminBusinessService gymAdminBusinessService=new GymAdminBusinessService();
@@ -43,7 +44,8 @@ public class GymAdminMenu {
                     ViewPendingGymRequests();
                     break;
                 default:
-                    System.out.println("Invalid choice");
+                    System.out.println("Logout Successful");
+                    return;
 
             }
             adminPage();
@@ -82,7 +84,7 @@ public class GymAdminMenu {
 
     }
     void ViewApprovedGyms(){
-        GymOwnerDAO.viewApprovedGyms();
+        GymOwnerDAO.viewApprovedGyms(null);
     }
     void AddGymOwner(){
         GymOwnerMenu gymOwnerMenu = new GymOwnerMenu();

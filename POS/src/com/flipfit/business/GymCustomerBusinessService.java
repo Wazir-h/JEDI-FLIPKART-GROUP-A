@@ -75,7 +75,7 @@ public class GymCustomerBusinessService implements GymCustomerBusinessServiceInt
         GymCustomerDAO.viewBookings(userName);
     }
     public void viewAllGyms(){
-        GymOwnerDAO.getAllGyms();
+        GymOwnerDAO.viewApprovedGyms(null);
     }
     public  void bookSlot(String userName){
         viewAllGyms();

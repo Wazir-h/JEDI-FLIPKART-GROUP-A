@@ -116,14 +116,27 @@ public class GymOwnerDAO {
         }
         return false;
     }
-    public static void viewApprovedGyms(){
-        System.out.println("----------------------------------------------------------------------------------------------------");
-        System.out.printf("%-30s %-40s %-15s %-40s %-15s%n", "Gym Name", "Gym Address", "Slots", "Gym ID", "Gym Status");
-        System.out.println("----------------------------------------------------------------------------------------------------");
-        for(String ownerEmail : GymCenterDetails.keySet()){
-            List<GymCentre> gymsInCity = GymCenterDetails.get(ownerEmail);
-            for(GymCentre gym : gymsInCity){
-            if(gym.isApproved()){
+    public static void viewApprovedGyms(String gymusername){
+        if(gymusername == null) {
+            for (String ownerEmail : GymCenterDetails.keySet()) {
+                List<GymCentre> gymsInCity = GymCenterDetails.get(ownerEmail);
+                for (GymCentre gyms : gymsInCity) {
+                    if (gyms.isApproved()) {
+                        System.out.printf("%-30s %-40s %-15d %-15s %-15s%n ",
+                                gym.getGymName(),
+                                gym.getGymCenterAddress(),
+                                gym.getSlotCount(),
+                                gym.getGymID(),
+                                gym.isApproved()?"Approved":"Not Approved"
+                        );
+                    }
+                }
+            }
+            return;
+        }
+        List<GymCentre> gymsInCity = GymCenterDetails.get(gymusername);
+        for (GymCentre gyms : gymsInCity) {
+            if (gyms.isApproved()) {
                 System.out.printf("%-30s %-40s %-15d %-15s %-15s%n ",
                         gym.getGymName(),
                         gym.getGymCenterAddress(),
@@ -132,7 +145,7 @@ public class GymOwnerDAO {
                         gym.isApproved()?"Approved":"Not Approved"
                 );
             }
-        }}
+        }
     }
     public static void viewPendingGymApprovals(){
         System.out.println("----------------------------------------------------------------------------------------------------");

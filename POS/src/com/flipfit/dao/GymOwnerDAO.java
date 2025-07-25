@@ -187,6 +187,9 @@ public class GymOwnerDAO {
     }
     public static void viewApprovedGyms(String gymusername){
         if(gymusername == null) {
+            System.out.println("-".repeat(130));
+            System.out.printf("%-30s %-40s %-15s %-50s %-15s%n", "Gym Name", "Gym Address", "Slots", "Gym ID", "Gym Status");
+            System.out.println("-".repeat(130));
             for (String ownerEmail : GymCenterDetails.keySet()) {
                 List<GymCentre> gymsInCity = GymCenterDetails.get(ownerEmail);
                 for (GymCentre gyms : gymsInCity) {

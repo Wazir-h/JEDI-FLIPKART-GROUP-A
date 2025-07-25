@@ -3,14 +3,7 @@ package com.flipfit.client;
 import com.flipfit.business.GymAdminBusinessService;
 import com.flipfit.dao.GymOwnerDAO;
 import java.util.Scanner;
-/*
- * @Author: "Abdul Razique, Shivansh Sinha, Sujal Mishra "
- * @ClassName: "GymAdminMenu"
- * @Description: "This class represents the command-line interface (CLI) for the Admin Dashboard in the FlipFit system. It's responsible for displaying administrative options and routing user input to the appropriate service layer for handling tasks like gym and gym owner management."
- * @Exceptions: "Catches java.util.InputMismatchException for invalid menu inputs. May handle exceptions propagated from the service layer."
- * @Version: "1.0"
- * @See: "com.flipfit.service.AdminFlipFitService, java.util.Scanner"
- */
+
 public class GymAdminMenu {
     public void adminPage() {
         Scanner sc = new Scanner(System.in);

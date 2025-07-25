@@ -7,14 +7,7 @@ import com.flipfit.business.GymCustomerBusinessServiceInterface;
 import com.flipfit.dao.GymCustomerDAO;
 
 import java.util.Scanner;
-/*
- * @Author: "Trilekya, Shivansh Sinha, Abdul Razique"
- * @ClassName: "GymCustomerMenu"
- * @Description: "This class provides the command-line interface (CLI) for the Customer Dashboard. It enables customers to browse gyms, book workout slots, view their schedule, and manage their profile information."
- * @Exceptions: "Catches java.util.InputMismatchException for invalid menu inputs and may handle service-level exceptions related to booking or data retrieval."
- * @Version: "1.0"
- * @See: "com.flipfit.business.GymCustomerBusinessService, com.flipfit.beans.GymCustomer, com.flipfit.beans.Slot, java.util.Scanner"
- */
+
 public class GymCustomerMenu {
     public static void customerPage(String userName,String userPassword,int roleId){
         GymCustomer gymCustomer=new GymCustomer();

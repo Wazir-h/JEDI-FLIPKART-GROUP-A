@@ -8,15 +8,6 @@ import com.flipfit.dao.GymCustomerDAO;
 import com.flipfit.beans.GymCustomer;
 import com.flipfit.dao.GymOwnerDAO;
 
-/*
- * @Author: "Abdul Razique, Shivansh Sinha, Yashvardhan"
- * @ClassName: "GymFlipfitApplicationClient"
- * @Description: "This class is the main entry point for the FlipFit command-line application. It handles the initial user interaction, such as login and registration, and directs users to the appropriate dashboard (Admin, Gym Owner, or Customer) based on their role."
- * @Exceptions: "Handles top-level user input and orchestrates the application flow. May catch exceptions from underlying service or DAO layers to ensure graceful program termination."
- * @Version: "1.0"
- * @See: "com.flipfit.view.GymAdminMenu, com.flipfit.view.GymOwnerMenu, com.flipfit.view.GymCustomerMenu, com.flipfit.business.GymCustomerBusinessService, com.flipfit.business.GymOwnerBusinessService"
- */
-
 public class GymFlipfitApplicationClient {
     public GymOwnerMenu gymOwnerMenu = new GymOwnerMenu();
 

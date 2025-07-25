@@ -273,8 +273,6 @@ public class GymCustomerDAO  {
         List<Integer> numberOfSlots = new ArrayList<>();
         for(int i=0;i<6;i++) numberOfSlots.add(mxSlot);
         GymBookings.put(gymId,numberOfSlots);
-//        System.out.println("Fill success");
-//        System.out.println(GymBookings);
     }
 
     public static void cancelBooking(String userName) {
@@ -375,6 +373,5 @@ public class GymCustomerDAO  {
             System.out.println(slot);
         }
     }
-
 
 }

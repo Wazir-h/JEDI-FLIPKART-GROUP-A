@@ -66,9 +66,10 @@ public class GymCustomerDAO  {
             int rowsAffected = ps1.executeUpdate();
             System.out.println("Rows Affected\t" + rowsAffected);
             ps2 = db.prepareStatement(SqlQueries.REGISTER_NEW_CUSTOMER_DETAILS);
-            ps2.setString(1,customer.getRoleid());
+            ps2.setString(1,customer.getUserEmail());
             ps2.setString(2,customer.getAddress());
             ps2.setString(3,customer.getPhoneNo());
+
             rowsAffected = ps2.executeUpdate();
             System.out.println("Rows Affected\t" + rowsAffected);
         }catch (SQLException e){
@@ -109,6 +110,7 @@ public class GymCustomerDAO  {
             PreparedStatement ps1 = db.prepareStatement(SqlQueries.AUTHENTICATE_USER);
             ps1.setString(1,username);
             ps1.setString(2,password);
+            ps1.setString(3,"2");
             try (ResultSet rs = ps1.executeQuery()) {
                 if (rs.next()) {
 
@@ -307,12 +309,16 @@ public class GymCustomerDAO  {
         try {
             Connection db = getConnection();
             db.setAutoCommit(false); // Start transaction for DB operations
-
+            System.out.println("fail lvl1");
             ps1 = db.prepareStatement(SqlQueries.INSERT_SLOT);
             ps1.setString(1, newSlot.getSlotID()); // Use the generated slot ID
+            System.out.println("fail lvl1");
             ps1.setDate(2, java.sql.Date.valueOf(newSlot.getSlotTimeStart().toLocalDateTime().toLocalDate())); // Extract date
+            System.out.println("fail lvl1");
             ps1.setTimestamp(3, newSlot.getSlotTimeStart());
+            System.out.println("fail lvl1");
             ps1.setTimestamp(4, newSlot.getSlotTimeEnd());
+            System.out.println("fail lvl1");
             ps1.setString(5, gymName);
 
             int rowsAffected1 = ps1.executeUpdate();

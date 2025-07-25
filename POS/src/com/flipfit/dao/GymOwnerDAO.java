@@ -34,7 +34,6 @@ public class GymOwnerDAO {
                 gymOwner.setGymOwnerPhone(resultSet.getString("gym_owner_phone"));
                 gymOwner.setGSTNumber(resultSet.getString("gst_number"));
                 gymOwner.setApproved(resultSet.getBoolean("is_approved"));
-                System.out.println(resultSet.getString("user_id"));
                 OwnerCredentials.put(resultSet.getString("user_id"), gymOwner);
             }
 
@@ -70,7 +69,7 @@ public class GymOwnerDAO {
         try{
             Connection db = DBConnection.getConnection();
             PreparedStatement ps1 = db.prepareStatement(SqlQueries.REGISTER_NEW_USER);
-            owner.setRoleid(owner.getUserEmail());
+            owner.setRoleid("3");
             ps1.setString(1,owner.getUserEmail());
             ps1.setString(2,owner.getUserName());
             ps1.setString(3,owner.getUserEmail());
@@ -79,10 +78,8 @@ public class GymOwnerDAO {
             int rowsAffected = ps1.executeUpdate();
             System.out.println(rowsAffected + " row(s) inserted.");
 
-//            System.out.println("OKKKKK");
-
             PreparedStatement gymownerRegistration = db.prepareStatement(SqlQueries.REGISTER_NEW_GYMOWNER_DETAILS);
-            gymownerRegistration.setString(1, owner.getRoleid());
+            gymownerRegistration.setString(1, owner.getUserEmail());
             gymownerRegistration.setString(2, owner.getGymOwnerAddress());
             gymownerRegistration.setString(3, owner.getGymOwnerPhone());
             gymownerRegistration.setString(4, owner.getGSTNumber());

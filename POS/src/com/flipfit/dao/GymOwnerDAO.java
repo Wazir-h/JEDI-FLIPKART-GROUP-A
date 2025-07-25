@@ -31,10 +31,9 @@ public class GymOwnerDAO {
                 gymOwner.setUserName(resultSet.getString("user_name"));
                 gymOwner.setUserEmail(resultSet.getString("user_email"));
                 gymOwner.setGymOwnerAddress(resultSet.getString("gym_owner_address"));
-                gymOwner.setGymOwnerPhone(resultSet.getString("user_phone"));
+                gymOwner.setGymOwnerPhone(resultSet.getString("gym_owner_phone"));
                 gymOwner.setGSTNumber(resultSet.getString("gst_number"));
                 gymOwner.setApproved(resultSet.getBoolean("is_approved"));
-
                 OwnerCredentials.put(resultSet.getString("user_email"), gymOwner);
             }
 

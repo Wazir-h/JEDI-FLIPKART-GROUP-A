@@ -57,15 +57,16 @@ public class GymCustomerDAO  {
         try{
             Connection db = DBConnection.getConnection();
             PreparedStatement ps1 = db.prepareStatement(SqlQueries.REGISTER_NEW_USER);
-            customer.setId(customer.getUserEmail());
-            ps1.setString(1,customer.getId());
+            customer.setRoleid("1");
+            ps1.setString(1,customer.getUserEmail());
             ps1.setString(2,customer.getUserName());
             ps1.setString(3,customer.getUserEmail());
             ps1.setString(4,customer.getUserPassword());
             ps1.setString(5,"1");
             int rowsAffected = ps1.executeUpdate();
-            ps2 = db.prepareStatement(SqlQueries.REGISTER_NEW_CUSTOMER_DETAILS);
-            ps2.setString(1,customer.getId());
+            System.out.println("Rows Affected\t" + rowsAffected);
+            PreparedStatement ps2 = db.prepareStatement(SqlQueries.REGISTER_NEW_CUSTOMER_DETAILS);
+            ps2.setString(1,customer.getRoleid());
             ps2.setString(2,customer.getAddress());
             ps2.setString(3,customer.getPhoneNo());
             rowsAffected = ps2.executeUpdate();

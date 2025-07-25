@@ -54,7 +54,7 @@ public class GymCustomerBusinessService implements GymCustomerBusinessServiceInt
                 gymCustomer.setUserName(userName);
                 gymCustomer.setUserEmail(userEmail);
                 gymCustomer.setUserPassword(userPassword);
-                gymCustomer.setId(userRole);
+                gymCustomer.setRoleid(userRole);
                 gymCustomer.setAddress(userAddress);
                 gymCustomer.setPhoneNo(userPhoneNo);
 

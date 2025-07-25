@@ -48,7 +48,7 @@ public class GymCentre extends GymOwner {
 
     @Override
     public String toString() {
-        return String.format("%-30s %-40s %-15d %-50s %-15s%n ",
+        return String.format("%-30s %-40s %-15d %-50s %-15s%n",
                 getGymName(),
                 getGymCenterAddress(),
                 getSlotCount(),

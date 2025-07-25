@@ -31,7 +31,8 @@ public class SqlQueries {
     public static final String INITIAL = "SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0";
     public static final String INSERT_GYM =
             "INSERT INTO GymCentre (gym_id, gym_name, gym_center_address, gym_center_phone, slot_count, is_approved, owner_user_id) VALUES (?, ?, ?, ?, ?, ?, ?)" ;
-
+    public static final String DELETE_GYM_CENTRE= "DELETE FROM GymCentre WHERE gym_name = ?";
+    public static final String DELETE_GYM_OWNER= "DELETE FROM GYMOWNER WHERE USER_ID = ?";
     public static final String FETCH_PENDING_GYM_CENTERS = "SELECT gym_id, gym_name, gym_center_address, gym_center_phone, slot_count, is_approved, owner_user_id FROM GymCentre WHERE is_approved = FALSE";
 
 

@@ -1,12 +1,12 @@
 package com.flipfit.beans;
 
 public class Role {
-    public String getId() {
-        return id;
+    public String getRoleid() {
+        return roleid;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setRoleid(String roleid) {
+        this.roleid = roleid;
     }
 
     public String getName() {
@@ -25,7 +25,7 @@ public class Role {
         this.description = description;
     }
 
-    private String id;
+    private String roleid;
     private String name;
     private String description;
 

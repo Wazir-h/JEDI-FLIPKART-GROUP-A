@@ -34,7 +34,8 @@ public class GymOwnerDAO {
                 gymOwner.setGymOwnerPhone(resultSet.getString("gym_owner_phone"));
                 gymOwner.setGSTNumber(resultSet.getString("gst_number"));
                 gymOwner.setApproved(resultSet.getBoolean("is_approved"));
-                OwnerCredentials.put(resultSet.getString("user_email"), gymOwner);
+                System.out.println(resultSet.getString("user_id"));
+                OwnerCredentials.put(resultSet.getString("user_id"), gymOwner);
             }
 
             PreparedStatement gymCenterData = db.prepareStatement(SqlQueries.FETCH_ALL_GYM_CENTERS);
@@ -48,6 +49,8 @@ public class GymOwnerDAO {
                 gymCenter.setSlotCount(resultSet.getInt("slot_count"));
                 gymCenter.setApproved(resultSet.getBoolean("is_approved"));
                 String ownerEmail = resultSet.getString("owner_user_id");
+                gymCenter.setUserEmail(ownerEmail);
+                gymCenter.setUserId(ownerEmail);
                 gymCenter.setUserName(ownerEmail);
                 if (!GymCenterDetails.containsKey(ownerEmail)) {
                     List<GymCentre> gymsInCity = new ArrayList<>();
@@ -57,7 +60,7 @@ public class GymOwnerDAO {
                     GymCenterDetails.get(ownerEmail).add(gymCenter);
                 }
             }
-
+//            viewPendingGymApprovals();
         }catch (SQLException e){
             System.out.println(e.getMessage());
         }
@@ -67,8 +70,8 @@ public class GymOwnerDAO {
         try{
             Connection db = DBConnection.getConnection();
             PreparedStatement ps1 = db.prepareStatement(SqlQueries.REGISTER_NEW_USER);
-            owner.setId(owner.getUserEmail());
-            ps1.setString(1,owner.getId());
+            owner.setRoleid(owner.getUserEmail());
+            ps1.setString(1,owner.getUserEmail());
             ps1.setString(2,owner.getUserName());
             ps1.setString(3,owner.getUserEmail());
             ps1.setString(4,owner.getUserPassword());
@@ -76,19 +79,17 @@ public class GymOwnerDAO {
             int rowsAffected = ps1.executeUpdate();
             System.out.println(rowsAffected + " row(s) inserted.");
 
-            System.out.println("OKKKKK");
+//            System.out.println("OKKKKK");
 
             PreparedStatement gymownerRegistration = db.prepareStatement(SqlQueries.REGISTER_NEW_GYMOWNER_DETAILS);
-            gymownerRegistration.setString(1, owner.getId());
+            gymownerRegistration.setString(1, owner.getRoleid());
             gymownerRegistration.setString(2, owner.getGymOwnerAddress());
             gymownerRegistration.setString(3, owner.getGymOwnerPhone());
             gymownerRegistration.setString(4, owner.getGSTNumber());
             gymownerRegistration.setBoolean(5, owner.isApproved());
-            System.out.println("Problem Here!!!!!!");
             int b = gymownerRegistration.executeUpdate();
             System.out.println(b + " row(s) inserted.");
 
-            db.commit();
 
         }catch (SQLException e){
             System.out.println(e.getMessage());
@@ -117,8 +118,7 @@ public class GymOwnerDAO {
             gymCenterRegistration.setString(4, gymCenter.getGymCenterPhone());
             gymCenterRegistration.setInt(5, gymCenter.getSlotCount());
             gymCenterRegistration.setBoolean(6, gymCenter.isApproved());
-            gymCenterRegistration.setString(7, gymCenter.getUserEmail());
-            System.out.println(gymCenter.getUserEmail());
+            gymCenterRegistration.setString(7, ownerEmail);
             int rowsAffected = gymCenterRegistration.executeUpdate();
             System.out.println(rowsAffected + " row(s) inserted.");
 
@@ -134,6 +134,20 @@ public class GymOwnerDAO {
                 break;
             }
         }
+        try (Connection db = DBConnection.getConnection();
+             PreparedStatement ps = db.prepareStatement(SqlQueries.DELETE_GYM_CENTRE)) {
+
+            // Set the parameters for the WHERE clause
+            ps.setString(1, gymName);
+
+            // Execute the deletion
+            int rowsAffected = ps.executeUpdate();
+            System.out.println(rowsAffected + " row(s) deleted from the database.");
+
+        } catch (SQLException e) {
+            System.out.println("Database error during gym deletion: " + e.getMessage());
+            // Exit if the database operation fails
+        }
     }
 
     public static void DeleteGymOwner(String ownerEmail) {
@@ -142,9 +156,24 @@ public class GymOwnerDAO {
             return;
         }
         OwnerCredentials.remove(ownerEmail);
+        try (Connection db = DBConnection.getConnection();
+             PreparedStatement ps = db.prepareStatement(SqlQueries.DELETE_GYM_CENTRE)) {
+
+            // Set the parameters for the WHERE clause
+            ps.setString(1, ownerEmail);
+
+            // Execute the deletion
+            int rowsAffected = ps.executeUpdate();
+            System.out.println(rowsAffected + " row(s) deleted from the database.");
+
+        } catch (SQLException e) {
+            System.out.println("Database error during gym deletion: " + e.getMessage());
+            // Exit if the database operation fails
+        }
 
     }
     public static GymCentre GetGymCenter(String ownerEmail, String gymName) {
+        System.out.println("Getting gym centre");
         List<GymCentre> gymsInCity = GymCenterDetails.get(ownerEmail);
         for (GymCentre gymCentre : gymsInCity) {
             if (gymCentre.getGymName().equals(gymName)) {
@@ -154,9 +183,9 @@ public class GymOwnerDAO {
         return null;
     }
     public static void getAllGymCenters(String userName){
-        System.out.println("-".repeat(50));
+        System.out.println("-".repeat(130));
         System.out.printf("%-30s %-40s %-15s %-50s %-15s%n", "Gym Name", "Gym Address", "Slots", "Gym ID", "Approved Status");
-        System.out.println("-".repeat(50));
+        System.out.println("-".repeat(130));
         for (GymCentre gymCentre : GymCenterDetails.get(userName)){
             System.out.println(gymCentre);
 //            System.out.println(gymCentre);
@@ -167,9 +196,9 @@ public class GymOwnerDAO {
             System.out.println("No Gym is registered");
         }
         else{
-            System.out.println("-".repeat(50));
+            System.out.println("-".repeat(150));
             System.out.printf("%-30s %-40s %-15s %-50s %-15s%n", "Gym Name", "Gym Address", "Slots", "Gym ID", "Gym Status");
-            System.out.println("-".repeat(50));
+            System.out.println("-".repeat(150));
             for (List<GymCentre> gymlist: GymCenterDetails.values()){
                 for(GymCentre gym: gymlist){
                     System.out.println(gym);
@@ -179,6 +208,7 @@ public class GymOwnerDAO {
     }
     public static void approveGym(String username, String gymName){
         GymCentre gymCenter = GetGymCenter(username, gymName);
+//        System.out.println("Error here approve gym");
         gymCenter.setApproved(true);
         DeleteGymCenter(username, gymName);
         AddGymCenter(username, gymCenter);
@@ -205,9 +235,9 @@ public class GymOwnerDAO {
     }
     public static void viewApprovedGyms(String gymusername){
         if(gymusername == null) {
-            System.out.println("-".repeat(130));
+            System.out.println("-".repeat(150));
             System.out.printf("%-30s %-40s %-15s %-50s %-15s%n", "Gym Name", "Gym Address", "Slots", "Gym ID", "Gym Status");
-            System.out.println("-".repeat(130));
+            System.out.println("-".repeat(150));
             for (String ownerEmail : GymCenterDetails.keySet()) {
                 List<GymCentre> gymsInCity = GymCenterDetails.get(ownerEmail);
                 for (GymCentre gyms : gymsInCity) {
@@ -226,13 +256,14 @@ public class GymOwnerDAO {
         }
     }
     public static void viewPendingGymApprovals(){
-        System.out.println("----------------------------------------------------------------------------------------------------");
+        System.out.println("-".repeat(150));
         System.out.printf("%-40s %-40s %-15s %-40s %-15s%n", "Gym Name", "Gym Address", "Slots", "Gym ID", "Gym Status");
-        System.out.println("----------------------------------------------------------------------------------------------------");
+        System.out.println("-".repeat(150));
         for(String ownerEmail : GymCenterDetails.keySet()){
             List<GymCentre> gymsInCity = GymCenterDetails.get(ownerEmail);
             for(GymCentre gym : gymsInCity){
                 if(!gym.isApproved()){
+//                    System.out.println(ownerEmail);
                     System.out.println(gym);
                 }
             }}

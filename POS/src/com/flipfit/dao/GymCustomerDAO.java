@@ -56,7 +56,7 @@ public class GymCustomerDAO  {
 
         try{
             Connection db = DBConnection.getConnection();
-            PreparedStatement ps1 = db.prepareStatement(SqlQueries.REGISTER_NEW_USER);
+            ps1 = db.prepareStatement(SqlQueries.REGISTER_NEW_USER);
             customer.setRoleid("1");
             ps1.setString(1,customer.getUserEmail());
             ps1.setString(2,customer.getUserName());
@@ -65,7 +65,7 @@ public class GymCustomerDAO  {
             ps1.setString(5,"1");
             int rowsAffected = ps1.executeUpdate();
             System.out.println("Rows Affected\t" + rowsAffected);
-            PreparedStatement ps2 = db.prepareStatement(SqlQueries.REGISTER_NEW_CUSTOMER_DETAILS);
+            ps2 = db.prepareStatement(SqlQueries.REGISTER_NEW_CUSTOMER_DETAILS);
             ps2.setString(1,customer.getRoleid());
             ps2.setString(2,customer.getAddress());
             ps2.setString(3,customer.getPhoneNo());
@@ -248,7 +248,7 @@ public class GymCustomerDAO  {
 
         System.out.println("\n--- Book a Slot ---");
         System.out.print("Enter Gym Name: ");
-        String gymId = sc.nextLine();
+        String gymName = sc.nextLine();
 
         System.out.print("Enter Start Time (6-8): ");
         int startTime = sc.nextInt();
@@ -290,15 +290,15 @@ public class GymCustomerDAO  {
         Timestamp slotTimeEnd = Timestamp.valueOf(endDateTime);
         // --- Create and Set Slot Details ---
         Slot newSlot = new Slot();
-        newSlot.setSlotID(gymId + "_" + userName + "_" + slotTimeStart.getTime()); // Using timestamp long value for uniqueness
+        newSlot.setSlotID(gymName + "_" + userName + "_" + slotTimeStart.getTime()); // Using timestamp long value for uniqueness
         newSlot.setSlotTimeStart(slotTimeStart);
         newSlot.setSlotTimeEnd(slotTimeEnd);
-        newSlot.setGymName(gymId);
-        System.out.println(GymBookings);
-        if(shift.equals("M") && GymBookings.get(gymId).get(startTime-6) >0){
-            GymBookings.get(gymId).set(startTime-6,GymBookings.get(gymId).get(startTime-6)-1);
-        }else if(shift.equals("E") && GymBookings.get(gymId).get(startTime-3) > 0){
-            GymBookings.get(gymId).set(startTime-3,GymBookings.get(gymId).get(startTime-3)-1);
+        newSlot.setGymName(gymName);
+//        System.out.println(GymBookings);
+        if(shift.equals("M") && GymBookings.get(gymName).get(startTime-6) >0){
+            GymBookings.get(gymName).set(startTime-6,GymBookings.get(gymName).get(startTime-6)-1);
+        }else if(shift.equals("E") && GymBookings.get(gymName).get(startTime-3) > 0){
+            GymBookings.get(gymName).set(startTime-3,GymBookings.get(gymName).get(startTime-3)-1);
         }else{
             System.out.println("Slots not available in this time");
             return;
@@ -313,7 +313,7 @@ public class GymCustomerDAO  {
             ps1.setDate(2, java.sql.Date.valueOf(newSlot.getSlotTimeStart().toLocalDateTime().toLocalDate())); // Extract date
             ps1.setTimestamp(3, newSlot.getSlotTimeStart());
             ps1.setTimestamp(4, newSlot.getSlotTimeEnd());
-            ps1.setString(5, gymId);
+            ps1.setString(5, gymName);
 
             int rowsAffected1 = ps1.executeUpdate();
             if (rowsAffected1 == 0) {
@@ -350,7 +350,7 @@ public class GymCustomerDAO  {
             userBookings.put(userName, slots);
         }
         System.out.println("\nSlot booking details:");
-        System.out.println("Gym ID: " + gymId);
+        System.out.println("Gym ID: " + gymName);
         System.out.println("Customer: " + userName);
         System.out.println("Booked Slot: " + newSlot.getSlotID());
         System.out.println("Start Time: " + startTime + newSlot.getSlotTimeStart());
@@ -359,10 +359,10 @@ public class GymCustomerDAO  {
         GymPaymentBusinessService.makePayment(userName, 100, startTime, endTime);
     }
 
-    public static void fillNumberofSlotInGym(String gymId, int mxSlot){
+    public static void fillNumberofSlotInGym(String gymName, int mxSlot){
         List<Integer> numberOfSlots = new ArrayList<>();
         for(int i=0;i<6;i++) numberOfSlots.add(mxSlot);
-        GymBookings.put(gymId,numberOfSlots);
+        GymBookings.put(gymName,numberOfSlots);
     }
 
     public static void cancelBooking(String userName) {

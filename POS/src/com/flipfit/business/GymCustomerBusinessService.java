@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.List;
 
-public class GymCustomerBusinessService implements GymCustomerBusinessServiceInterface{
+public class GymCustomerBusinessService implements GymCustomerBusinessServiceInterface {
 
     public static GymCustomer createProfile(String userName,String EmailId,String userPhoneNo,String userAddress,String userPassword){
         //Complete This -----------------------------------------
@@ -136,9 +136,9 @@ public class GymCustomerBusinessService implements GymCustomerBusinessServiceInt
         viewAllGyms();
         GymCustomerDAO.bookSlot(userName);
     }
-    public void viewAllAvailableSlots(String userName){
+    public void viewAllAvailableSlots(){
         Scanner sc = new Scanner(System.in);
-        System.out.print("Enter Gym Name to view slots: ");
+        System.out.print("Enter Gym Name: ");
         String gymId = sc.nextLine();
         List<Integer> slotsForGym = GymCustomerDAO.GymBookings.get(gymId);
         System.out.println("Available Slots Details:");

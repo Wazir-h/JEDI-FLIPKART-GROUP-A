@@ -51,7 +51,7 @@ public class GymCustomerMenu {
                     gymCustomerBusinessService.cancelSlot(userName);
                     break;
                 case 6:
-                    gymCustomerBusinessService.viewAllAvailableSlots(userName);
+                    gymCustomerBusinessService.viewAllAvailableSlots();
                     break;
                 default:
                     System.out.println("Logout Successful");

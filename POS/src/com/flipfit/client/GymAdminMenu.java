@@ -1,7 +1,6 @@
 package com.flipfit.client;
 
 import com.flipfit.business.GymAdminBusinessService;
-import com.flipfit.business.SlotBusinessServiceInterfcae;
 import com.flipfit.dao.GymOwnerDAO;
 import java.util.Scanner;
 

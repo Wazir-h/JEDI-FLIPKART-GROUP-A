@@ -11,6 +11,6 @@ public interface GymCustomerBusinessServiceInterface {
     public void viewAllGyms();
     public  void bookSlot(String userName);
     public  void cancelSlot(String userName);
-    public void viewAllAvailableSlots(String userName);
+    public void viewAllAvailableSlots();
     void viewAllBookings(String userName);
 }

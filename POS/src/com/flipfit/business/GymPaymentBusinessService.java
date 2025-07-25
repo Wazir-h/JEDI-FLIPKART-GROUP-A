@@ -1,17 +1,69 @@
 package com.flipfit.business;
 
+import com.flipfit.beans.Slot;
+import com.flipfit.constant.SqlQueries;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Calendar;
+import java.sql.Date;
+import static com.flipfit.dao.DBConnection.getConnection;
+
 public class GymPaymentBusinessService {
     public static void makePayment(String customerId, double amount, int slotStartTime, int slotEndTime) {
         System.out.println("\n--- Initiating Payment Process ---");
         System.out.println("Customer: " + customerId + ", Amount: Rs." + amount);
 
         boolean isPaymentSuccessful = true;
-
+        Calendar cal = Calendar.getInstance();
+        cal.set(2025, Calendar.JULY, 25);
         if (isPaymentSuccessful) {
-            System.out.println("Paymenet Succesful");
+            Connection db=null;
+            PreparedStatement ps1=null;
+
+            try {
+                db = getConnection();
+                ps1 = db.prepareStatement(SqlQueries.MAKE_PAYMENT);
+                ps1.setString(1,customerId+"23");
+                ps1.setString(2,customerId);
+                ps1.setDouble(3,100);
+                ps1.setString(4,"Success");
+                ps1.setInt(5,slotStartTime);
+                ps1.setInt(6,slotEndTime);
+                ps1.setDate(7, new java.sql.Date(cal.getTimeInMillis()));
+
+                try (ResultSet rs = ps1.executeQuery()) {
+                    if (rs.next()) {
+
+                        System.out.println("Payment Done Successfully.");
+
+                    } else {
+
+                        System.out.println("Payment Failed");
+
+                    }
+                }
+
+            } catch (SQLException e) {
+                System.err.println("DAO Error: Failed to Make Payment" + e.getMessage());
+                e.printStackTrace();
+            } finally {
+                if(ps1!=null){
+                    try {
+                        ps1.close();
+                    } catch (SQLException closeEx) {
+                        System.err.println("Error closing PreparedStatement ps1: " + closeEx.getMessage());
+                    }
+                }
+            }
+
         }
         else {
-            System.out.println("Paymenet Not Succesful");
+            System.out.println("Payment Not Successful");
         }
     }
     public void retrievePaymentInfo(){

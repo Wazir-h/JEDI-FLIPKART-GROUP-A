@@ -57,6 +57,7 @@ public class GymCustomerDAO  {
                 slot.setSlotTimeStart(rs.getTimestamp("slot_time_start"));
                 slot.setSlotTimeEnd(rs.getTimestamp("slot_time_end"));
                 slot.setGymID(rs.getString("gym_id"));
+                slot.setGymName(rs.getString("gym_id"));
                 loadedSlots.add(slot);
             }
 

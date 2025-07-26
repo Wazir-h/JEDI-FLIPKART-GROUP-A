@@ -7,7 +7,18 @@ import com.flipfit.dao.GymAdminDAO;
 import com.flipfit.dao.GymCustomerDAO;
 import com.flipfit.beans.GymCustomer;
 import com.flipfit.dao.GymOwnerDAO;
-
+/*
+ * @Author : "Kartik Aggarwal, Shivansh Sinha, Sujal Mishra, Yashvardhan Yadav"
+ * @ClassName: "GymOwnerMenu"
+ * @Description: "Provides the command-line interface (CLI) menu for Gym Owners.
+ * This class handles user input and orchestrates calls to the GymOwnerBusinessService
+ * to perform actions such as managing gym centers, viewing requests, and updating profiles."
+ * @Exceptions: "InputMismatchException (for Scanner issues), or custom exceptions from business layer."
+ * @Version : "1.0"
+ * @See : "com.flipfit.business.GymOwnerBusinessService, java.util.Scanner"
+ *
+ *
+ */
 public class GymFlipfitApplicationClient {
     public GymOwnerMenu gymOwnerMenu = new GymOwnerMenu();
 

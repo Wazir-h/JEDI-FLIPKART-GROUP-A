@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"com.dropwizard","l":"App"},{"p":"com.flipfit.rest","l":"GymOwnerflipfitrest"},{"p":"com.flipfit.rest","l":"HelloTestRest"}];updateSearchResults();

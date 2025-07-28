@@ -53,7 +53,7 @@ public class GymCustomerMenu {
                     gymCustomerBusinessService.viewAllGyms();
                     break;
                 case 3:
-                    gymCustomerBusinessService.viewAllBookings(userName);
+                    String s = gymCustomerBusinessService.viewAllBookings(userName);
                     break;
                 case 4:
                     gymCustomerBusinessService.bookSlot(userName);

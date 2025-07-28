@@ -1,9 +1,11 @@
 package com.flipfit.business;
 
+import com.flipfit.beans.GymOwner;
+
 public interface GymOwnerBusinessServiceInterface {
 
-    public void AddGymOwnerDetails(String gymEmail, String gymOwnerName, String gymOwnerAddress,
-                                   String gymOwnerPhone, String GSTNumber, String password);
+    public GymOwner AddGymOwnerDetails(String gymEmail, String gymOwnerName, String gymOwnerAddress,
+                                       String gymOwnerPhone, String GSTNumber, String password);
 
     public void AddGymCenter(String gymOwnerId, String gymCenterName, String gymCenterAddress,
                              String gymCenterPhone, int SlotCount);

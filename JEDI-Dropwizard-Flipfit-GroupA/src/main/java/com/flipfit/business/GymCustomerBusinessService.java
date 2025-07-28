@@ -12,7 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Scanner;
-import java.util.List;
+
 /*
  * @Author : "Shivansh Sinha, Kartik Aggarwal, Sujal Mishra"
  * @ClassName: "GymCustomerBusinessService"
@@ -139,10 +139,11 @@ public class GymCustomerBusinessService implements GymCustomerBusinessServiceInt
         return "";
     }
     public void viewAllBookings(String userName){
-        GymCustomerDAO.viewBookings(userName);
+        String bookings = GymCustomerDAO.viewBookings(userName);
     }
-    public void viewAllGyms(){
-        GymOwnerDAO.viewApprovedGyms(null);
+    public String viewAllGyms(){
+        String response = GymOwnerDAO.viewApprovedGyms(null);
+        return response;
     }
     public  void bookSlot(String userName){
         viewAllGyms();

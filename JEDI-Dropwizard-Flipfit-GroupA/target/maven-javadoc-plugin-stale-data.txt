@@ -6,7 +6,7 @@
 'UTF-8'
 -protected
 -sourcepath
-'/Users/kartik.aggarwal1/Desktop/Drop Wizard Project/DemoJavaProject/src/main/java:/Users/kartik.aggarwal1/Desktop/Drop Wizard Project/DemoJavaProject/target/generated-sources/annotations'
+'/Users/kartik.aggarwal1/Desktop/JEDI-FLIPKART-GROUP-A/JEDI-Dropwizard-Flipfit-GroupA/src/main/java:/Users/kartik.aggarwal1/Desktop/JEDI-FLIPKART-GROUP-A/JEDI-Dropwizard-Flipfit-GroupA/target/generated-sources/annotations'
 -Xdoclint:none
 -author
 -bottom
@@ -14,18 +14,24 @@
 -charset
 'UTF-8'
 -d
-'/Users/kartik.aggarwal1/Desktop/Drop Wizard Project/DemoJavaProject/target/apidocs'
+'/Users/kartik.aggarwal1/Desktop/JEDI-FLIPKART-GROUP-A/JEDI-Dropwizard-Flipfit-GroupA/target/apidocs'
 -docencoding
 'UTF-8'
 -doctitle
 'flipfit_d 1.0-SNAPSHOT API'
 -linkoffline
-'https://docs.oracle.com/javase/8/docs/api' '/Users/kartik.aggarwal1/Desktop/Drop Wizard Project/DemoJavaProject/target/javadoc-bundle-options'
+'https://docs.oracle.com/en/java/javase/15/docs/api' '/Users/kartik.aggarwal1/Desktop/JEDI-FLIPKART-GROUP-A/JEDI-Dropwizard-Flipfit-GroupA/target/javadoc-bundle-options'
 -use
 -version
 -windowtitle
 'flipfit_d 1.0-SNAPSHOT API'
 com.dropwizard
+com.flipfit.business
+com.flipfit.dao
+com.flipfit.exceptions
+com.flipfit.constant
+com.flipfit.beans
+com.flipfit.client
 com.flipfit.rest
 /Users/kartik.aggarwal1/.m2/repository/io/dropwizard/dropwizard-core/2.0.33/dropwizard-core-2.0.33.jar = 1662979214000
 /Users/kartik.aggarwal1/.m2/repository/io/dropwizard/dropwizard-util/2.0.33/dropwizard-util-2.0.33.jar = 1662979204000
@@ -113,20 +119,22 @@ com.flipfit.rest
 /Users/kartik.aggarwal1/.m2/repository/org/slf4j/slf4j-api/1.7.36/slf4j-api-1.7.36.jar = 1644327230000
 /Users/kartik.aggarwal1/.m2/repository/com/mysql/mysql-connector-j/8.0.33/mysql-connector-j-8.0.33.jar = 1681683093000
 /Users/kartik.aggarwal1/.m2/repository/com/google/protobuf/protobuf-java/3.21.9/protobuf-java-3.21.9.jar = 1666818740000
-/Users/kartik.aggarwal1/Desktop/Drop Wizard Project/DemoJavaProject/src/main/java/.DS_Store = 1753510844497
-/Users/kartik.aggarwal1/Desktop/Drop Wizard Project/DemoJavaProject/src/main/java = 1753510844496
-/Users/kartik.aggarwal1/Desktop/Drop Wizard Project/DemoJavaProject/target/generated-sources/annotations = 1753513527671
-/Users/kartik.aggarwal1/Desktop/Drop Wizard Project/DemoJavaProject/target/apidocs/tag-search-index.js = 1753513530418
-/Users/kartik.aggarwal1/Desktop/Drop Wizard Project/DemoJavaProject/target/apidocs/overview-tree.html = 1753513530410
-/Users/kartik.aggarwal1/Desktop/Drop Wizard Project/DemoJavaProject/target/apidocs/module-search-index.js = 1753513530417
-/Users/kartik.aggarwal1/Desktop/Drop Wizard Project/DemoJavaProject/target/apidocs/index.html = 1753513530413
-/Users/kartik.aggarwal1/Desktop/Drop Wizard Project/DemoJavaProject/target/apidocs/package-search-index.js = 1753513530417
-/Users/kartik.aggarwal1/Desktop/Drop Wizard Project/DemoJavaProject/target/apidocs/index-all.html = 1753513530421
-/Users/kartik.aggarwal1/Desktop/Drop Wizard Project/DemoJavaProject/target/apidocs/allpackages-index.html = 1753513530417
-/Users/kartik.aggarwal1/Desktop/Drop Wizard Project/DemoJavaProject/target/apidocs/member-search-index.js = 1753513530418
-/Users/kartik.aggarwal1/Desktop/Drop Wizard Project/DemoJavaProject/target/apidocs/overview-summary.html = 1753513530422
-/Users/kartik.aggarwal1/Desktop/Drop Wizard Project/DemoJavaProject/target/apidocs/help-doc.html = 1753513530431
-/Users/kartik.aggarwal1/Desktop/Drop Wizard Project/DemoJavaProject/target/apidocs/element-list = 1753513530395
-/Users/kartik.aggarwal1/Desktop/Drop Wizard Project/DemoJavaProject/target/apidocs/search.html = 1753513530422
-/Users/kartik.aggarwal1/Desktop/Drop Wizard Project/DemoJavaProject/target/apidocs/allclasses-index.html = 1753513530416
-/Users/kartik.aggarwal1/Desktop/Drop Wizard Project/DemoJavaProject/target/apidocs/type-search-index.js = 1753513530417
+/Users/kartik.aggarwal1/Desktop/JEDI-FLIPKART-GROUP-A/JEDI-Dropwizard-Flipfit-GroupA/src/main/java/.DS_Store = 1753631606141
+/Users/kartik.aggarwal1/Desktop/JEDI-FLIPKART-GROUP-A/JEDI-Dropwizard-Flipfit-GroupA/src/main/java = 1753510844496
+/Users/kartik.aggarwal1/Desktop/JEDI-FLIPKART-GROUP-A/JEDI-Dropwizard-Flipfit-GroupA/target/generated-sources/annotations = 1753679448857
+/Users/kartik.aggarwal1/Desktop/JEDI-FLIPKART-GROUP-A/JEDI-Dropwizard-Flipfit-GroupA/target/apidocs/constant-values.html = 1753679452095
+/Users/kartik.aggarwal1/Desktop/JEDI-FLIPKART-GROUP-A/JEDI-Dropwizard-Flipfit-GroupA/target/apidocs/tag-search-index.js = 1753679452168
+/Users/kartik.aggarwal1/Desktop/JEDI-FLIPKART-GROUP-A/JEDI-Dropwizard-Flipfit-GroupA/target/apidocs/overview-tree.html = 1753679452156
+/Users/kartik.aggarwal1/Desktop/JEDI-FLIPKART-GROUP-A/JEDI-Dropwizard-Flipfit-GroupA/target/apidocs/module-search-index.js = 1753679452167
+/Users/kartik.aggarwal1/Desktop/JEDI-FLIPKART-GROUP-A/JEDI-Dropwizard-Flipfit-GroupA/target/apidocs/index.html = 1753679452157
+/Users/kartik.aggarwal1/Desktop/JEDI-FLIPKART-GROUP-A/JEDI-Dropwizard-Flipfit-GroupA/target/apidocs/package-search-index.js = 1753679452168
+/Users/kartik.aggarwal1/Desktop/JEDI-FLIPKART-GROUP-A/JEDI-Dropwizard-Flipfit-GroupA/target/apidocs/serialized-form.html = 1753679452098
+/Users/kartik.aggarwal1/Desktop/JEDI-FLIPKART-GROUP-A/JEDI-Dropwizard-Flipfit-GroupA/target/apidocs/index-all.html = 1753679452178
+/Users/kartik.aggarwal1/Desktop/JEDI-FLIPKART-GROUP-A/JEDI-Dropwizard-Flipfit-GroupA/target/apidocs/allpackages-index.html = 1753679452167
+/Users/kartik.aggarwal1/Desktop/JEDI-FLIPKART-GROUP-A/JEDI-Dropwizard-Flipfit-GroupA/target/apidocs/member-search-index.js = 1753679452168
+/Users/kartik.aggarwal1/Desktop/JEDI-FLIPKART-GROUP-A/JEDI-Dropwizard-Flipfit-GroupA/target/apidocs/overview-summary.html = 1753679452180
+/Users/kartik.aggarwal1/Desktop/JEDI-FLIPKART-GROUP-A/JEDI-Dropwizard-Flipfit-GroupA/target/apidocs/help-doc.html = 1753679452183
+/Users/kartik.aggarwal1/Desktop/JEDI-FLIPKART-GROUP-A/JEDI-Dropwizard-Flipfit-GroupA/target/apidocs/element-list = 1753679452069
+/Users/kartik.aggarwal1/Desktop/JEDI-FLIPKART-GROUP-A/JEDI-Dropwizard-Flipfit-GroupA/target/apidocs/search.html = 1753679452179
+/Users/kartik.aggarwal1/Desktop/JEDI-FLIPKART-GROUP-A/JEDI-Dropwizard-Flipfit-GroupA/target/apidocs/allclasses-index.html = 1753679452166
+/Users/kartik.aggarwal1/Desktop/JEDI-FLIPKART-GROUP-A/JEDI-Dropwizard-Flipfit-GroupA/target/apidocs/type-search-index.js = 1753679452168

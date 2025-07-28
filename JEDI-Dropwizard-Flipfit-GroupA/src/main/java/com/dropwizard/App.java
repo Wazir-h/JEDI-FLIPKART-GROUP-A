@@ -1,6 +1,6 @@
 package com.dropwizard;
 
-import com.flipfit.rest.HelloTestRest;
+import com.flipfit.rest.GymServiceRest;
 import io.dropwizard.Application;
 import io.dropwizard.Configuration;
 import io.dropwizard.setup.Bootstrap;
@@ -26,7 +26,7 @@ public class App extends Application<Configuration> {
     @Override
     public void run(Configuration c, Environment e) throws Exception {
         LOGGER.info("Registering REST resources");
-          e.jersey().register(new HelloTestRest());
+          e.jersey().register(new GymServiceRest());
         //  e.jersey().register(new AdminGMSRESTService());
         //e.jersey().register(new CustomerGMSRESTService());
         // e.jersey().register(new GymOwnerGMSRESTService());

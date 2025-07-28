@@ -8,7 +8,7 @@ public interface GymCustomerBusinessServiceInterface {
 
     public String getRole();
 
-    public void viewAllGyms();
+    public String viewAllGyms();
     public  void bookSlot(String userName);
     public  void cancelSlot(String userName);
     public void viewAllAvailableSlots();

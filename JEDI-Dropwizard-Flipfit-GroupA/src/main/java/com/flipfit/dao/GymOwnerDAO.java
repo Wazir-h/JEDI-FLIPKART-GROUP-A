@@ -243,27 +243,33 @@ public class GymOwnerDAO {
         }
         return false;
     }
-    public static void viewApprovedGyms(String gymusername){
-        if(gymusername == null) {
-            System.out.println("-".repeat(150));
-            System.out.printf("%-30s %-40s %-15s %-50s %-15s%n", "Gym Name", "Gym Address", "Slots", "Gym ID", "Gym Status");
-            System.out.println("-".repeat(150));
+
+    public static String viewApprovedGyms(String gymusername) {
+        StringBuilder output = new StringBuilder();
+
+        if (gymusername == null) {
+            output.append("-".repeat(150)).append("\n");
+            output.append(String.format("%-30s %-40s %-15s %-50s %-15s%n", "Gym Name", "Gym Address", "Slots", "Gym ID", "Gym Status"));
+            output.append("-".repeat(150)).append("\n");
+
             for (String ownerEmail : GymCenterDetails.keySet()) {
                 List<GymCentre> gymsInCity = GymCenterDetails.get(ownerEmail);
-                for (GymCentre gyms : gymsInCity) {
-                    if (gyms.isApproved()) {
-                        System.out.println(gyms);
+                for (GymCentre gym : gymsInCity) {
+                    if (gym.isApproved()) {
+                        output.append(gym).append("\n");
                     }
                 }
             }
-            return;
-        }
-        List<GymCentre> gymsInCity = GymCenterDetails.get(gymusername);
-        for (GymCentre gyms : gymsInCity) {
-            if (gyms.isApproved()) {
-                System.out.println(gyms);
+        } else {
+            List<GymCentre> gymsInCity = GymCenterDetails.get(gymusername);
+            for (GymCentre gym : gymsInCity) {
+                if (gym.isApproved()) {
+                    output.append(gym).append("\n");
+                }
             }
         }
+
+        return output.toString();
     }
     public static void viewPendingGymApprovals(){
         System.out.println("-".repeat(150));

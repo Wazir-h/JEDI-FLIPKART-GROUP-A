@@ -487,10 +487,12 @@ public class GymCustomerDAO  {
         }
     }
 
-    public static void viewBookings(String userName){
+    public static String viewBookings(String userName){
+        String bookings = "";
         for(Slot slot: userBookings.get(userName)){
-            System.out.println(slot);
+            bookings = bookings + slot.toString() + "\n";
         }
+        return bookings;
     }
 
 

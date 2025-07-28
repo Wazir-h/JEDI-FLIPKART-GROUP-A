@@ -41,6 +41,7 @@ public class GymAdminDAO {
     }
 
     public static boolean authenticateUser(String username, String password) {
+        System.out.println(username + password);
         if (AdminCred.containsKey(username)) {
             String storedPassword = AdminCred.get(username);
             return storedPassword.equals(password);

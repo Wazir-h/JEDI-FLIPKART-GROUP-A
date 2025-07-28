@@ -20,7 +20,7 @@ import com.flipfit.dao.GymOwnerDAO;
  */
 
 public class GymOwnerBusinessService implements GymOwnerBusinessServiceInterface {
-    public void AddGymOwnerDetails(String gymEmail, String gymOwnerName, String gymOwnerAddress,
+    public GymOwner AddGymOwnerDetails(String gymEmail, String gymOwnerName, String gymOwnerAddress,
                                    String gymOwnerPhone, String GSTNumber, String password) {
 
           GymOwner gymOwner=new GymOwner();
@@ -35,7 +35,7 @@ public class GymOwnerBusinessService implements GymOwnerBusinessServiceInterface
           gymOwner.setUserEmail(gymEmail);
           gymOwner.setUserPassword(password);
           GymOwnerDAO.AddGymOwner(gymOwner.getUserEmail(),gymOwner);
-
+            return gymOwner;
 //          System.out.println("Gym Owner registration Successful");
     }
 

@@ -1,7 +1,7 @@
 package com.flipfit.rest;
 import  com.flipfit.*;
 import javax.ws.rs.*;
-@PATH("/GymOwner")
+//@PATH("/GymOwner")
 public class GymOwnerflipfitrest {
 //    @Path("/centers")
 //    @POST

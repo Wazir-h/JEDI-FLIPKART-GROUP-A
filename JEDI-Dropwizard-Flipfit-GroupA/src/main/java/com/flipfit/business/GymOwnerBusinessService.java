@@ -39,7 +39,7 @@ public class GymOwnerBusinessService implements GymOwnerBusinessServiceInterface
 //          System.out.println("Gym Owner registration Successful");
     }
 
-    public void AddGymCenter(String gymOwnerEmail, String gymCenterName, String gymCenterAddress,
+    public GymCentre AddGymCenter(String gymOwnerEmail, String gymCenterName, String gymCenterAddress,
                       String gymCenterPhone, int SlotCount){
 
         GymCentre gymCenter = new GymCentre();
@@ -53,7 +53,7 @@ public class GymOwnerBusinessService implements GymOwnerBusinessServiceInterface
         gymCenter.setGymID(gymID);
 
         System.out.println(gymCenter.getUserEmail());
-        GymOwnerDAO.AddGymCenter(gymCenter.getUserEmail(), gymCenter);
+        return GymOwnerDAO.AddGymCenter(gymCenter.getUserEmail(), gymCenter);
 //        System.out.println("Gym Center registration Successful");
     }
     public void DeleteGymCenter(String userName,  String gymName){

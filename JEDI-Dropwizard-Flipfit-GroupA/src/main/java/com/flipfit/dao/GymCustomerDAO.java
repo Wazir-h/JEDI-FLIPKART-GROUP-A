@@ -388,6 +388,103 @@ public class GymCustomerDAO  {
         GymPaymentBusinessService.makePayment(userName, 100, startTime, endTime);
     }
 
+    public static Slot bookSlotApi(String userName,String gymName,int startTime,int endTime,String shift) {
+        Slot newSlot = new Slot();
+        if (startTime < 1 || startTime > 12 || endTime < 1 || endTime > 12) {
+            System.out.println("Invalid time input. Start and End times must be between 1 and 12.");
+            return newSlot;
+        }
+        if (!shift.equals("E") && !shift.equals("M")) {
+            System.out.println("Invalid shift input. Please enter 'E' for Evening or 'M' for Morning.");
+            return newSlot;
+        }
+        // --- Calculate Start Time Timestamp ---
+        LocalDate today = LocalDate.now(); // Get today's date
+        int startHour24 = startTime; // Initialize with 12-hour format
+        if (shift.equals("E") && startTime != 12) { // If Evening and not 12 PM (noon)
+            startHour24 = startTime + 12;
+        } else if (shift.equals("M") && startTime == 12) { // If Morning and 12 AM (midnight)
+            startHour24 = 0; // 12 AM is 00:00 in 24-hour format
+        }
+        LocalTime localStartTime = LocalTime.of(startHour24, 0); // Assuming minutes are 00
+        LocalDateTime startDateTime = LocalDateTime.of(today, localStartTime);
+        Timestamp slotTimeStart = Timestamp.valueOf(startDateTime);
+        // --- Calculate End Time Timestamp ---
+        int endHour24 = endTime;
+        if (shift.equals("E") && endTime != 12) {
+            endHour24 = endTime + 12;
+        } else if (shift.equals("M") && endTime == 12) {
+            endHour24 = 0;
+        }
+        LocalTime localEndTime = LocalTime.of(endHour24, 0);
+        LocalDateTime endDateTime = LocalDateTime.of(today, localEndTime);
+        Timestamp slotTimeEnd = Timestamp.valueOf(endDateTime);
+        newSlot.setSlotID(gymName + "_" + userName + "_" + slotTimeStart.getTime()); // Using timestamp long value for uniqueness
+        newSlot.setSlotTimeStart(slotTimeStart);
+        newSlot.setSlotTimeEnd(slotTimeEnd);
+        newSlot.setUserId(userName);
+        newSlot.setGymName(gymName);
+//        System.out.println(GymBookings);
+        if(shift.equals("M") && GymBookings.get(gymName).get(startTime-6) >0){
+            GymBookings.get(gymName).set(startTime-6,GymBookings.get(gymName).get(startTime-6)-1);
+        }else if(shift.equals("E") && GymBookings.get(gymName).get(startTime-3) > 0){
+            GymBookings.get(gymName).set(startTime-3,GymBookings.get(gymName).get(startTime-3)-1);
+        }else{
+            System.out.println("Slots not available in this time");
+            return newSlot;
+        }
+        PreparedStatement ps1=null;
+        try {
+            Connection db = getConnection();
+//            System.out.println("fail lvl1");
+            ps1 = db.prepareStatement(SqlQueries.INSERT_SLOT);
+            ps1.setString(1, newSlot.getSlotID()); // Use the generated slot ID
+//            System.out.println("fail lvl1");
+            ps1.setDate(2, java.sql.Date.valueOf(newSlot.getSlotTimeStart().toLocalDateTime().toLocalDate())); // Extract date
+//            System.out.println("fail lvl1");
+            ps1.setTimestamp(3, newSlot.getSlotTimeStart());
+//            System.out.println("fail lvl1");
+            ps1.setTimestamp(4, newSlot.getSlotTimeEnd());
+//            System.out.println("fail lvl1");
+            ps1.setString(5, gymName);
+
+            int rowsAffected1 = ps1.executeUpdate();
+            if (rowsAffected1 == 0) {
+                throw new SQLException("Booking slot failed, no rows affected in Slot table.");
+            }
+            PreparedStatement ps2 = db.prepareStatement(SqlQueries.INSERT_BOOKING);
+            ps2.setString(1,newSlot.getSlotID());
+            ps2.setString(2,newSlot.getUserId());
+            ps2.setTimestamp(3,newSlot.getSlotTimeStart());
+            int rowsAffected2 = ps2.executeUpdate();
+            if (rowsAffected2 == 0) {
+                throw new SQLException("Booking slot failed, no rows affected in Booking table.");
+            }
+        }catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
+        finally {
+            if(ps1!=null){
+                try{
+                    ps1.close();
+                }
+                catch (SQLException closeEx) {
+                    System.err.println("Error closing PreparedStatement ps1: " + closeEx.getMessage());
+                }
+
+            }
+        }
+        if(userBookings.containsKey(userName)){
+            userBookings.get(userName).add(newSlot);
+        }else {
+            List<Slot> slots = new ArrayList<>();
+            slots.add(newSlot);
+            userBookings.put(userName, slots);
+        }
+        GymPaymentBusinessService.makePayment(userName, 100, startTime, endTime);
+        return newSlot;
+    }
+
     public static void fillNumberofSlotInGym(String gymName, int mxSlot){
         List<Integer> numberOfSlots = new ArrayList<>();
         for(int i=0;i<6;i++) numberOfSlots.add(mxSlot);

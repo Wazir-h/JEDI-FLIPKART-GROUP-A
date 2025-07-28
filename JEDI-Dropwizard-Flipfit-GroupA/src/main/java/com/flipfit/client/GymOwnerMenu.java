@@ -1,4 +1,5 @@
 package com.flipfit.client;
+import com.flipfit.beans.GymCentre;
 import com.flipfit.business.GymOwnerBusinessService;
 
 import java.util.Scanner;
@@ -109,7 +110,7 @@ public class GymOwnerMenu {
         System.out.print("Enter Total Slot Count: ");
         int SlotCount = scanner.nextInt();
 
-        gymOwnerBusinessService.AddGymCenter(userName, GymName, GymCenterAddress, GymCenterPhone, SlotCount);
+        GymCentre newGym = gymOwnerBusinessService.AddGymCenter(userName, GymName, GymCenterAddress, GymCenterPhone, SlotCount);
     }
     void ViewGymCentresClient(String userName) {
          gymOwnerBusinessService.ViewAllGymCenters(userName);

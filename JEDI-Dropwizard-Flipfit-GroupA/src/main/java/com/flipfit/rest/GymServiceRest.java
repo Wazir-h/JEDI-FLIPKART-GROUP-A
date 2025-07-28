@@ -1,7 +1,9 @@
 package com.flipfit.rest;
 
+import com.flipfit.beans.GymCentre;
 import com.flipfit.beans.GymCustomer;
 import com.flipfit.beans.GymOwner;
+import com.flipfit.beans.Slot;
 import com.flipfit.business.GymCustomerBusinessService;
 import com.flipfit.business.GymCustomerBusinessServiceInterface;
 import com.flipfit.business.GymOwnerBusinessService;
@@ -14,7 +16,10 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
+import static com.flipfit.dao.GymCustomerDAO.bookSlotApi;
 
 // The base path for all endpoints in this class is now /gymservice
 @Path("/gymservice")
@@ -195,8 +200,83 @@ public class GymServiceRest {
         // This is left as is from your original code, but consider moving the auth logic to the service.
         String bookings = GymCustomerDAO.viewBookings(name);
         // Check if the user profile was successfully created.
-        if (true) {
+        if (bookings!=null) {
             return Response.status(Response.Status.CREATED).entity(bookings).build();
+        } else {
+            Map<String, String> errorResponse = new HashMap<>();
+            errorResponse.put("status", "error");
+            errorResponse.put("message", "User registration failed. The email might already exist or input is invalid.");
+            return Response.status(Response.Status.BAD_REQUEST).entity(errorResponse).build();
+        }
+    }
+
+    @POST
+    @Path("/owner/registerGymCenter")
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response registerGymByOwner(
+            @FormParam("gymOwnerEmail") String gymOwnerEmail,
+            @FormParam("gymCenterName") String gymCenterName,
+            @FormParam("gymCenterAddress") String gymCenterAddress,
+            @FormParam("gymCenterPhone") String gymCenterPhone,
+            @FormParam("SlotCount") int SlotCount
+    ){
+        GymOwnerBusinessService gymownerservice = new GymOwnerBusinessService();
+        GymCentre newGym = gymownerservice.AddGymCenter(gymOwnerEmail,gymCenterName,gymCenterAddress, gymCenterPhone, SlotCount);
+        if (true) {
+            return Response.status(Response.Status.CREATED).entity(newGym).build();
+        } else {
+            Map<String, String> errorResponse = new HashMap<>();
+            errorResponse.put("status", "error");
+            errorResponse.put("message", "Owner registration failed. The email might already exist or input is invalid.");
+            return Response.status(Response.Status.BAD_REQUEST).entity(errorResponse).build();
+        }
+    }
+
+    @GET
+    @Path("/admin/viewApprovedGyms")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response viewApprovedGyms(){
+        String approvedGyms = GymOwnerDAO.viewApprovedGyms(null);
+        if(approvedGyms!=null){
+            return Response.status(Response.Status.CREATED).entity(approvedGyms).build();
+        } else {
+            Map<String, String> errorResponse = new HashMap<>();
+            errorResponse.put("status", "error");
+            errorResponse.put("message", "User registration failed. The email might already exist or input is invalid.");
+            return Response.status(Response.Status.BAD_REQUEST).entity(errorResponse).build();
+        }
+    }
+
+    @GET
+    @Path("/user/viewAvailableSlots")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response viewAvailbleSlots(@QueryParam("name") String gymId){
+        List<Integer> slotsForGym = GymCustomerDAO.GymBookings.get(gymId);
+        if(slotsForGym!=null){
+            return Response.status(Response.Status.CREATED).entity(slotsForGym).build();
+        } else {
+            Map<String, String> errorResponse = new HashMap<>();
+            errorResponse.put("status", "error");
+            errorResponse.put("message", "User registration failed. The email might already exist or input is invalid.");
+            return Response.status(Response.Status.BAD_REQUEST).entity(errorResponse).build();
+        }
+    }
+
+    @POST
+    @Path("/user/bookSlot")
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response bookSlot(
+            @FormParam("name") String name,
+            @FormParam("gymName") String gymName,
+            @FormParam("startTime") int startTime,
+            @FormParam("endTime") int endTime,
+            @FormParam("shift") String shift
+    ){
+        Slot newSlot = GymCustomerDAO.bookSlotApi(name,gymName,startTime,endTime,shift);
+        if(newSlot!=null){
+            return Response.status(Response.Status.CREATED).entity(newSlot).build();
         } else {
             Map<String, String> errorResponse = new HashMap<>();
             errorResponse.put("status", "error");

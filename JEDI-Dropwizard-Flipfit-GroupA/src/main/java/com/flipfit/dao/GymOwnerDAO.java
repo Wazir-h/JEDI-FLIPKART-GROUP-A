@@ -106,7 +106,7 @@ public class GymOwnerDAO {
         }
 
     }
-    public static void AddGymCenter(String ownerEmail, GymCentre gymCenter) {
+    public static GymCentre AddGymCenter(String ownerEmail, GymCentre gymCenter) {
 
         if (!GymCenterDetails.containsKey(ownerEmail)) {
             List<GymCentre> gymsInCity = new ArrayList<>();
@@ -135,6 +135,7 @@ public class GymOwnerDAO {
         }catch (SQLException e){
             System.out.println(e.getMessage());
         }
+        return gymCenter;
     }
     public static void DeleteGymCenter(String ownerEmail, String gymName) {
         List<GymCentre> gymsInCity = GymCenterDetails.get(ownerEmail);

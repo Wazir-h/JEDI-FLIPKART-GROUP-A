@@ -1,4 +1,4 @@
-package com.flipfit.beans;
+ package com.flipfit.beans;
 
 
 /*
